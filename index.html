@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Конфигуратор Умного Дома Wiren Board</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            opacity: 0.9;
+            font-size: 1.1em;
+        }
+        
+        .configurator {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+            padding: 30px;
+        }
+        
+        @media (min-width: 992px) {
+            .configurator {
+                grid-template-columns: 2fr 1fr;
+            }
+        }
+        
+        .section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-left: 5px solid #4dabf7;
+        }
+        
+        .section h3 {
+            color: #1e3c72;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section h3 i {
+            color: #4dabf7;
+        }
+        
+        .form-group {
+            margin: 20px 0;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #495057;
+            font-size: 1.1em;
+        }
+        
+        select, input[type="number"], input[type="text"] {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid #dee2e6;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s;
+            background: white;
+        }
+        
+        select:focus, input:focus {
+            border-color: #4dabf7;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(77, 171, 247, 0.2);
+        }
+        
+        .radio-group, .checkbox-group {
+            display: grid;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .radio-item, .checkbox-item {
+            background: white;
+            border: 2px solid #dee2e6;
+            border-radius: 12px;
+            padding: 18px 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .radio-item:hover, .checkbox-item:hover {
+            border-color: #4dabf7;
+            transform: translateY(-3px);
+        }
+        
+        .radio-item.selected, .checkbox-item.selected {
+            border-color: #40c057;
+            background: #f8fff9;
+        }
+        
+        .price-tag {
+            background: #40c057;
+            color: white;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        
+        .counter {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin: 15px 0;
+        }
+        
+        .counter button {
+            width: 45px;
+            height: 45px;
+            border: 2px solid #4dabf7;
+            background: white;
+            color: #4dabf7;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .counter button:hover {
+            background: #4dabf7;
+            color: white;
+        }
+        
+        .counter span {
+            font-size: 24px;
+            font-weight: bold;
+            min-width: 50px;
+            text-align: center;
+        }
+        
+        .summary {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 2px solid #e9ecef;
+        }
+        
+        .summary h3 {
+            color: #1e3c72;
+            margin-bottom: 25px;
+            text-align: center;
+            font-size: 1.5em;
+        }
+        
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 15px 0;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .total-block {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 25px;
+        }
+        
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 15px 0;
+            font-size: 1.1em;
+        }
+        
+        .total-row.final {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #1e3c72;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 3px solid #dee2e6;
+        }
+        
+        .actions {
+            display: grid;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 18px 25px;
+            border: none;
+            border-radius: 12px;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #4dabf7 0%, #1e3c72 100%);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, #40c057 0%, #2b8a3e 100%);
+            color: white;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .notes {
+            margin-top: 30px;
+            padding: 20px;
+            background: #fff3cd;
+            border-radius: 10px;
+            border: 1px solid #ffecb5;
+        }
+        
+        .notes p {
+            color: #856404;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+        
+        .contact-info {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #dee2e6;
+        }
+        
+        .contact-info a {
+            color: #4dabf7;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-home"></i> Конфигуратор Умного Дома</h1>
+            <p>Расчет стоимости системы на Wiren Board + Home Assistant</p>
+        </header>
+        
+        <div class="configurator">
+            <!-- Левая часть - настройки -->
+            <div class="left-panel">
+                <!-- Объект -->
+                <div class="section">
+                    <h3><i class="fas fa-building"></i> 1. Объект</h3>
+                    <div class="form-group">
+                        <label>Тип объекта:</label>
+                        <select id="objectType">
+                            <option value="apartment">Квартира</option>
+                            <option value="house">Частный дом</option>
+                            <option value="office">Офис</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Площадь (м²):</label>
+                        <input type="number" id="area" value="80" min="20" max="1000">
+                    </div>
+                    <div class="form-group">
+                        <label>Количество комнат:</label>
+                        <input type="number" id="rooms" value="3" min="1" max="20">
+                    </div>
+                </div>
+                
+                <!-- Контроллер -->
+                <div class="section">
+                    <h3><i class="fas fa-microchip"></i> 2. Контроллер Wiren Board</h3>
+                    <div class="radio-group">
+                        <div class="radio-item" onclick="selectController('wb7')">
+                            <div>
+                                <strong>Wiren Board 7</strong>
+                                <p style="color: #666; margin-top: 5px;">Флагман, 64 слота, максимум возможностей</p>
+                            </div>
+                            <div class="price-tag">45 000 RUB</div>
+                        </div>
+                        <div class="radio-item" onclick="selectController('wb6')">
+                            <div>
+                                <strong>Wiren Board 6</strong>
+                                <p style="color: #666; margin-top: 5px;">Бюджетный, 32 слота, для стандартных задач</p>
+                            </div>
+                            <div class="price-tag">28 000 RUB</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Освещение -->
+                <div class="section">
+                    <h3><i class="fas fa-lightbulb"></i> 3. Освещение</h3>
+                    <div class="form-group">
+                        <label>Количество линий освещения:</label>
+                        <div class="counter">
+                            <button onclick="changeCount('lightLines', -1)">-</button>
+                            <span id="lightLines">5</span>
+                            <button onclick="changeCount('lightLines', 1)">+</button>
+                        </div>
+                        <p style="color: #666; margin-top: 10px; font-size: 0.95em;">
+                            1 линия = 1 комната или зона. Включает: реле, монтаж, настройку.
+                        </p>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Тип управления:</label>
+                        <select id="lightType">
+                            <option value="relay">Простое (вкл/выкл)</option>
+                            <option value="dimmer">Диммирование (плавное регулирование)</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Датчики -->
+                <div class="section">
+                    <h3><i class="fas fa-thermometer-half"></i> 4. Датчики и безопасность</h3>
+                    
+                    <div class="form-group">
+                        <label>Датчики движения:</label>
+                        <div class="counter">
+                            <button onclick="changeCount('motionSensors', -1)">-</button>
+                            <span id="motionSensors">3</span>
+                            <button onclick="changeCount('motionSensors', 1)">+</button>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Датчики температуры:</label>
+                        <div class="counter">
+                            <button onclick="changeCount('tempSensors', -1)">-</button>
+                            <span id="tempSensors">2</span>
+                            <button onclick="changeCount('tempSensors', 1)">+</button>
+                        </div>
+                    </div>
+                    
+                    <div class="checkbox-group">
+                        <div class="checkbox-item" onclick="toggleCheckbox('leakSensor')">
+                            <div>
+                                <strong>Датчик протечки воды</strong>
+                                <p style="color: #666; margin-top: 5px;">WB-MSW, мгновенное оповещение</p>
+                            </div>
+                            <div class="price-tag">2 500 RUB</div>
+                        </div>
+                        
+                        <div class="checkbox-item" onclick="toggleCheckbox('gasSensor')">
+                            <div>
+                                <strong>Датчик утечки газа</strong>
+                                <p style="color: #666; margin-top: 5px;">Защита от CH4/CO, с сиреной</p>
+                            </div>
+                            <div class="price-tag">3 800 RUB</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Дополнительно -->
+                <div class="section">
+                    <h3><i class="fas fa-plus-circle"></i> 5. Дополнительные услуги</h3>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item" onclick="toggleCheckbox('homeAssistant')">
+                            <div>
+                                <strong>Установка Home Assistant</strong>
+                                <p style="color: #666; margin-top: 5px;">Сервер, панель управления, интеграции</p>
+                            </div>
+                            <div class="price-tag">8 000 RUB</div>
+                        </div>
+                        
+                        <div class="checkbox-item" onclick="toggleCheckbox('scenarios')">
+                            <div>
+                                <strong>Настройка сценариев</strong>
+                                <p style="color: #666; margin-top: 5px;">5 готовых сценариев под ваш объект</p>
+                            </div>
+                            <div class="price-tag">5 000 RUB</div>
+                        </div>
+                        
+                        <div class="checkbox-item" onclick="toggleCheckbox('warranty')">
+                            <div>
+                                <strong>Расширенная гарантия 2 года</strong>
+                                <p style="color: #666; margin-top: 5px;">+1 год к стандартной гарантии</p>
+                            </div>
+                            <div class="price-tag">3 000 RUB</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Правая часть - итог -->
+            <div class="summary">
+                <h3><i class="fas fa-file-invoice-dollar"></i> Ваша смета</h3>
+                
+                <div id="summaryItems">
+                    <!-- Здесь появятся выбранные позиции -->
+                    <div class="summary-item">
+                        <span>Идет расчет...</span>
+                        <span>0 RUB</span>
+                    </div>
+                </div>
+                
+                <div class="total-block">
+                    <div class="total-row">
+                        <span>Оборудование:</span>
+                        <span id="equipmentTotal">0 RUB</span>
+                    </div>
+                    <div class="total-row">
+                        <span>Работы и монтаж:</span>
+                        <span id="workTotal">0 RUB</span>
+                    </div>
+                    <div class="total-row">
+                        <span>Дополнительные услуги:</span>
+                        <span id="extraTotal">0 RUB</span>
+                    </div>
+                    <div class="total-row final">
+                        <span>ИТОГО К ОПЛАТЕ:</span>
+                        <span id="finalTotal">0 RUB</span>
+                    </div>
+                </div>
+                
+                <div class="actions">
+                    <button class="btn btn-primary" onclick="calculate()">
+                        <i class="fas fa-calculator"></i> Рассчитать
+                    </button>
+                    <button class="btn btn-secondary" onclick="saveAsPDF()">
+                        <i class="fas fa-download"></i> Скачать PDF
+                    </button>
+                    <button class="btn btn-success" onclick="sendRequest()">
+                        <i class="fas fa-paper-plane"></i> Отправить заявку
+                    </button>
+                </div>
+                
+                <div class="contact-info">
+                    <p><strong>Вопросы?</strong> Пишите: <a href="mailto:example@email.com">example@email.com</a></p>
+                    <p>или звоните: <a href="tel:+79991234567">+7 (999) 123-45-67</a></p>
+                </div>
+                
+                <div class="notes">
+                    <p><i class="fas fa-info-circle"></i> <strong>Важно:</strong> Стоимость является предварительной.</p>
+                    <p>Окончательная цена определяется после выезда инженера на объект.</p>
+                    <p>В стоимость включены: оборудование, монтаж, пусконаладка, гарантия 1 год.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Цены и конфигурация
+        const prices = {
+            controllers: {
+                wb7: { name: "Wiren Board 7", price: 45000, install: 4 },
+                wb6: { name: "Wiren Board 6", price: 28000, install: 3 }
+            },
+            modules: {
+                lightLine: { name: "Линия освещения", price: 1500, install: 0.5 },
+                lightDimmer: { name: "Линия с диммированием", price: 2800, install: 0.7 },
+                motionSensor: { name: "Датчик движения", price: 1200, install: 0.3 },
+                tempSensor: { name: "Датчик температуры", price: 900, install: 0.3 },
+                leakSensor: { name: "Датчик протечки", price: 2500, install: 0.4 },
+                gasSensor: { name: "Датчик газа", price: 3800, install: 0.5 }
+            },
+            services: {
+                homeAssistant: { name: "Home Assistant", price: 8000, install: 3 },
+                scenarios: { name: "Настройка сценариев", price: 5000, install: 2 },
+                warranty: { name: "Гарантия 2 года", price: 3000, install: 0 }
+            },
+            
+            // Коэффициенты
+            markup: 1.3,          // Наценка на оборудование 30%
+            workRate: 1500,       // Стоимость часа работы
+            materialsPerM2: 80,   // Материалы за м²
+            roomBase: 2000        // Базовая цена за комнату
+        };
+        
+        let selectedController = 'wb7';
+        let selectedOptions = {
+            leakSensor: false,
+            gasSensor: false,
+            homeAssistant: false,
+            scenarios: false,
+            warranty: false
+        };
+        
+        // Инициализация
+        document.addEventListener('DOMContentLoaded', function() {
+            selectController('wb7');
+            calculate();
+        });
+        
+        function selectController(id) {
+            selectedController = id;
+            document.querySelectorAll('.radio-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            event.target.closest('.radio-item').classList.add('selected');
+            calculate();
+        }
+        
+        function toggleCheckbox(optionId) {
+            selectedOptions[optionId] = !selectedOptions[optionId];
+            const item = event.target.closest('.checkbox-item');
+            item.classList.toggle('selected');
+            calculate();
+        }
+        
+        function changeCount(itemId, delta) {
+            const element = document.getElementById(itemId);
+            let value = parseInt(element.textContent) + delta;
+            if (value < 0) value = 0;
+            element.textContent = value;
+            calculate();
+        }
+        
+        function calculate() {
+            // Получаем значения
+            const area = parseInt(document.getElementById('area').value) || 0;
+            const rooms = parseInt(document.getElementById('rooms').value) || 0;
+            const lightLines = parseInt(document.getElementById('lightLines').textContent) || 0;
+            const motionSensors = parseInt(document.getElementById('motionSensors').textContent) || 0;
+            const tempSensors = parseInt(document.getElementById('tempSensors').textContent) || 0;
+            const lightType = document.getElementById('lightType').value;
+            
+            // Расчет
+            let equipmentCost = 0;
+            let workHours = 0;
+            let extraCost = 0;
+            const items = [];
+            
+            // 1. Контроллер
+            const controller = prices.controllers[selectedController];
+            equipmentCost += controller.price;
+            workHours += controller.install;
+            items.push({ name: controller.name, price: controller.price });
+            
+            // 2. Базовые системы
+            const baseCost = rooms * prices.roomBase;
+            equipmentCost += baseCost;
+            workHours += rooms * 0.5;
+            items.push({ name: `Базовые системы (${rooms} комнат)`, price: baseCost });
+            
+            // 3. Освещение
+            if (lightLines > 0) {
+                const lightPrice = lightType === 'dimmer' ? 
+                    prices.modules.lightDimmer.price : prices.modules.lightLine.price;
+                const lightName = lightType === 'dimmer' ? 
+                    'Линия с диммированием' : 'Линия освещения';
+                
+                const lightCost = lightLines * lightPrice;
+                equipmentCost += lightCost;
+                workHours += lightLines * (lightType === 'dimmer' ? 0.7 : 0.5);
+                items.push({ name: `${lightName} (${lightLines} шт)`, price: lightCost });
+            }
+            
+            // 4. Датчики движения
+            if (motionSensors > 0) {
+                const sensorCost = motionSensors * prices.modules.motionSensor.price;
+                equipmentCost += sensorCost;
+                workHours += motionSensors * prices.modules.motionSensor.install;
+                items.push({ name: `Датчики движения (${motionSensors} шт)`, price: sensorCost });
+            }
+            
+            // 5. Датчики температуры
+            if (tempSensors > 0) {
+                const tempCost = tempSensors * prices.modules.tempSensor.price;
+                equipmentCost += tempCost;
+                workHours += tempSensors * prices.modules.tempSensor.install;
+                items.push({ name: `Датчики температуры (${tempSensors} шт)`, price: tempCost });
+            }
+            
+            // 6. Опциональные датчики
+            if (selectedOptions.leakSensor) {
+                equipmentCost += prices.modules.leakSensor.price;
+                workHours += prices.modules.leakSensor.install;
+                items.push({ name: prices.modules.leakSensor.name, price: prices.modules.leakSensor.price });
+            }
+            
+            if (selectedOptions.gasSensor) {
+                equipmentCost += prices.modules.gasSensor.price;
+                workHours += prices.modules.gasSensor.install;
+                items.push({ name: prices.modules.gasSensor.name, price: prices.modules.gasSensor.price });
+            }
+            
+            // 7. Дополнительные услуги
+            if (selectedOptions.homeAssistant) {
+                extraCost += prices.services.homeAssistant.price;
+                workHours += prices.services.homeAssistant.install;
+                items.push({ name: prices.services.homeAssistant.name, price: prices.services.homeAssistant.price });
+            }
+            
+            if (selectedOptions.scenarios) {
+                extraCost += prices.services.scenarios.price;
+                workHours += prices.services.scenarios.install;
+                items.push({ name: prices.services.scenarios.name, price: prices.services.scenarios.price });
+            }
+            
+            if (selectedOptions.warranty) {
+                extraCost += prices.services.warranty.price;
+                items.push({ name: prices.services.warranty.name, price: prices.services.warranty.price });
+            }
+            
+            // Материалы
+            const materialsCost = area * prices.materialsPerM2;
+            
+            // Итоговый расчет
+            const equipmentWithMarkup = equipmentCost * prices.markup;
+            const workCost = workHours * prices.workRate;
+            const total = equipmentWithMarkup + workCost + materialsCost + extraCost;
+            
+            // Обновляем интерфейс
+            updateSummary(items, equipmentWithMarkup, workCost, materialsCost, extraCost, total);
+        }
+        
+        function updateSummary(items, equipmentTotal, workTotal, materialsTotal, extraTotal, finalTotal) {
+            const container = document.getElementById('summaryItems');
+            container.innerHTML = '';
+            
+            items.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'summary-item';
+                div.innerHTML = `
+                    <span>${item.name}</span>
+                    <span>${formatPrice(item.price)} RUB</span>
+                `;
+                container.appendChild(div);
+            });
+            
+            // Обновляем итоги
+            document.getElementById('equipmentTotal').textContent = formatPrice(equipmentTotal) + ' RUB';
+            document.getElementById('workTotal').textContent = formatPrice(workTotal) + ' RUB';
+            document.getElementById('extraTotal').textContent = formatPrice(extraTotal) + ' RUB';
+            document.getElementById('finalTotal').textContent = formatPrice(finalTotal) + ' RUB';
+        }
+        
+        function formatPrice(price) {
+            return Math.round(price).toLocaleString('ru-RU');
+        }
+        
+        function saveAsPDF() {
+            alert('PDF сохранен! В реальной версии здесь будет генерация PDF.');
+            // В реальном проекте подключите библиотеку jsPDF
+        }
+        
+        function sendRequest() {
+            const name = prompt('Введите ваше имя:');
+            const phone = prompt('Введите ваш телефон:');
+            const email = prompt('Введите ваш email:');
+            
+            if (name && phone) {
+                const total = document.getElementById('finalTotal').textContent;
+                alert(`Спасибо, ${name}!\n\nЗаявка на сумму ${total} принята.\nМы свяжемся с вами в течение 24 часов.`);
+                
+                // Здесь можно отправить данные на сервер
+                // или сохранить в Google Sheets
+            }
+        }
+    </script>
+</body>
+</html>
