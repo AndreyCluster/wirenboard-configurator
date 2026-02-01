@@ -519,15 +519,15 @@
                 
                 <div class="total-block">
                     <div class="total-row">
-                        <span>Оборудование (контроллеры):</span>
+                        <span>Оборудование:</span>
                         <span id="equipmentTotal">0 ₽</span>
                     </div>
                     <div class="total-row">
-                        <span>Дополнительное оборудование (модули):</span>
+                        <span>Дополнительное оборудование:</span>
                         <span id="modulesTotal">0 ₽</span>
                     </div>
                     <div class="total-row">
-                        <span>Работы (освещение/подсветки):</span>
+                        <span>Работы и монтаж:</span>
                         <span id="workTotal">0 ₽</span>
                     </div>
                     <div class="total-row">
@@ -567,20 +567,20 @@
     </div>
 
     <script>
-        // Цены и конфигурация
+        // Цены и конфигурация (БЕЗ НАЦЕНКИ)
         const prices = {
-            // Контроллеры (основное оборудование)
+            // Контроллеры (основное оборудование) - БЕЗ наценки
             controllers: {
                 wb8: { name: "Wiren Board 8", price: 23500, install: 4 }
             },
             
-            // Модули расширения (дополнительное оборудование)
+            // Модули расширения (дополнительное оборудование) - БЕЗ наценки
             modules: {
                 zigbeeModule: { name: "WBE2R-R-ZIGBEE v.2 + антенна", price: 3600, install: 0.5 },
                 rs485Module: { name: "WBE2-I-RS485-ISO", price: 1480, install: 0.3 }
             },
             
-            // Освещение и подсветки (работы)
+            // Освещение и подсветки (работы) - БЕЗ наценки
             lighting: {
                 simple: { name: "Освещение вкл/выкл", price: 1500, install: 0.5 },
                 dimmable: { name: "Диммируемое освещение", price: 2800, install: 0.7 },
@@ -590,7 +590,7 @@
                 rgbwBacklight: { name: "RGBW подсветка", price: 16000, install: 2.5 }
             },
             
-            // Датчики (дополнительное оборудование)
+            // Датчики (дополнительное оборудование) - БЕЗ наценки
             sensors: {
                 motionSensor: { name: "Датчик движения", price: 1200, install: 0.3 },
                 tempSensor: { name: "Датчик температуры", price: 900, install: 0.3 },
@@ -598,15 +598,14 @@
                 gasSensor: { name: "Датчик газа", price: 3800, install: 0.5 }
             },
             
-            // Услуги (дополнительные услуги)
+            // Услуги (дополнительные услуги) - БЕЗ наценки
             services: {
                 homeAssistant: { name: "Установка Home Assistant", price: 8000, install: 3 },
                 scenarios: { name: "Настройка сценариев", price: 5000, install: 2 },
                 warranty: { name: "Расширенная гарантия 2 года", price: 3000, install: 0 }
             },
             
-            // Коэффициенты
-            markup: 1.3,          // Наценка на оборудование 30%
+            // Коэффициенты - УБРАНА наценка 30%
             workRate: 1500,       // Стоимость часа работы
             materialsCost: 0      // Базовые материалы (0 по умолчанию)
         };
@@ -663,9 +662,9 @@
             const motionSensors = parseInt(document.getElementById('motionSensors').textContent) || 0;
             const tempSensors = parseInt(document.getElementById('tempSensors').textContent) || 0;
             
-            // Инициализируем категории
-            let controllerCost = 0;          // Оборудование (контроллеры)
-            let modulesCost = 0;             // Дополнительное оборудование (модули)
+            // Инициализируем категории (БЕЗ наценки)
+            let equipmentCost = 0;           // Оборудование (контроллеры) - БЕЗ наценки
+            let modulesCost = 0;             // Дополнительное оборудование (модули) - БЕЗ наценки
             let workCost = 0;                // Работы (освещение/подсветки)
             let extraCost = 0;               // Дополнительные услуги
             
@@ -685,9 +684,9 @@
                 
                 hasAnySelection = true;
                 
-                // Добавляем контроллер
+                // Добавляем контроллер (БЕЗ наценки)
                 const controller = prices.controllers[selectedController];
-                controllerCost += controller.price;
+                equipmentCost += controller.price;
                 workHours += controller.install;
                 items.push({ 
                     name: controller.name, 
@@ -702,7 +701,7 @@
                 return;
             }
             
-            // 2. ДОПОЛНИТЕЛЬНОЕ ОБОРУДОВАНИЕ: Модули расширения
+            // 2. ДОПОЛНИТЕЛЬНОЕ ОБОРУДОВАНИЕ: Модули расширения (БЕЗ наценки)
             if (selectedOptions.zigbeeModule) {
                 modulesCost += prices.modules.zigbeeModule.price;
                 workHours += prices.modules.zigbeeModule.install;
@@ -791,7 +790,7 @@
                 });
             }
             
-            // 4. ДОПОЛНИТЕЛЬНОЕ ОБОРУДОВАНИЕ: Датчики
+            // 4. ДОПОЛНИТЕЛЬНОЕ ОБОРУДОВАНИЕ: Датчики (БЕЗ наценки)
             if (motionSensors > 0) {
                 const motionPrice = motionSensors * prices.sensors.motionSensor.price;
                 modulesCost += motionPrice;
@@ -834,7 +833,7 @@
                 });
             }
             
-            // 5. ДОПОЛНИТЕЛЬНЫЕ УСЛУГИ
+            // 5. ДОПОЛНИТЕЛЬНЫЕ УСЛУГИ (БЕЗ наценки)
             if (selectedOptions.homeAssistant) {
                 extraCost += prices.services.homeAssistant.price;
                 workHours += prices.services.homeAssistant.install;
@@ -865,19 +864,16 @@
             }
             
             // Материалы (только если есть оборудование)
-            const materialsCost = (controllerCost + modulesCost) > 0 ? 5000 : 0;
+            const materialsCost = (equipmentCost + modulesCost) > 0 ? 5000 : 0;
             
-            // Итоговый расчет с наценкой на оборудование
-            const controllerWithMarkup = controllerCost * prices.markup;
-            const modulesWithMarkup = modulesCost * prices.markup;
+            // Итоговый расчет БЕЗ наценки
             const workHoursCost = workHours * prices.workRate;
+            const workTotal = workCost + workHoursCost + materialsCost;
             
-            const total = controllerWithMarkup + modulesWithMarkup + workCost + 
-                         workHoursCost + materialsCost + extraCost;
+            const total = equipmentCost + modulesCost + workTotal + extraCost;
             
             // Обновляем интерфейс
-            updateSummary(items, controllerWithMarkup, modulesWithMarkup, 
-                         workCost + workHoursCost, extraCost, total);
+            updateSummary(items, equipmentCost, modulesCost, workTotal, extraCost, total);
         }
         
         function updateSummary(items, equipmentTotal, modulesTotal, workTotal, extraTotal, finalTotal) {
@@ -903,139 +899,4 @@
                 
                 items.forEach(item => {
                     if (categories[item.category]) {
-                        categories[item.category].push(item);
-                    }
-                });
-                
-                // Оборудование (контроллеры)
-                if (categories.equipment.length > 0) {
-                    const title = document.createElement('div');
-                    title.className = 'summary-item category-title';
-                    title.textContent = 'Оборудование';
-                    container.appendChild(title);
-                    
-                    categories.equipment.forEach(item => {
-                        const div = document.createElement('div');
-                        div.className = 'summary-item';
-                        div.innerHTML = `
-                            <span>${item.name}</span>
-                            <span>${formatPrice(item.price)} ₽</span>
-                        `;
-                        container.appendChild(div);
-                    });
-                }
-                
-                // Дополнительное оборудование (модули)
-                if (categories.modules.length > 0) {
-                    const title = document.createElement('div');
-                    title.className = 'summary-item category-title';
-                    title.textContent = 'Дополнительное оборудование';
-                    container.appendChild(title);
-                    
-                    categories.modules.forEach(item => {
-                        const div = document.createElement('div');
-                        div.className = 'summary-item';
-                        div.innerHTML = `
-                            <span>${item.name}</span>
-                            <span>${formatPrice(item.price)} ₽</span>
-                        `;
-                        container.appendChild(div);
-                    });
-                }
-                
-                // Работы (освещение/подсветки)
-                if (categories.work.length > 0) {
-                    const title = document.createElement('div');
-                    title.className = 'summary-item category-title';
-                    title.textContent = 'Работы по монтажу';
-                    container.appendChild(title);
-                    
-                    categories.work.forEach(item => {
-                        const div = document.createElement('div');
-                        div.className = 'summary-item';
-                        div.innerHTML = `
-                            <span>${item.name}</span>
-                            <span>${formatPrice(item.price)} ₽</span>
-                        `;
-                        container.appendChild(div);
-                    });
-                }
-                
-                // Дополнительные услуги
-                if (categories.extra.length > 0) {
-                    const title = document.createElement('div');
-                    title.className = 'summary-item category-title';
-                    title.textContent = 'Дополнительные услуги';
-                    container.appendChild(title);
-                    
-                    categories.extra.forEach(item => {
-                        const div = document.createElement('div');
-                        div.className = 'summary-item';
-                        div.innerHTML = `
-                            <span>${item.name}</span>
-                            <span>${formatPrice(item.price)} ₽</span>
-                        `;
-                        container.appendChild(div);
-                    });
-                }
-            }
-            
-            // Обновляем итоги по категориям
-            document.getElementById('equipmentTotal').textContent = formatPrice(equipmentTotal) + ' ₽';
-            document.getElementById('modulesTotal').textContent = formatPrice(modulesTotal) + ' ₽';
-            document.getElementById('workTotal').textContent = formatPrice(workTotal) + ' ₽';
-            document.getElementById('extraTotal').textContent = formatPrice(extraTotal) + ' ₽';
-            document.getElementById('finalTotal').textContent = formatPrice(finalTotal) + ' ₽';
-        }
-        
-        function formatPrice(price) {
-            return Math.round(price).toLocaleString('ru-RU');
-        }
-        
-        function saveAsPDF() {
-            const total = document.getElementById('finalTotal').textContent;
-            if (total === '0 ₽') {
-                alert('Добавьте оборудование для сохранения сметы');
-                return;
-            }
-            
-            alert('PDF сохранен! В реальной версии здесь будет генерация PDF.');
-        }
-        
-        function sendRequest() {
-            const total = document.getElementById('finalTotal').textContent;
-            if (total === '0 ₽') {
-                alert('Добавьте оборудование для отправки заявки');
-                return;
-            }
-            
-            const name = prompt('Введите ваше имя:');
-            if (!name) return;
-            
-            const phone = prompt('Введите ваш телефон:');
-            if (!phone) return;
-            
-            const email = prompt('Введите ваш email (необязательно):', '');
-            
-            alert(`Спасибо, ${name}!\n\nЗаявка на сумму ${total} принята.\nМы свяжемся с вами в течение 24 часов.`);
-        }
-    </script>
-    
-    <!-- Водяной знак "В разработке" -->
-    <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; 
-                pointer-events: none; background: repeating-linear-gradient(
-                    45deg,
-                    rgba(255,165,0,0.1),
-                    rgba(255,165,0,0.1) 10px,
-                    transparent 10px,
-                    transparent 20px
-                ); z-index: 9999;">
-        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-                    background: rgba(255,165,0,0.9); color: white; padding: 15px 30px;
-                    font-size: 20px; font-weight: bold; border-radius: 8px; text-align: center;">
-            🚧 В РАЗРАБОТКЕ 🚧<br>
-            <small style="font-size: 14px; opacity: 0.8;">Тестовая версия - ветка development</small>
-        </div>
-    </div>
-</body>
-</html>
+                        categories[item.category].push(item
