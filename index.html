@@ -318,7 +318,7 @@
                 <div class="section">
                     <h3><i class="fas fa-microchip"></i> 1. Контроллер Wiren Board</h3>
                     <div class="radio-group">
-                        <div class="radio-item" onclick="selectController('wb8', event)">
+                        <div class="radio-item selected" onclick="selectController('wb8')">
                             <div>
                                 <strong>Wiren Board 8</strong>
                                 <p style="color: #666; margin-top: 5px;">Современный контроллер, 40 слотов</p>
@@ -334,7 +334,7 @@
                         </h4>
                         
                         <!-- Zigbee модуль -->
-                        <div class="checkbox-item" onclick="toggleCheckbox('zigbeeModule', event)">
+                        <div class="checkbox-item" onclick="toggleCheckbox('zigbeeModule')">
                             <div>
                                 <strong>WBE2R-R-ZIGBEE v.2 + антенна</strong>
                                 <p style="color: #666; margin-top: 5px;">Zigbee координатор для беспроводных устройств</p>
@@ -346,9 +346,9 @@
                         <div class="form-group" style="margin-top: 20px;">
                             <label>WBE2-I-RS485-ISO (количество):</label>
                             <div class="counter">
-                                <button onclick="changeCount('rs485Modules', -1, event)">-</button>
+                                <button onclick="changeCount('rs485Modules', -1)">-</button>
                                 <span id="rs485Modules">0</span>
-                                <button onclick="changeCount('rs485Modules', 1, event)">+</button>
+                                <button onclick="changeCount('rs485Modules', 1)">+</button>
                             </div>
                             <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
                                 Интерфейс RS-485 для подключения оборудования
@@ -365,9 +365,9 @@
                     <div class="form-group">
                         <label>Освещение вкл/выкл (линий):</label>
                         <div class="counter">
-                            <button onclick="changeCount('lightSimple', -1, event)">-</button>
+                            <button onclick="changeCount('lightSimple', -1)">-</button>
                             <span id="lightSimple">0</span>
-                            <button onclick="changeCount('lightSimple', 1, event)">+</button>
+                            <button onclick="changeCount('lightSimple', 1)">+</button>
                         </div>
                         <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
                             Стандартные линии освещения (реле WB-MRM2)
@@ -378,9 +378,9 @@
                     <div class="form-group">
                         <label>Диммируемое освещение (линий):</label>
                         <div class="counter">
-                            <button onclick="changeCount('lightDimmable', -1, event)">-</button>
+                            <button onclick="changeCount('lightDimmable', -1)">-</button>
                             <span id="lightDimmable">0</span>
-                            <button onclick="changeCount('lightDimmable', 1, event)">+</button>
+                            <button onclick="changeCount('lightDimmable', 1)">+</button>
                         </div>
                         <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
                             Плавное регулирование яркости (диммер WB-MDM3)
@@ -391,9 +391,9 @@
                     <div class="form-group">
                         <label>LED подсветка (зоны):</label>
                         <div class="counter">
-                            <button onclick="changeCount('ledBacklight', -1, event)">-</button>
+                            <button onclick="changeCount('ledBacklight', -1)">-</button>
                             <span id="ledBacklight">0</span>
-                            <button onclick="changeCount('ledBacklight', 1, event)">+</button>
+                            <button onclick="changeCount('ledBacklight', 1)">+</button>
                         </div>
                         <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
                             Монохромная подсветка, 1 цвет
@@ -404,9 +404,9 @@
                     <div class="form-group">
                         <label>CCT подсветка (зоны):</label>
                         <div class="counter">
-                            <button onclick="changeCount('cctBacklight', -1, event)">-</button>
+                            <button onclick="changeCount('cctBacklight', -1)">-</button>
                             <span id="cctBacklight">0</span>
-                            <button onclick="changeCount('cctBacklight', 1, event)">+</button>
+                            <button onclick="changeCount('cctBacklight', 1)">+</button>
                         </div>
                         <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
                             Два цвета, регулировка температуры
@@ -417,9 +417,9 @@
                     <div class="form-group">
                         <label>RGB подсветка (зоны):</label>
                         <div class="counter">
-                            <button onclick="changeCount('rgbBacklight', -1, event)">-</button>
+                            <button onclick="changeCount('rgbBacklight', -1)">-</button>
                             <span id="rgbBacklight">0</span>
-                            <button onclick="changeCount('rgbBacklight', 1, event)">+</button>
+                            <button onclick="changeCount('rgbBacklight', 1)">+</button>
                         </div>
                         <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
                             Три цвета, полный спектр RGB
@@ -430,9 +430,9 @@
                     <div class="form-group">
                         <label>RGBW подсветка (зоны):</label>
                         <div class="counter">
-                            <button onclick="changeCount('rgbwBacklight', -1, event)">-</button>
+                            <button onclick="changeCount('rgbwBacklight', -1)">-</button>
                             <span id="rgbwBacklight">0</span>
-                            <button onclick="changeCount('rgbwBacklight', 1, event)">+</button>
+                            <button onclick="changeCount('rgbwBacklight', 1)">+</button>
                         </div>
                         <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
                             Четыре цвета, RGB + белый канал
@@ -447,23 +447,23 @@
                     <div class="form-group">
                         <label>Датчики движения:</label>
                         <div class="counter">
-                            <button onclick="changeCount('motionSensors', -1, event)">-</button>
+                            <button onclick="changeCount('motionSensors', -1)">-</button>
                             <span id="motionSensors">0</span>
-                            <button onclick="changeCount('motionSensors', 1, event)">+</button>
+                            <button onclick="changeCount('motionSensors', 1)">+</button>
                         </div>
                     </div>
                     
                     <div class="form-group">
                         <label>Датчики температуры:</label>
                         <div class="counter">
-                            <button onclick="changeCount('tempSensors', -1, event)">-</button>
+                            <button onclick="changeCount('tempSensors', -1)">-</button>
                             <span id="tempSensors">0</span>
-                            <button onclick="changeCount('tempSensors', 1, event)">+</button>
+                            <button onclick="changeCount('tempSensors', 1)">+</button>
                         </div>
                     </div>
                     
                     <div class="checkbox-group">
-                        <div class="checkbox-item" onclick="toggleCheckbox('leakSensor', event)">
+                        <div class="checkbox-item" onclick="toggleCheckbox('leakSensor')">
                             <div>
                                 <strong>Датчик протечки воды</strong>
                                 <p style="color: #666; margin-top: 5px;">WB-MSW, мгновенное оповещение</p>
@@ -471,7 +471,7 @@
                             <div class="price-tag">2 500 ₽</div>
                         </div>
                         
-                        <div class="checkbox-item" onclick="toggleCheckbox('gasSensor', event)">
+                        <div class="checkbox-item" onclick="toggleCheckbox('gasSensor')">
                             <div>
                                 <strong>Датчик утечки газа</strong>
                                 <p style="color: #666; margin-top: 5px;">Защита от CH4/CO, с сиреной</p>
@@ -479,7 +479,7 @@
                             <div class="price-tag">3 800 ₽</div>
                         </div>
                         
-                        <div class="checkbox-item" onclick="toggleCheckbox('homeAssistant', event)">
+                        <div class="checkbox-item" onclick="toggleCheckbox('homeAssistant')">
                             <div>
                                 <strong>Установка Home Assistant</strong>
                                 <p style="color: #666; margin-top: 5px;">Сервер, панель управления, интеграции</p>
@@ -487,7 +487,7 @@
                             <div class="price-tag">8 000 ₽</div>
                         </div>
                         
-                        <div class="checkbox-item" onclick="toggleCheckbox('scenarios', event)">
+                        <div class="checkbox-item" onclick="toggleCheckbox('scenarios')">
                             <div>
                                 <strong>Настройка сценариев</strong>
                                 <p style="color: #666; margin-top: 5px;">5 готовых сценариев под ваш объект</p>
@@ -495,7 +495,7 @@
                             <div class="price-tag">5 000 ₽</div>
                         </div>
                         
-                        <div class="checkbox-item" onclick="toggleCheckbox('warranty', event)">
+                        <div class="checkbox-item" onclick="toggleCheckbox('warranty')">
                             <div>
                                 <strong>Расширенная гарантия 2 года</strong>
                                 <p style="color: #666; margin-top: 5px;">+1 год к стандартной гарантии</p>
@@ -622,28 +622,29 @@
         
         // Инициализация
         document.addEventListener('DOMContentLoaded', function() {
-            selectController('wb8');
+            console.log("Документ загружен");
             calculate();
         });
         
         function selectController(id) {
+            console.log("Выбран контроллер:", id);
             selectedController = id;
             document.querySelectorAll('.radio-item').forEach(item => {
                 item.classList.remove('selected');
             });
-            event.target.closest('.radio-item').classList.add('selected');
+            event.currentTarget.classList.add('selected');
             calculate();
         }
         
         function toggleCheckbox(optionId) {
+            console.log("Переключен чекбокс:", optionId);
             selectedOptions[optionId] = !selectedOptions[optionId];
-            const item = event.target.closest('.checkbox-item');
-            item.classList.toggle('selected');
+            event.currentTarget.classList.toggle('selected');
             calculate();
         }
         
         function changeCount(itemId, delta) {
-            event.stopPropagation(); // Останавливаем всплытие события
+            console.log("Изменение счетчика:", itemId, delta);
             const element = document.getElementById(itemId);
             let value = parseInt(element.textContent) + delta;
             if (value < 0) value = 0;
@@ -652,6 +653,8 @@
         }
         
         function calculate() {
+            console.log("=== НАЧАЛО РАСЧЕТА ===");
+            
             // Получаем значения
             const lightSimple = parseInt(document.getElementById('lightSimple').textContent) || 0;
             const lightDimmable = parseInt(document.getElementById('lightDimmable').textContent) || 0;
@@ -662,6 +665,12 @@
             const rs485Modules = parseInt(document.getElementById('rs485Modules').textContent) || 0;
             const motionSensors = parseInt(document.getElementById('motionSensors').textContent) || 0;
             const tempSensors = parseInt(document.getElementById('tempSensors').textContent) || 0;
+            
+            console.log("Значения:", {
+                lightSimple, lightDimmable, ledBacklight, cctBacklight,
+                rgbBacklight, rgbwBacklight, rs485Modules, motionSensors, tempSensors
+            });
+            console.log("Выбранные опции:", selectedOptions);
             
             // Инициализируем категории (БЕЗ наценки)
             let equipmentCost = 0;           // Оборудование (контроллеры) - БЕЗ наценки
@@ -676,13 +685,8 @@
             let hasAnySelection = false;
             
             // 1. ОБОРУДОВАНИЕ: Контроллер (только если есть другие элементы)
-            if (lightSimple > 0 || lightDimmable > 0 || ledBacklight > 0 || 
-                cctBacklight > 0 || rgbBacklight > 0 || rgbwBacklight > 0 ||
-                rs485Modules > 0 || motionSensors > 0 || tempSensors > 0 ||
-                selectedOptions.zigbeeModule || selectedOptions.leakSensor ||
-                selectedOptions.gasSensor || selectedOptions.homeAssistant ||
-                selectedOptions.scenarios || selectedOptions.warranty) {
-                
+            // УПРОЩАЕМ: контроллер всегда считается, если выбран
+            if (true) { // Всегда показываем контроллер, так как он выбран по умолчанию
                 hasAnySelection = true;
                 
                 // Добавляем контроллер (БЕЗ наценки)
@@ -694,10 +698,12 @@
                     price: controller.price,
                     category: 'equipment'
                 });
+                console.log("Добавлен контроллер:", controller.name, controller.price);
             }
             
             // Если ничего не выбрано - показываем 0
             if (!hasAnySelection) {
+                console.log("Ничего не выбрано");
                 updateSummary([], 0, 0, 0, 0, 0);
                 return;
             }
@@ -711,6 +717,7 @@
                     price: prices.modules.zigbeeModule.price,
                     category: 'modules'
                 });
+                console.log("Добавлен Zigbee модуль:", prices.modules.zigbeeModule.price);
             }
             
             if (rs485Modules > 0) {
@@ -722,6 +729,7 @@
                     price: rs485Price,
                     category: 'modules'
                 });
+                console.log("Добавлены RS485 модули:", rs485Price);
             }
             
             // 3. РАБОТЫ: Освещение и подсветки (считаем как работы)
@@ -734,6 +742,7 @@
                     price: simplePrice,
                     category: 'work'
                 });
+                console.log("Добавлено простое освещение:", simplePrice);
             }
             
             if (lightDimmable > 0) {
@@ -745,6 +754,7 @@
                     price: dimmablePrice,
                     category: 'work'
                 });
+                console.log("Добавлено диммируемое освещение:", dimmablePrice);
             }
             
             if (ledBacklight > 0) {
@@ -756,6 +766,7 @@
                     price: ledPrice,
                     category: 'work'
                 });
+                console.log("Добавлена LED подсветка:", ledPrice);
             }
             
             if (cctBacklight > 0) {
@@ -767,6 +778,7 @@
                     price: cctPrice,
                     category: 'work'
                 });
+                console.log("Добавлена CCT подсветка:", cctPrice);
             }
             
             if (rgbBacklight > 0) {
@@ -778,6 +790,7 @@
                     price: rgbPrice,
                     category: 'work'
                 });
+                console.log("Добавлена RGB подсветка:", rgbPrice);
             }
             
             if (rgbwBacklight > 0) {
@@ -789,6 +802,7 @@
                     price: rgbwPrice,
                     category: 'work'
                 });
+                console.log("Добавлена RGBW подсветка:", rgbwPrice);
             }
             
             // 4. ДОПОЛНИТЕЛЬНОЕ ОБОРУДОВАНИЕ: Датчики (БЕЗ наценки)
@@ -801,6 +815,7 @@
                     price: motionPrice,
                     category: 'modules'
                 });
+                console.log("Добавлены датчики движения:", motionPrice);
             }
             
             if (tempSensors > 0) {
@@ -812,6 +827,7 @@
                     price: tempPrice,
                     category: 'modules'
                 });
+                console.log("Добавлены датчики температуры:", tempPrice);
             }
             
             if (selectedOptions.leakSensor) {
@@ -822,6 +838,7 @@
                     price: prices.sensors.leakSensor.price,
                     category: 'modules'
                 });
+                console.log("Добавлен датчик протечки:", prices.sensors.leakSensor.price);
             }
             
             if (selectedOptions.gasSensor) {
@@ -832,6 +849,7 @@
                     price: prices.sensors.gasSensor.price,
                     category: 'modules'
                 });
+                console.log("Добавлен датчик газа:", prices.sensors.gasSensor.price);
             }
             
             // 5. ДОПОЛНИТЕЛЬНЫЕ УСЛУГИ (БЕЗ наценки)
@@ -843,6 +861,7 @@
                     price: prices.services.homeAssistant.price,
                     category: 'extra'
                 });
+                console.log("Добавлена установка Home Assistant:", prices.services.homeAssistant.price);
             }
             
             if (selectedOptions.scenarios) {
@@ -853,6 +872,7 @@
                     price: prices.services.scenarios.price,
                     category: 'extra'
                 });
+                console.log("Добавлена настройка сценариев:", prices.services.scenarios.price);
             }
             
             if (selectedOptions.warranty) {
@@ -862,6 +882,7 @@
                     price: prices.services.warranty.price,
                     category: 'extra'
                 });
+                console.log("Добавлена расширенная гарантия:", prices.services.warranty.price);
             }
             
             // Материалы (только если есть оборудование)
@@ -873,8 +894,14 @@
             
             const total = equipmentCost + modulesCost + workTotal + extraCost;
             
+            console.log("Итоги расчета:", {
+                equipmentCost, modulesCost, workCost, workHours,
+                materialsCost, workHoursCost, workTotal, extraCost, total
+            });
+            
             // Обновляем интерфейс
             updateSummary(items, equipmentCost, modulesCost, workTotal, extraCost, total);
+            console.log("=== КОНЕЦ РАСЧЕТА ===");
         }
         
         function updateSummary(items, equipmentTotal, modulesTotal, workTotal, extraTotal, finalTotal) {
@@ -890,6 +917,8 @@
                 `;
                 container.appendChild(emptyDiv);
             } else {
+                console.log("Обновление сметы, элементов:", items.length);
+                
                 // Группируем по категориям
                 const categories = {
                     'equipment': [],
@@ -966,6 +995,8 @@
             document.getElementById('workTotal').textContent = formatPrice(workTotal);
             document.getElementById('extraTotal').textContent = formatPrice(extraTotal);
             document.getElementById('finalTotal').textContent = formatPrice(finalTotal);
+            
+            console.log("Смета обновлена, итог:", finalTotal);
         }
         
         function formatPrice(price) {
