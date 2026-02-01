@@ -711,5 +711,21 @@
             }
         }
     </script>
+    <!-- Водяной знак "В разработке" -->
+    <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; 
+                pointer-events: none; background: repeating-linear-gradient(
+                    45deg,
+                    rgba(255,165,0,0.1),
+                    rgba(255,165,0,0.1) 10px,
+                    transparent 10px,
+                    transparent 20px
+                ); z-index: 9999;">
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+                    background: rgba(255,165,0,0.9); color: white; padding: 15px 30px;
+                    font-size: 20px; font-weight: bold; border-radius: 8px; text-align: center;">
+            🚧 В РАЗРАБОТКЕ 🚧<br>
+            <small style="font-size: 14px; opacity: 0.8;">Тестовая версия - ветка development</small>
+        </div>
+    </div>
 </body>
 </html>
