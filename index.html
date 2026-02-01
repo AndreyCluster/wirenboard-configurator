@@ -348,29 +348,95 @@
                     </div>
                 </div>
                 
-                <!-- Освещение -->
-                <div class="section">
-                    <h3><i class="fas fa-lightbulb"></i> 3. Освещение</h3>
-                    <div class="form-group">
-                        <label>Количество линий освещения:</label>
-                        <div class="counter">
-                            <button onclick="changeCount('lightLines', -1)">-</button>
-                            <span id="lightLines">5</span>
-                            <button onclick="changeCount('lightLines', 1)">+</button>
-                        </div>
-                        <p style="color: #666; margin-top: 10px; font-size: 0.95em;">
-                            1 линия = 1 комната или зона. Включает: реле, монтаж, настройку.
-                        </p>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Тип управления:</label>
-                        <select id="lightType">
-                            <option value="relay">Простое (вкл/выкл)</option>
-                            <option value="dimmer">Диммирование (плавное регулирование)</option>
-                        </select>
-                    </div>
+<!-- Освещение -->
+<div class="section">
+    <h3><i class="fas fa-lightbulb"></i> 3. Освещение и подсветки</h3>
+    
+    <!-- Простое освещение вкл/выкл -->
+    <div class="form-group">
+        <label>Освещение вкл/выкл (линий):</label>
+        <div class="counter">
+            <button onclick="changeCount('lightSimple', -1)">-</button>
+            <span id="lightSimple">0</span>
+            <button onclick="changeCount('lightSimple', 1)">+</button>
+        </div>
+        <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
+            Стандартные линии освещения (реле WB-MRM2)
+        </p>
+    </div>
+    
+    <!-- Диммируемое освещение -->
+    <div class="form-group">
+        <label>Диммируемое освещение (линий):</label>
+        <div class="counter">
+            <button onclick="changeCount('lightDimmable', -1)">-</button>
+            <span id="lightDimmable">0</span>
+            <button onclick="changeCount('lightDimmable', 1)">+</button>
+        </div>
+        <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
+            Плавное регулирование яркости (диммер WB-MDM3)
+        </p>
+    </div>
+    
+    <!-- Тип подсветки -->
+    <div class="form-group">
+        <label>Тип декоративной подсветки:</label>
+        <div class="radio-group">
+            <div class="radio-item" onclick="selectBacklight('none')">
+                <div>
+                    <strong>Без подсветки</strong>
+                    <p style="color: #666; margin-top: 5px;">Декоративная подсветка не требуется</p>
                 </div>
+                <div class="price-tag">0 RUB</div>
+            </div>
+            
+            <div class="radio-item" onclick="selectBacklight('led')">
+                <div>
+                    <strong>LED подсветка (1 цвет)</strong>
+                    <p style="color: #666; margin-top: 5px;">Монохромная, один цвет температуры</p>
+                </div>
+                <div class="price-tag">+4 000 RUB</div>
+            </div>
+            
+            <div class="radio-item" onclick="selectBacklight('cct')">
+                <div>
+                    <strong>CCT подсветка (2 цвета)</strong>
+                    <p style="color: #666; margin-top: 5px;">Два цвета, регулировка температуры</p>
+                </div>
+                <div class="price-tag">+8 000 RUB</div>
+            </div>
+            
+            <div class="radio-item" onclick="selectBacklight('rgb')">
+                <div>
+                    <strong>RGB подсветка (3 цвета)</strong>
+                    <p style="color: #666; margin-top: 5px;">Три цвета, полный спектр RGB</p>
+                </div>
+                <div class="price-tag">+12 000 RUB</div>
+            </div>
+            
+            <div class="radio-item" onclick="selectBacklight('rgbw')">
+                <div>
+                    <strong>RGBW подсветка (4 цвета)</strong>
+                    <p style="color: #666; margin-top: 5px;">Четыре цвета, RGB + белый канал</p>
+                </div>
+                <div class="price-tag">+16 000 RUB</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Количество зон подсветки -->
+    <div class="form-group">
+        <label>Количество зон подсветки:</label>
+        <div class="counter">
+            <button onclick="changeCount('backlightZones', -1)">-</button>
+            <span id="backlightZones">0</span>
+            <button onclick="changeCount('backlightZones', 1)">+</button>
+        </div>
+        <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
+            Одна зона = отдельно управляемая область
+        </p>
+    </div>
+</div>
                 
                 <!-- Датчики -->
                 <div class="section">
