@@ -388,7 +388,7 @@
                             <button onclick="changeCount('ledBacklight', 1)">+</button>
                         </div>
                         <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
-                            Монохромная подсветка, 1 цвет (4 000 ₽ за зону)
+                            Монохромная подсветка, 1 цвет
                         </p>
                     </div>
                     
@@ -401,7 +401,7 @@
                             <button onclick="changeCount('cctBacklight', 1)">+</button>
                         </div>
                         <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
-                            Два цвета, регулировка температуры (8 000 ₽ за зону)
+                            Два цвета, регулировка температуры
                         </p>
                     </div>
                     
@@ -414,7 +414,7 @@
                             <button onclick="changeCount('rgbBacklight', 1)">+</button>
                         </div>
                         <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
-                            Три цвета, полный спектр RGB (12 000 ₽ за зону)
+                            Три цвета, полный спектр RGB
                         </p>
                     </div>
                     
@@ -427,7 +427,7 @@
                             <button onclick="changeCount('rgbwBacklight', 1)">+</button>
                         </div>
                         <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
-                            Четыре цвета, RGB + белый канал (16 000 ₽ за зону)
+                            Четыре цвета, RGB + белый канал
                         </p>
                     </div>
                 </div>
@@ -511,7 +511,7 @@
                 <div id="summaryItems">
                     <!-- Здесь появятся выбранные позиции -->
                     <div class="summary-item">
-                        <span>Идет расчет...</span>
+                        <span style="color: #666; font-style: italic;">Выберите оборудование для расчета стоимости</span>
                         <span>0 ₽</span>
                     </div>
                 </div>
@@ -603,8 +603,7 @@
             // Коэффициенты
             markup: 1.3,          // Наценка на оборудование 30%
             workRate: 1500,       // Стоимость часа работы
-            materialsPerM2: 80,   // Материалы за м² (оставил для совместимости)
-            roomBase: 2000        // Базовая цена (оставил для совместимости)
+            materialsCost: 0      // Базовые материалы (0 по умолчанию)
         };
         
         let selectedController = 'wb8';
@@ -665,13 +664,33 @@
             let extraCost = 0;
             const items = [];
             
-            // 1. Контроллер
-            const controller = prices.controllers[selectedController];
-            equipmentCost += controller.price;
-            workHours += controller.install;
-            items.push({ name: controller.name, price: controller.price });
+            // Проверяем, есть ли хоть что-то выбрано
+            let hasAnySelection = false;
             
-            // 2. Модули расширения
+            // Проверяем все счетчики и чекбоксы
+            if (lightSimple > 0 || lightDimmable > 0 || ledBacklight > 0 || 
+                cctBacklight > 0 || rgbBacklight > 0 || rgbwBacklight > 0 ||
+                rs485Modules > 0 || motionSensors > 0 || tempSensors > 0 ||
+                selectedOptions.zigbeeModule || selectedOptions.leakSensor ||
+                selectedOptions.gasSensor || selectedOptions.homeAssistant ||
+                selectedOptions.scenarios || selectedOptions.warranty) {
+                
+                hasAnySelection = true;
+                
+                // Добавляем контроллер только если есть другие элементы
+                const controller = prices.controllers[selectedController];
+                equipmentCost += controller.price;
+                workHours += controller.install;
+                items.push({ name: controller.name, price: controller.price });
+            }
+            
+            // Если ничего не выбрано - показываем 0
+            if (!hasAnySelection) {
+                updateSummary([], 0, 0, 0, 0, 0);
+                return;
+            }
+            
+            // 1. Модули расширения
             if (selectedOptions.zigbeeModule) {
                 equipmentCost += prices.modules.zigbeeModule.price;
                 workHours += prices.modules.zigbeeModule.install;
@@ -685,7 +704,7 @@
                 items.push({ name: `WBE2-I-RS485-ISO (${rs485Modules} шт)`, price: rs485Cost });
             }
             
-            // 3. Освещение вкл/выкл
+            // 2. Освещение вкл/выкл
             if (lightSimple > 0) {
                 const simpleCost = lightSimple * prices.lighting.simple.price;
                 equipmentCost += simpleCost;
@@ -693,7 +712,7 @@
                 items.push({ name: `Освещение вкл/выкл (${lightSimple} линий)`, price: simpleCost });
             }
             
-            // 4. Диммируемое освещение
+            // 3. Диммируемое освещение
             if (lightDimmable > 0) {
                 const dimmableCost = lightDimmable * prices.lighting.dimmable.price;
                 equipmentCost += dimmableCost;
@@ -701,7 +720,7 @@
                 items.push({ name: `Диммируемое освещение (${lightDimmable} линий)`, price: dimmableCost });
             }
             
-            // 5. LED подсветка
+            // 4. LED подсветка
             if (ledBacklight > 0) {
                 const ledCost = ledBacklight * prices.lighting.ledBacklight.price;
                 equipmentCost += ledCost;
@@ -709,7 +728,7 @@
                 items.push({ name: `LED подсветка (${ledBacklight} зон)`, price: ledCost });
             }
             
-            // 6. CCT подсветка
+            // 5. CCT подсветка
             if (cctBacklight > 0) {
                 const cctCost = cctBacklight * prices.lighting.cctBacklight.price;
                 equipmentCost += cctCost;
@@ -717,7 +736,7 @@
                 items.push({ name: `CCT подсветка (${cctBacklight} зон)`, price: cctCost });
             }
             
-            // 7. RGB подсветка
+            // 6. RGB подсветка
             if (rgbBacklight > 0) {
                 const rgbCost = rgbBacklight * prices.lighting.rgbBacklight.price;
                 equipmentCost += rgbCost;
@@ -725,7 +744,7 @@
                 items.push({ name: `RGB подсветка (${rgbBacklight} зон)`, price: rgbCost });
             }
             
-            // 8. RGBW подсветка
+            // 7. RGBW подсветка
             if (rgbwBacklight > 0) {
                 const rgbwCost = rgbwBacklight * prices.lighting.rgbwBacklight.price;
                 equipmentCost += rgbwCost;
@@ -733,7 +752,7 @@
                 items.push({ name: `RGBW подсветка (${rgbwBacklight} зон)`, price: rgbwCost });
             }
             
-            // 9. Датчики движения
+            // 8. Датчики движения
             if (motionSensors > 0) {
                 const sensorCost = motionSensors * prices.sensors.motionSensor.price;
                 equipmentCost += sensorCost;
@@ -741,7 +760,7 @@
                 items.push({ name: `Датчики движения (${motionSensors} шт)`, price: sensorCost });
             }
             
-            // 10. Датчики температуры
+            // 9. Датчики температуры
             if (tempSensors > 0) {
                 const tempCost = tempSensors * prices.sensors.tempSensor.price;
                 equipmentCost += tempCost;
@@ -749,7 +768,7 @@
                 items.push({ name: `Датчики температуры (${tempSensors} шт)`, price: tempCost });
             }
             
-            // 11. Опциональные датчики
+            // 10. Опциональные датчики
             if (selectedOptions.leakSensor) {
                 equipmentCost += prices.sensors.leakSensor.price;
                 workHours += prices.sensors.leakSensor.install;
@@ -762,7 +781,7 @@
                 items.push({ name: prices.sensors.gasSensor.name, price: prices.sensors.gasSensor.price });
             }
             
-            // 12. Дополнительные услуги
+            // 11. Дополнительные услуги
             if (selectedOptions.homeAssistant) {
                 extraCost += prices.services.homeAssistant.price;
                 workHours += prices.services.homeAssistant.install;
@@ -780,8 +799,8 @@
                 items.push({ name: prices.services.warranty.name, price: prices.services.warranty.price });
             }
             
-            // Материалы (фиксированная стоимость)
-            const materialsCost = 5000; // Базовая стоимость материалов
+            // Материалы (только если есть оборудование)
+            const materialsCost = equipmentCost > 0 ? 5000 : 0;
             
             // Итоговый расчет
             const equipmentWithMarkup = equipmentCost * prices.markup;
@@ -796,15 +815,25 @@
             const container = document.getElementById('summaryItems');
             container.innerHTML = '';
             
-            items.forEach(item => {
-                const div = document.createElement('div');
-                div.className = 'summary-item';
-                div.innerHTML = `
-                    <span>${item.name}</span>
-                    <span>${formatPrice(item.price)} ₽</span>
+            if (items.length === 0) {
+                const emptyDiv = document.createElement('div');
+                emptyDiv.className = 'summary-item';
+                emptyDiv.innerHTML = `
+                    <span style="color: #666; font-style: italic;">Выберите оборудование для расчета стоимости</span>
+                    <span>0 ₽</span>
                 `;
-                container.appendChild(div);
-            });
+                container.appendChild(emptyDiv);
+            } else {
+                items.forEach(item => {
+                    const div = document.createElement('div');
+                    div.className = 'summary-item';
+                    div.innerHTML = `
+                        <span>${item.name}</span>
+                        <span>${formatPrice(item.price)} ₽</span>
+                    `;
+                    container.appendChild(div);
+                });
+            }
             
             // Обновляем итоги
             document.getElementById('equipmentTotal').textContent = formatPrice(equipmentTotal) + ' ₽';
@@ -818,22 +847,35 @@
         }
         
         function saveAsPDF() {
+            const total = document.getElementById('finalTotal').textContent;
+            if (total === '0 ₽') {
+                alert('Добавьте оборудование для сохранения сметы');
+                return;
+            }
+            
             alert('PDF сохранен! В реальной версии здесь будет генерация PDF.');
             // В реальном проекте подключите библиотеку jsPDF
         }
         
         function sendRequest() {
-            const name = prompt('Введите ваше имя:');
-            const phone = prompt('Введите ваш телефон:');
-            const email = prompt('Введите ваш email:');
-            
-            if (name && phone) {
-                const total = document.getElementById('finalTotal').textContent;
-                alert(`Спасибо, ${name}!\n\nЗаявка на сумму ${total} принята.\nМы свяжемся с вами в течение 24 часов.`);
-                
-                // Здесь можно отправить данные на сервер
-                // или сохранить в Google Sheets
+            const total = document.getElementById('finalTotal').textContent;
+            if (total === '0 ₽') {
+                alert('Добавьте оборудование для отправки заявки');
+                return;
             }
+            
+            const name = prompt('Введите ваше имя:');
+            if (!name) return;
+            
+            const phone = prompt('Введите ваш телефон:');
+            if (!phone) return;
+            
+            const email = prompt('Введите ваш email (необязательно):', '');
+            
+            alert(`Спасибо, ${name}!\n\nЗаявка на сумму ${total} принята.\nМы свяжемся с вами в течение 24 часов.`);
+            
+            // Здесь можно отправить данные на сервер
+            // или сохранить в Google Sheets
         }
     </script>
     
