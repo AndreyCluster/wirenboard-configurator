@@ -17,50 +17,15 @@
             min-height: 100vh;
             padding: 20px;
             color: #333;
-            position: relative;
-        }
-        
-        /* Баннер "Сайт в разработке" */
-        .dev-banner {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
-            color: white;
-            text-align: center;
-            padding: 15px;
-            font-weight: bold;
-            font-size: 1.2em;
-            z-index: 1000;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-            animation: pulse 2s infinite;
-        }
-        
-        .dev-banner i {
-            margin-right: 10px;
-            animation: spin 4s linear infinite;
-        }
-        
-        @keyframes pulse {
-            0% { opacity: 0.9; }
-            50% { opacity: 1; }
-            100% { opacity: 0.9; }
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
         }
         
         .container {
             max-width: 1200px;
-            margin: 60px auto 0;
+            margin: 0 auto;
             background: white;
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             overflow: hidden;
-            position: relative;
         }
         
         header {
@@ -68,21 +33,6 @@
             color: white;
             padding: 30px;
             text-align: center;
-            position: relative;
-        }
-        
-        .dev-badge {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: #ff6b6b;
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.8em;
-            font-weight: bold;
-            transform: rotate(5deg);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
         
         header h1 {
@@ -114,21 +64,6 @@
             padding: 25px;
             margin-bottom: 20px;
             border-left: 5px solid #4dabf7;
-            position: relative;
-        }
-        
-        .dev-warning {
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            background: #ffd43b;
-            color: #856404;
-            padding: 5px 10px;
-            border-radius: 10px;
-            font-size: 0.8em;
-            font-weight: bold;
-            transform: rotate(5deg);
-            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
         }
         
         .section h3 {
@@ -187,7 +122,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: relative;
         }
         
         .radio-item:hover, .checkbox-item:hover {
@@ -249,7 +183,6 @@
             padding: 25px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             border: 2px solid #e9ecef;
-            position: relative;
         }
         
         .summary h3 {
@@ -280,7 +213,6 @@
             border-radius: 12px;
             padding: 25px;
             margin-top: 25px;
-            border: 2px dashed #dee2e6;
         }
         
         .total-row {
@@ -317,20 +249,6 @@
             align-items: center;
             justify-content: center;
             gap: 12px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .btn::after {
-            content: 'BETA';
-            position: absolute;
-            top: -5px;
-            right: -20px;
-            background: #ff6b6b;
-            color: white;
-            padding: 3px 25px;
-            font-size: 0.7em;
-            transform: rotate(45deg);
         }
         
         .btn-primary {
@@ -383,60 +301,21 @@
         .contact-info a:hover {
             text-decoration: underline;
         }
-        
-        .footer-note {
-            text-align: center;
-            margin-top: 20px;
-            color: #666;
-            font-size: 0.9em;
-            padding: 10px;
-            background: #f8f9fa;
-            border-radius: 10px;
-            border: 1px dashed #dee2e6;
-        }
-        
-        /* Анимация для элементов в разработке */
-        .beta-feature {
-            position: relative;
-        }
-        
-        .beta-feature::before {
-            content: 'BETA';
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            background: #ff6b6b;
-            color: white;
-            font-size: 0.7em;
-            padding: 2px 8px;
-            border-radius: 10px;
-            font-weight: bold;
-        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- Баннер "Сайт в разработке" -->
-    <div class="dev-banner">
-        <i class="fas fa-tools"></i> САЙТ В РАЗРАБОТКЕ | Демо-версия | Функционал в тестировании
-    </div>
-    
     <div class="container">
         <header>
-            <div class="dev-badge">BETA</div>
             <h1><i class="fas fa-home"></i> Конфигуратор Умного Дома</h1>
             <p>Расчет стоимости системы на Wiren Board + Home Assistant</p>
-            <p style="font-size: 0.9em; margin-top: 10px; color: #a5d8ff;">
-                <i class="fas fa-exclamation-triangle"></i> Демонстрационная версия. Все цены ориентировочные.
-            </p>
         </header>
         
         <div class="configurator">
             <!-- Левая часть - настройки -->
             <div class="left-panel">
                 <!-- Контроллер -->
-                <div class="section beta-feature">
-                    <div class="dev-warning">DEV</div>
+                <div class="section">
                     <h3><i class="fas fa-microchip"></i> 1. Контроллер Wiren Board</h3>
                     <div class="radio-group">
                         <div class="radio-item" onclick="selectController('wb8')">
@@ -479,8 +358,7 @@
                 </div>
                 
                 <!-- Освещение и подсветки -->
-                <div class="section beta-feature">
-                    <div class="dev-warning">DEV</div>
+                <div class="section">
                     <h3><i class="fas fa-lightbulb"></i> 2. Освещение и подсветки</h3>
                     
                     <!-- Простое освещение вкл/выкл -->
@@ -492,7 +370,7 @@
                             <button onclick="changeCount('lightSimple', 1)">+</button>
                         </div>
                         <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
-                            Монтаж стандартных линий освещения
+                            Стандартные линии освещения (реле WB-MRM2)
                         </p>
                     </div>
                     
@@ -505,7 +383,7 @@
                             <button onclick="changeCount('lightDimmable', 1)">+</button>
                         </div>
                         <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
-                            Монтаж плавного регулирования яркости
+                            Плавное регулирование яркости (диммер WB-MDM3)
                         </p>
                     </div>
                     
@@ -518,7 +396,7 @@
                             <button onclick="changeCount('ledBacklight', 1)">+</button>
                         </div>
                         <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
-                            Монтаж монохромной подсветки
+                            Монохромная подсветка, 1 цвет
                         </p>
                     </div>
                     
@@ -531,7 +409,7 @@
                             <button onclick="changeCount('cctBacklight', 1)">+</button>
                         </div>
                         <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
-                            Монтаж двухцветной подсветки
+                            Два цвета, регулировка температуры
                         </p>
                     </div>
                     
@@ -544,7 +422,7 @@
                             <button onclick="changeCount('rgbBacklight', 1)">+</button>
                         </div>
                         <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
-                            Монтаж RGB подсветки
+                            Три цвета, полный спектр RGB
                         </p>
                     </div>
                     
@@ -557,14 +435,13 @@
                             <button onclick="changeCount('rgbwBacklight', 1)">+</button>
                         </div>
                         <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
-                            Монтаж RGBW подсветки
+                            Четыре цвета, RGB + белый канал
                         </p>
                     </div>
                 </div>
                 
                 <!-- Датчики и услуги -->
-                <div class="section beta-feature">
-                    <div class="dev-warning">DEV</div>
+                <div class="section">
                     <h3><i class="fas fa-thermometer-half"></i> 3. Датчики и дополнительные услуги</h3>
                     
                     <div class="form-group">
@@ -631,7 +508,6 @@
             
             <!-- Правая часть - итог -->
             <div class="summary">
-                <div class="dev-warning" style="top: 15px; right: 15px;">DEMO</div>
                 <h3><i class="fas fa-file-invoice-dollar"></i> Ваша смета</h3>
                 
                 <div id="summaryItems">
@@ -686,39 +562,35 @@
                     <p>Окончательная цена определяется после выезда инженера на объект.</p>
                     <p>В стоимость включены: оборудование, монтаж, пусконаладка, гарантия 1 год.</p>
                 </div>
-                
-                <div class="footer-note">
-                    <i class="fas fa-code"></i> Демонстрационная версия конфигуратора. Функционал находится в разработке.
-                </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Цены и конфигурация
+        // Цены и конфигурация (БЕЗ НАЦЕНКИ)
         const prices = {
-            // Контроллеры (основное оборудование)
+            // Контроллеры (основное оборудование) - БЕЗ наценки
             controllers: {
                 wb8: { name: "Wiren Board 8", price: 23500, install: 4 }
             },
             
-            // Модули расширения (дополнительное оборудование)
+            // Модули расширения (дополнительное оборудование) - БЕЗ наценки
             modules: {
                 zigbeeModule: { name: "WBE2R-R-ZIGBEE v.2 + антенна", price: 3600, install: 0.5 },
                 rs485Module: { name: "WBE2-I-RS485-ISO", price: 1480, install: 0.3 }
             },
             
-            // Освещение и подсветки (РАБОТЫ) - только работы по монтажу
+            // Освещение и подсветки (работы) - БЕЗ наценки
             lighting: {
-                simple: { name: "Монтаж освещения вкл/выкл", price: 1500, install: 0.5 },
-                dimmable: { name: "Монтаж диммируемого освещения", price: 2800, install: 0.7 },
-                ledBacklight: { name: "Монтаж LED подсветки", price: 4000, install: 1 },
-                cctBacklight: { name: "Монтаж CCT подсветки", price: 8000, install: 1.5 },
-                rgbBacklight: { name: "Монтаж RGB подсветки", price: 12000, install: 2 },
-                rgbwBacklight: { name: "Монтаж RGBW подсветки", price: 16000, install: 2.5 }
+                simple: { name: "Освещение вкл/выкл", price: 1500, install: 0.5 },
+                dimmable: { name: "Диммируемое освещение", price: 2800, install: 0.7 },
+                ledBacklight: { name: "LED подсветка", price: 4000, install: 1 },
+                cctBacklight: { name: "CCT подсветка", price: 8000, install: 1.5 },
+                rgbBacklight: { name: "RGB подсветка", price: 12000, install: 2 },
+                rgbwBacklight: { name: "RGBW подсветка", price: 16000, install: 2.5 }
             },
             
-            // Датчики (дополнительное оборудование)
+            // Датчики (дополнительное оборудование) - БЕЗ наценки
             sensors: {
                 motionSensor: { name: "Датчик движения", price: 1200, install: 0.3 },
                 tempSensor: { name: "Датчик температуры", price: 900, install: 0.3 },
@@ -726,14 +598,14 @@
                 gasSensor: { name: "Датчик газа", price: 3800, install: 0.5 }
             },
             
-            // Услуги (дополнительные услуги)
+            // Услуги (дополнительные услуги) - БЕЗ наценки
             services: {
                 homeAssistant: { name: "Установка Home Assistant", price: 8000, install: 3 },
                 scenarios: { name: "Настройка сценариев", price: 5000, install: 2 },
                 warranty: { name: "Расширенная гарантия 2 года", price: 3000, install: 0 }
             },
             
-            // Коэффициенты
+            // Коэффициенты - УБРАНА наценка 30%
             workRate: 1500,       // Стоимость часа работы
             materialsCost: 0      // Базовые материалы (0 по умолчанию)
         };
@@ -790,19 +662,19 @@
             const motionSensors = parseInt(document.getElementById('motionSensors').textContent) || 0;
             const tempSensors = parseInt(document.getElementById('tempSensors').textContent) || 0;
             
-            // Инициализируем категории
-            let equipmentCost = 0;           // Оборудование (контроллеры)
-            let modulesCost = 0;             // Дополнительное оборудование (модули, датчики)
-            let workHours = 0;               // Часы работы для монтажа
-            let workMaterials = 0;           // Стоимость работ (освещение и подсветки)
+            // Инициализируем категории (БЕЗ наценки)
+            let equipmentCost = 0;           // Оборудование (контроллеры) - БЕЗ наценки
+            let modulesCost = 0;             // Дополнительное оборудование (модули) - БЕЗ наценки
+            let workCost = 0;                // Работы (освещение/подсветки)
             let extraCost = 0;               // Дополнительные услуги
             
+            let workHours = 0;
             const items = [];
             
             // Проверяем, есть ли хоть что-то выбрано
             let hasAnySelection = false;
             
-            // 1. ОБОРУДОВАНИЕ: Контроллер
+            // 1. ОБОРУДОВАНИЕ: Контроллер (только если есть другие элементы)
             if (lightSimple > 0 || lightDimmable > 0 || ledBacklight > 0 || 
                 cctBacklight > 0 || rgbBacklight > 0 || rgbwBacklight > 0 ||
                 rs485Modules > 0 || motionSensors > 0 || tempSensors > 0 ||
@@ -812,7 +684,7 @@
                 
                 hasAnySelection = true;
                 
-                // Добавляем контроллер
+                // Добавляем контроллер (БЕЗ наценки)
                 const controller = prices.controllers[selectedController];
                 equipmentCost += controller.price;
                 workHours += controller.install;
@@ -829,7 +701,7 @@
                 return;
             }
             
-            // 2. ДОПОЛНИТЕЛЬНОЕ ОБОРУДОВАНИЕ: Модули расширения
+            // 2. ДОПОЛНИТЕЛЬНОЕ ОБОРУДОВАНИЕ: Модули расширения (БЕЗ наценки)
             if (selectedOptions.zigbeeModule) {
                 modulesCost += prices.modules.zigbeeModule.price;
                 workHours += prices.modules.zigbeeModule.install;
@@ -851,60 +723,180 @@
                 });
             }
             
-            // 3. РАБОТЫ: Освещение и подсветки (ТОЛЬКО как работы)
+            // 3. РАБОТЫ: Освещение и подсветки (считаем как работы)
             if (lightSimple > 0) {
-                const simpleWorkCost = lightSimple * prices.lighting.simple.price;
-                workMaterials += simpleWorkCost;
+                const simplePrice = lightSimple * prices.lighting.simple.price;
+                workCost += simplePrice;
                 workHours += lightSimple * prices.lighting.simple.install;
                 items.push({ 
-                    name: `Монтаж освещения вкл/выкл (${lightSimple} линий)`, 
-                    price: simpleWorkCost,
+                    name: `Освещение вкл/выкл (${lightSimple} линий)`, 
+                    price: simplePrice,
                     category: 'work'
                 });
             }
             
             if (lightDimmable > 0) {
-                const dimmableWorkCost = lightDimmable * prices.lighting.dimmable.price;
-                workMaterials += dimmableWorkCost;
+                const dimmablePrice = lightDimmable * prices.lighting.dimmable.price;
+                workCost += dimmablePrice;
                 workHours += lightDimmable * prices.lighting.dimmable.install;
                 items.push({ 
-                    name: `Монтаж диммируемого освещения (${lightDimmable} линий)`, 
-                    price: dimmableWorkCost,
+                    name: `Диммируемое освещение (${lightDimmable} линий)`, 
+                    price: dimmablePrice,
                     category: 'work'
                 });
             }
             
             if (ledBacklight > 0) {
-                const ledWorkCost = ledBacklight * prices.lighting.ledBacklight.price;
-                workMaterials += ledWorkCost;
+                const ledPrice = ledBacklight * prices.lighting.ledBacklight.price;
+                workCost += ledPrice;
                 workHours += ledBacklight * prices.lighting.ledBacklight.install;
                 items.push({ 
-                    name: `Монтаж LED подсветки (${ledBacklight} зон)`, 
-                    price: ledWorkCost,
+                    name: `LED подсветка (${ledBacklight} зон)`, 
+                    price: ledPrice,
                     category: 'work'
                 });
             }
             
             if (cctBacklight > 0) {
-                const cctWorkCost = cctBacklight * prices.lighting.cctBacklight.price;
-                workMaterials += cctWorkCost;
+                const cctPrice = cctBacklight * prices.lighting.cctBacklight.price;
+                workCost += cctPrice;
                 workHours += cctBacklight * prices.lighting.cctBacklight.install;
                 items.push({ 
-                    name: `Монтаж CCT подсветки (${cctBacklight} зон)`, 
-                    price: cctWorkCost,
+                    name: `CCT подсветка (${cctBacklight} зон)`, 
+                    price: cctPrice,
                     category: 'work'
                 });
             }
             
             if (rgbBacklight > 0) {
-                const rgbWorkCost = rgbBacklight * prices.lighting.rgbBacklight.price;
-                workMaterials += rgbWorkCost;
+                const rgbPrice = rgbBacklight * prices.lighting.rgbBacklight.price;
+                workCost += rgbPrice;
                 workHours += rgbBacklight * prices.lighting.rgbBacklight.install;
                 items.push({ 
-                    name: `Монтаж RGB подсветки (${rgbBacklight} зон)`, 
-                    price: rgbWorkCost,
+                    name: `RGB подсветка (${rgbBacklight} зон)`, 
+                    price: rgbPrice,
                     category: 'work'
                 });
             }
             
-           
+            if (rgbwBacklight > 0) {
+                const rgbwPrice = rgbwBacklight * prices.lighting.rgbwBacklight.price;
+                workCost += rgbwPrice;
+                workHours += rgbwBacklight * prices.lighting.rgbwBacklight.install;
+                items.push({ 
+                    name: `RGBW подсветка (${rgbwBacklight} зон)`, 
+                    price: rgbwPrice,
+                    category: 'work'
+                });
+            }
+            
+            // 4. ДОПОЛНИТЕЛЬНОЕ ОБОРУДОВАНИЕ: Датчики (БЕЗ наценки)
+            if (motionSensors > 0) {
+                const motionPrice = motionSensors * prices.sensors.motionSensor.price;
+                modulesCost += motionPrice;
+                workHours += motionSensors * prices.sensors.motionSensor.install;
+                items.push({ 
+                    name: `Датчики движения (${motionSensors} шт)`, 
+                    price: motionPrice,
+                    category: 'modules'
+                });
+            }
+            
+            if (tempSensors > 0) {
+                const tempPrice = tempSensors * prices.sensors.tempSensor.price;
+                modulesCost += tempPrice;
+                workHours += tempSensors * prices.sensors.tempSensor.install;
+                items.push({ 
+                    name: `Датчики температуры (${tempSensors} шт)`, 
+                    price: tempPrice,
+                    category: 'modules'
+                });
+            }
+            
+            if (selectedOptions.leakSensor) {
+                modulesCost += prices.sensors.leakSensor.price;
+                workHours += prices.sensors.leakSensor.install;
+                items.push({ 
+                    name: prices.sensors.leakSensor.name, 
+                    price: prices.sensors.leakSensor.price,
+                    category: 'modules'
+                });
+            }
+            
+            if (selectedOptions.gasSensor) {
+                modulesCost += prices.sensors.gasSensor.price;
+                workHours += prices.sensors.gasSensor.install;
+                items.push({ 
+                    name: prices.sensors.gasSensor.name, 
+                    price: prices.sensors.gasSensor.price,
+                    category: 'modules'
+                });
+            }
+            
+            // 5. ДОПОЛНИТЕЛЬНЫЕ УСЛУГИ (БЕЗ наценки)
+            if (selectedOptions.homeAssistant) {
+                extraCost += prices.services.homeAssistant.price;
+                workHours += prices.services.homeAssistant.install;
+                items.push({ 
+                    name: prices.services.homeAssistant.name, 
+                    price: prices.services.homeAssistant.price,
+                    category: 'extra'
+                });
+            }
+            
+            if (selectedOptions.scenarios) {
+                extraCost += prices.services.scenarios.price;
+                workHours += prices.services.scenarios.install;
+                items.push({ 
+                    name: prices.services.scenarios.name, 
+                    price: prices.services.scenarios.price,
+                    category: 'extra'
+                });
+            }
+            
+            if (selectedOptions.warranty) {
+                extraCost += prices.services.warranty.price;
+                items.push({ 
+                    name: prices.services.warranty.name, 
+                    price: prices.services.warranty.price,
+                    category: 'extra'
+                });
+            }
+            
+            // Материалы (только если есть оборудование)
+            const materialsCost = (equipmentCost + modulesCost) > 0 ? 5000 : 0;
+            
+            // Итоговый расчет БЕЗ наценки
+            const workHoursCost = workHours * prices.workRate;
+            const workTotal = workCost + workHoursCost + materialsCost;
+            
+            const total = equipmentCost + modulesCost + workTotal + extraCost;
+            
+            // Обновляем интерфейс
+            updateSummary(items, equipmentCost, modulesCost, workTotal, extraCost, total);
+        }
+        
+        function updateSummary(items, equipmentTotal, modulesTotal, workTotal, extraTotal, finalTotal) {
+            const container = document.getElementById('summaryItems');
+            container.innerHTML = '';
+            
+            if (items.length === 0) {
+                const emptyDiv = document.createElement('div');
+                emptyDiv.className = 'summary-item';
+                emptyDiv.innerHTML = `
+                    <span style="color: #666; font-style: italic;">Выберите оборудование для расчета стоимости</span>
+                    <span>0 ₽</span>
+                `;
+                container.appendChild(emptyDiv);
+            } else {
+                // Группируем по категориям
+                const categories = {
+                    'equipment': [],
+                    'modules': [],
+                    'work': [],
+                    'extra': []
+                };
+                
+                items.forEach(item => {
+                    if (categories[item.category]) {
+                        categories[item.category].push(item
