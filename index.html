@@ -348,95 +348,95 @@
                     </div>
                 </div>
                 
-<!-- Освещение -->
-<div class="section">
-    <h3><i class="fas fa-lightbulb"></i> 3. Освещение и подсветки</h3>
-    
-    <!-- Простое освещение вкл/выкл -->
-    <div class="form-group">
-        <label>Освещение вкл/выкл (линий):</label>
-        <div class="counter">
-            <button onclick="changeCount('lightSimple', -1)">-</button>
-            <span id="lightSimple">0</span>
-            <button onclick="changeCount('lightSimple', 1)">+</button>
-        </div>
-        <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
-            Стандартные линии освещения (реле WB-MRM2)
-        </p>
-    </div>
-    
-    <!-- Диммируемое освещение -->
-    <div class="form-group">
-        <label>Диммируемое освещение (линий):</label>
-        <div class="counter">
-            <button onclick="changeCount('lightDimmable', -1)">-</button>
-            <span id="lightDimmable">0</span>
-            <button onclick="changeCount('lightDimmable', 1)">+</button>
-        </div>
-        <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
-            Плавное регулирование яркости (диммер WB-MDM3)
-        </p>
-    </div>
-    
-    <!-- Тип подсветки -->
-    <div class="form-group">
-        <label>Тип декоративной подсветки:</label>
-        <div class="radio-group">
-            <div class="radio-item" onclick="selectBacklight('none')">
-                <div>
-                    <strong>Без подсветки</strong>
-                    <p style="color: #666; margin-top: 5px;">Декоративная подсветка не требуется</p>
+                <!-- Освещение и подсветки -->
+                <div class="section">
+                    <h3><i class="fas fa-lightbulb"></i> 3. Освещение и подсветки</h3>
+                    
+                    <!-- Простое освещение вкл/выкл -->
+                    <div class="form-group">
+                        <label>Освещение вкл/выкл (линий):</label>
+                        <div class="counter">
+                            <button onclick="changeCount('lightSimple', -1)">-</button>
+                            <span id="lightSimple">0</span>
+                            <button onclick="changeCount('lightSimple', 1)">+</button>
+                        </div>
+                        <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
+                            Стандартные линии освещения (реле WB-MRM2)
+                        </p>
+                    </div>
+                    
+                    <!-- Диммируемое освещение -->
+                    <div class="form-group">
+                        <label>Диммируемое освещение (линий):</label>
+                        <div class="counter">
+                            <button onclick="changeCount('lightDimmable', -1)">-</button>
+                            <span id="lightDimmable">0</span>
+                            <button onclick="changeCount('lightDimmable', 1)">+</button>
+                        </div>
+                        <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
+                            Плавное регулирование яркости (диммер WB-MDM3)
+                        </p>
+                    </div>
+                    
+                    <!-- Тип подсветки -->
+                    <div class="form-group">
+                        <label>Тип декоративной подсветки:</label>
+                        <div class="radio-group">
+                            <div class="radio-item" onclick="selectBacklight('none')">
+                                <div>
+                                    <strong>Без подсветки</strong>
+                                    <p style="color: #666; margin-top: 5px;">Декоративная подсветка не требуется</p>
+                                </div>
+                                <div class="price-tag">0 RUB</div>
+                            </div>
+                            
+                            <div class="radio-item" onclick="selectBacklight('led')">
+                                <div>
+                                    <strong>LED подсветка (1 цвет)</strong>
+                                    <p style="color: #666; margin-top: 5px;">Монохромная, один цвет температуры</p>
+                                </div>
+                                <div class="price-tag">+4 000 RUB</div>
+                            </div>
+                            
+                            <div class="radio-item" onclick="selectBacklight('cct')">
+                                <div>
+                                    <strong>CCT подсветка (2 цвета)</strong>
+                                    <p style="color: #666; margin-top: 5px;">Два цвета, регулировка температуры</p>
+                                </div>
+                                <div class="price-tag">+8 000 RUB</div>
+                            </div>
+                            
+                            <div class="radio-item" onclick="selectBacklight('rgb')">
+                                <div>
+                                    <strong>RGB подсветка (3 цвета)</strong>
+                                    <p style="color: #666; margin-top: 5px;">Три цвета, полный спектр RGB</p>
+                                </div>
+                                <div class="price-tag">+12 000 RUB</div>
+                            </div>
+                            
+                            <div class="radio-item" onclick="selectBacklight('rgbw')">
+                                <div>
+                                    <strong>RGBW подсветка (4 цвета)</strong>
+                                    <p style="color: #666; margin-top: 5px;">Четыре цвета, RGB + белый канал</p>
+                                </div>
+                                <div class="price-tag">+16 000 RUB</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Количество зон подсветки -->
+                    <div class="form-group">
+                        <label>Количество зон подсветки:</label>
+                        <div class="counter">
+                            <button onclick="changeCount('backlightZones', -1)">-</button>
+                            <span id="backlightZones">0</span>
+                            <button onclick="changeCount('backlightZones', 1)">+</button>
+                        </div>
+                        <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
+                            Одна зона = отдельно управляемая область
+                        </p>
+                    </div>
                 </div>
-                <div class="price-tag">0 RUB</div>
-            </div>
-            
-            <div class="radio-item" onclick="selectBacklight('led')">
-                <div>
-                    <strong>LED подсветка (1 цвет)</strong>
-                    <p style="color: #666; margin-top: 5px;">Монохромная, один цвет температуры</p>
-                </div>
-                <div class="price-tag">+4 000 RUB</div>
-            </div>
-            
-            <div class="radio-item" onclick="selectBacklight('cct')">
-                <div>
-                    <strong>CCT подсветка (2 цвета)</strong>
-                    <p style="color: #666; margin-top: 5px;">Два цвета, регулировка температуры</p>
-                </div>
-                <div class="price-tag">+8 000 RUB</div>
-            </div>
-            
-            <div class="radio-item" onclick="selectBacklight('rgb')">
-                <div>
-                    <strong>RGB подсветка (3 цвета)</strong>
-                    <p style="color: #666; margin-top: 5px;">Три цвета, полный спектр RGB</p>
-                </div>
-                <div class="price-tag">+12 000 RUB</div>
-            </div>
-            
-            <div class="radio-item" onclick="selectBacklight('rgbw')">
-                <div>
-                    <strong>RGBW подсветка (4 цвета)</strong>
-                    <p style="color: #666; margin-top: 5px;">Четыре цвета, RGB + белый канал</p>
-                </div>
-                <div class="price-tag">+16 000 RUB</div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Количество зон подсветки -->
-    <div class="form-group">
-        <label>Количество зон подсветки:</label>
-        <div class="counter">
-            <button onclick="changeCount('backlightZones', -1)">-</button>
-            <span id="backlightZones">0</span>
-            <button onclick="changeCount('backlightZones', 1)">+</button>
-        </div>
-        <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
-            Одна зона = отдельно управляемая область
-        </p>
-    </div>
-</div>
                 
                 <!-- Датчики -->
                 <div class="section">
@@ -574,14 +574,27 @@
                 wb7: { name: "Wiren Board 7", price: 45000, install: 4 },
                 wb6: { name: "Wiren Board 6", price: 28000, install: 3 }
             },
-            modules: {
-                lightLine: { name: "Линия освещения", price: 1500, install: 0.5 },
-                lightDimmer: { name: "Линия с диммированием", price: 2800, install: 0.7 },
+            
+            // Освещение и подсветки
+            lighting: {
+                simple: { name: "Линия освещения вкл/выкл", price: 1500, install: 0.5 },
+                dimmable: { name: "Диммируемая линия освещения", price: 2800, install: 0.7 },
+                backlightLED: { name: "LED подсветка (1 цвет)", price: 4000, install: 1 },
+                backlightCCT: { name: "CCT подсветка (2 цвета)", price: 8000, install: 1.5 },
+                backlightRGB: { name: "RGB подсветка (3 цвета)", price: 12000, install: 2 },
+                backlightRGBW: { name: "RGBW подсветка (4 цвета)", price: 16000, install: 2.5 },
+                backlightZone: { name: "Зона управления подсветкой", price: 2000, install: 0.3 }
+            },
+            
+            // Датчики
+            sensors: {
                 motionSensor: { name: "Датчик движения", price: 1200, install: 0.3 },
                 tempSensor: { name: "Датчик температуры", price: 900, install: 0.3 },
                 leakSensor: { name: "Датчик протечки", price: 2500, install: 0.4 },
                 gasSensor: { name: "Датчик газа", price: 3800, install: 0.5 }
             },
+            
+            // Услуги
             services: {
                 homeAssistant: { name: "Home Assistant", price: 8000, install: 3 },
                 scenarios: { name: "Настройка сценариев", price: 5000, install: 2 },
@@ -596,6 +609,7 @@
         };
         
         let selectedController = 'wb7';
+        let selectedBacklight = 'none';  // 'none', 'led', 'cct', 'rgb', 'rgbw'
         let selectedOptions = {
             leakSensor: false,
             gasSensor: false,
@@ -607,6 +621,7 @@
         // Инициализация
         document.addEventListener('DOMContentLoaded', function() {
             selectController('wb7');
+            selectBacklight('none');
             calculate();
         });
         
@@ -614,6 +629,19 @@
             selectedController = id;
             document.querySelectorAll('.radio-item').forEach(item => {
                 item.classList.remove('selected');
+            });
+            event.target.closest('.radio-item').classList.add('selected');
+            calculate();
+        }
+        
+        function selectBacklight(type) {
+            selectedBacklight = type;
+            // Снимаем выделение только у элементов подсветки
+            document.querySelectorAll('.radio-item').forEach(item => {
+                const strongText = item.querySelector('strong').textContent;
+                if (strongText.includes('подсветк') || strongText.includes('Без подсветки')) {
+                    item.classList.remove('selected');
+                }
             });
             event.target.closest('.radio-item').classList.add('selected');
             calculate();
@@ -638,10 +666,11 @@
             // Получаем значения
             const area = parseInt(document.getElementById('area').value) || 0;
             const rooms = parseInt(document.getElementById('rooms').value) || 0;
-            const lightLines = parseInt(document.getElementById('lightLines').textContent) || 0;
+            const lightSimple = parseInt(document.getElementById('lightSimple').textContent) || 0;
+            const lightDimmable = parseInt(document.getElementById('lightDimmable').textContent) || 0;
+            const backlightZones = parseInt(document.getElementById('backlightZones').textContent) || 0;
             const motionSensors = parseInt(document.getElementById('motionSensors').textContent) || 0;
             const tempSensors = parseInt(document.getElementById('tempSensors').textContent) || 0;
-            const lightType = document.getElementById('lightType').value;
             
             // Расчет
             let equipmentCost = 0;
@@ -661,49 +690,90 @@
             workHours += rooms * 0.5;
             items.push({ name: `Базовые системы (${rooms} комнат)`, price: baseCost });
             
-            // 3. Освещение
-            if (lightLines > 0) {
-                const lightPrice = lightType === 'dimmer' ? 
-                    prices.modules.lightDimmer.price : prices.modules.lightLine.price;
-                const lightName = lightType === 'dimmer' ? 
-                    'Линия с диммированием' : 'Линия освещения';
-                
-                const lightCost = lightLines * lightPrice;
-                equipmentCost += lightCost;
-                workHours += lightLines * (lightType === 'dimmer' ? 0.7 : 0.5);
-                items.push({ name: `${lightName} (${lightLines} шт)`, price: lightCost });
+            // 3. Освещение вкл/выкл
+            if (lightSimple > 0) {
+                const simpleCost = lightSimple * prices.lighting.simple.price;
+                equipmentCost += simpleCost;
+                workHours += lightSimple * prices.lighting.simple.install;
+                items.push({ name: `Освещение вкл/выкл (${lightSimple} линий)`, price: simpleCost });
             }
             
-            // 4. Датчики движения
+            // 4. Диммируемое освещение
+            if (lightDimmable > 0) {
+                const dimmableCost = lightDimmable * prices.lighting.dimmable.price;
+                equipmentCost += dimmableCost;
+                workHours += lightDimmable * prices.lighting.dimmable.install;
+                items.push({ name: `Диммируемое освещение (${lightDimmable} линий)`, price: dimmableCost });
+            }
+            
+            // 5. Декоративная подсветка
+            if (selectedBacklight !== 'none' && backlightZones > 0) {
+                let backlightPrice = 0;
+                let backlightName = '';
+                
+                switch(selectedBacklight) {
+                    case 'led':
+                        backlightPrice = prices.lighting.backlightLED.price;
+                        backlightName = prices.lighting.backlightLED.name;
+                        workHours += prices.lighting.backlightLED.install;
+                        break;
+                    case 'cct':
+                        backlightPrice = prices.lighting.backlightCCT.price;
+                        backlightName = prices.lighting.backlightCCT.name;
+                        workHours += prices.lighting.backlightCCT.install;
+                        break;
+                    case 'rgb':
+                        backlightPrice = prices.lighting.backlightRGB.price;
+                        backlightName = prices.lighting.backlightRGB.name;
+                        workHours += prices.lighting.backlightRGB.install;
+                        break;
+                    case 'rgbw':
+                        backlightPrice = prices.lighting.backlightRGBW.price;
+                        backlightName = prices.lighting.backlightRGBW.name;
+                        workHours += prices.lighting.backlightRGBW.install;
+                        break;
+                }
+                
+                const backlightCost = backlightPrice + (backlightZones * 2000);
+                equipmentCost += backlightCost;
+                workHours += backlightZones * prices.lighting.backlightZone.install;
+                
+                items.push({ 
+                    name: `${backlightName} (${backlightZones} зон)`, 
+                    price: backlightCost 
+                });
+            }
+            
+            // 6. Датчики движения
             if (motionSensors > 0) {
-                const sensorCost = motionSensors * prices.modules.motionSensor.price;
+                const sensorCost = motionSensors * prices.sensors.motionSensor.price;
                 equipmentCost += sensorCost;
-                workHours += motionSensors * prices.modules.motionSensor.install;
+                workHours += motionSensors * prices.sensors.motionSensor.install;
                 items.push({ name: `Датчики движения (${motionSensors} шт)`, price: sensorCost });
             }
             
-            // 5. Датчики температуры
+            // 7. Датчики температуры
             if (tempSensors > 0) {
-                const tempCost = tempSensors * prices.modules.tempSensor.price;
+                const tempCost = tempSensors * prices.sensors.tempSensor.price;
                 equipmentCost += tempCost;
-                workHours += tempSensors * prices.modules.tempSensor.install;
+                workHours += tempSensors * prices.sensors.tempSensor.install;
                 items.push({ name: `Датчики температуры (${tempSensors} шт)`, price: tempCost });
             }
             
-            // 6. Опциональные датчики
+            // 8. Опциональные датчики
             if (selectedOptions.leakSensor) {
-                equipmentCost += prices.modules.leakSensor.price;
-                workHours += prices.modules.leakSensor.install;
-                items.push({ name: prices.modules.leakSensor.name, price: prices.modules.leakSensor.price });
+                equipmentCost += prices.sensors.leakSensor.price;
+                workHours += prices.sensors.leakSensor.install;
+                items.push({ name: prices.sensors.leakSensor.name, price: prices.sensors.leakSensor.price });
             }
             
             if (selectedOptions.gasSensor) {
-                equipmentCost += prices.modules.gasSensor.price;
-                workHours += prices.modules.gasSensor.install;
-                items.push({ name: prices.modules.gasSensor.name, price: prices.modules.gasSensor.price });
+                equipmentCost += prices.sensors.gasSensor.price;
+                workHours += prices.sensors.gasSensor.install;
+                items.push({ name: prices.sensors.gasSensor.name, price: prices.sensors.gasSensor.price });
             }
             
-            // 7. Дополнительные услуги
+            // 9. Дополнительные услуги
             if (selectedOptions.homeAssistant) {
                 extraCost += prices.services.homeAssistant.price;
                 workHours += prices.services.homeAssistant.install;
@@ -777,6 +847,7 @@
             }
         }
     </script>
+    
     <!-- Водяной знак "В разработке" -->
     <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; 
                 pointer-events: none; background: repeating-linear-gradient(
