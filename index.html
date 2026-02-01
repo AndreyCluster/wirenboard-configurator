@@ -306,51 +306,52 @@
         <div class="configurator">
             <!-- Левая часть - настройки -->
             <div class="left-panel">
-                <!-- Объект -->
-                <div class="section">
-                    <h3><i class="fas fa-building"></i> 1. Объект</h3>
-                    <div class="form-group">
-                        <label>Тип объекта:</label>
-                        <select id="objectType">
-                            <option value="apartment">Квартира</option>
-                            <option value="house">Частный дом</option>
-                            <option value="office">Офис</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Площадь (м²):</label>
-                        <input type="number" id="area" value="80" min="20" max="1000">
-                    </div>
-                    <div class="form-group">
-                        <label>Количество комнат:</label>
-                        <input type="number" id="rooms" value="3" min="1" max="20">
-                    </div>
-                </div>
-                
                 <!-- Контроллер -->
                 <div class="section">
-                    <h3><i class="fas fa-microchip"></i> 2. Контроллер Wiren Board</h3>
+                    <h3><i class="fas fa-microchip"></i> 1. Контроллер Wiren Board</h3>
                     <div class="radio-group">
-                        <div class="radio-item" onclick="selectController('wb7')">
+                        <div class="radio-item" onclick="selectController('wb8')">
                             <div>
-                                <strong>Wiren Board 7</strong>
-                                <p style="color: #666; margin-top: 5px;">Флагман, 64 слота, максимум возможностей</p>
+                                <strong>Wiren Board 8</strong>
+                                <p style="color: #666; margin-top: 5px;">Современный контроллер, 40 слотов</p>
                             </div>
-                            <div class="price-tag">45 000 RUB</div>
+                            <div class="price-tag">23 500 ₽</div>
                         </div>
-                        <div class="radio-item" onclick="selectController('wb6')">
+                    </div>
+                    
+                    <!-- Модули расширения -->
+                    <div class="form-group" style="margin-top: 25px;">
+                        <h4 style="color: #1e3c72; margin-bottom: 15px;">
+                            <i class="fas fa-puzzle-piece"></i> Модули расширения
+                        </h4>
+                        
+                        <!-- Zigbee модуль -->
+                        <div class="checkbox-item" onclick="toggleCheckbox('zigbeeModule')">
                             <div>
-                                <strong>Wiren Board 6</strong>
-                                <p style="color: #666; margin-top: 5px;">Бюджетный, 32 слота, для стандартных задач</p>
+                                <strong>WBE2R-R-ZIGBEE v.2 + антенна</strong>
+                                <p style="color: #666; margin-top: 5px;">Zigbee координатор для беспроводных устройств</p>
                             </div>
-                            <div class="price-tag">28 000 RUB</div>
+                            <div class="price-tag">3 600 ₽</div>
+                        </div>
+                        
+                        <!-- RS485 модуль (счетчик) -->
+                        <div class="form-group" style="margin-top: 20px;">
+                            <label>WBE2-I-RS485-ISO (количество):</label>
+                            <div class="counter">
+                                <button onclick="changeCount('rs485Modules', -1)">-</button>
+                                <span id="rs485Modules">0</span>
+                                <button onclick="changeCount('rs485Modules', 1)">+</button>
+                            </div>
+                            <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
+                                Интерфейс RS-485 для подключения оборудования
+                            </p>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Освещение и подсветки -->
                 <div class="section">
-                    <h3><i class="fas fa-lightbulb"></i> 3. Освещение и подсветки</h3>
+                    <h3><i class="fas fa-lightbulb"></i> 2. Освещение и подсветки</h3>
                     
                     <!-- Простое освещение вкл/выкл -->
                     <div class="form-group">
@@ -378,75 +379,68 @@
                         </p>
                     </div>
                     
-                    <!-- Тип подсветки -->
+                    <!-- LED подсветка (счетчик) -->
                     <div class="form-group">
-                        <label>Тип декоративной подсветки:</label>
-                        <div class="radio-group">
-                            <div class="radio-item" onclick="selectBacklight('none')">
-                                <div>
-                                    <strong>Без подсветки</strong>
-                                    <p style="color: #666; margin-top: 5px;">Декоративная подсветка не требуется</p>
-                                </div>
-                                <div class="price-tag">0 RUB</div>
-                            </div>
-                            
-                            <div class="radio-item" onclick="selectBacklight('led')">
-                                <div>
-                                    <strong>LED подсветка (1 цвет)</strong>
-                                    <p style="color: #666; margin-top: 5px;">Монохромная, один цвет температуры</p>
-                                </div>
-                                <div class="price-tag">+4 000 RUB</div>
-                            </div>
-                            
-                            <div class="radio-item" onclick="selectBacklight('cct')">
-                                <div>
-                                    <strong>CCT подсветка (2 цвета)</strong>
-                                    <p style="color: #666; margin-top: 5px;">Два цвета, регулировка температуры</p>
-                                </div>
-                                <div class="price-tag">+8 000 RUB</div>
-                            </div>
-                            
-                            <div class="radio-item" onclick="selectBacklight('rgb')">
-                                <div>
-                                    <strong>RGB подсветка (3 цвета)</strong>
-                                    <p style="color: #666; margin-top: 5px;">Три цвета, полный спектр RGB</p>
-                                </div>
-                                <div class="price-tag">+12 000 RUB</div>
-                            </div>
-                            
-                            <div class="radio-item" onclick="selectBacklight('rgbw')">
-                                <div>
-                                    <strong>RGBW подсветка (4 цвета)</strong>
-                                    <p style="color: #666; margin-top: 5px;">Четыре цвета, RGB + белый канал</p>
-                                </div>
-                                <div class="price-tag">+16 000 RUB</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Количество зон подсветки -->
-                    <div class="form-group">
-                        <label>Количество зон подсветки:</label>
+                        <label>LED подсветка (зоны):</label>
                         <div class="counter">
-                            <button onclick="changeCount('backlightZones', -1)">-</button>
-                            <span id="backlightZones">0</span>
-                            <button onclick="changeCount('backlightZones', 1)">+</button>
+                            <button onclick="changeCount('ledBacklight', -1)">-</button>
+                            <span id="ledBacklight">0</span>
+                            <button onclick="changeCount('ledBacklight', 1)">+</button>
                         </div>
                         <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
-                            Одна зона = отдельно управляемая область
+                            Монохромная подсветка, 1 цвет (4 000 ₽ за зону)
+                        </p>
+                    </div>
+                    
+                    <!-- CCT подсветка (счетчик) -->
+                    <div class="form-group">
+                        <label>CCT подсветка (зоны):</label>
+                        <div class="counter">
+                            <button onclick="changeCount('cctBacklight', -1)">-</button>
+                            <span id="cctBacklight">0</span>
+                            <button onclick="changeCount('cctBacklight', 1)">+</button>
+                        </div>
+                        <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
+                            Два цвета, регулировка температуры (8 000 ₽ за зону)
+                        </p>
+                    </div>
+                    
+                    <!-- RGB подсветка (счетчик) -->
+                    <div class="form-group">
+                        <label>RGB подсветка (зоны):</label>
+                        <div class="counter">
+                            <button onclick="changeCount('rgbBacklight', -1)">-</button>
+                            <span id="rgbBacklight">0</span>
+                            <button onclick="changeCount('rgbBacklight', 1)">+</button>
+                        </div>
+                        <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
+                            Три цвета, полный спектр RGB (12 000 ₽ за зону)
+                        </p>
+                    </div>
+                    
+                    <!-- RGBW подсветка (счетчик) -->
+                    <div class="form-group">
+                        <label>RGBW подсветка (зоны):</label>
+                        <div class="counter">
+                            <button onclick="changeCount('rgbwBacklight', -1)">-</button>
+                            <span id="rgbwBacklight">0</span>
+                            <button onclick="changeCount('rgbwBacklight', 1)">+</button>
+                        </div>
+                        <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
+                            Четыре цвета, RGB + белый канал (16 000 ₽ за зону)
                         </p>
                     </div>
                 </div>
                 
                 <!-- Датчики -->
                 <div class="section">
-                    <h3><i class="fas fa-thermometer-half"></i> 4. Датчики и безопасность</h3>
+                    <h3><i class="fas fa-thermometer-half"></i> 3. Датчики и безопасность</h3>
                     
                     <div class="form-group">
                         <label>Датчики движения:</label>
                         <div class="counter">
                             <button onclick="changeCount('motionSensors', -1)">-</button>
-                            <span id="motionSensors">3</span>
+                            <span id="motionSensors">0</span>
                             <button onclick="changeCount('motionSensors', 1)">+</button>
                         </div>
                     </div>
@@ -455,7 +449,7 @@
                         <label>Датчики температуры:</label>
                         <div class="counter">
                             <button onclick="changeCount('tempSensors', -1)">-</button>
-                            <span id="tempSensors">2</span>
+                            <span id="tempSensors">0</span>
                             <button onclick="changeCount('tempSensors', 1)">+</button>
                         </div>
                     </div>
@@ -466,7 +460,7 @@
                                 <strong>Датчик протечки воды</strong>
                                 <p style="color: #666; margin-top: 5px;">WB-MSW, мгновенное оповещение</p>
                             </div>
-                            <div class="price-tag">2 500 RUB</div>
+                            <div class="price-tag">2 500 ₽</div>
                         </div>
                         
                         <div class="checkbox-item" onclick="toggleCheckbox('gasSensor')">
@@ -474,21 +468,21 @@
                                 <strong>Датчик утечки газа</strong>
                                 <p style="color: #666; margin-top: 5px;">Защита от CH4/CO, с сиреной</p>
                             </div>
-                            <div class="price-tag">3 800 RUB</div>
+                            <div class="price-tag">3 800 ₽</div>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Дополнительно -->
                 <div class="section">
-                    <h3><i class="fas fa-plus-circle"></i> 5. Дополнительные услуги</h3>
+                    <h3><i class="fas fa-plus-circle"></i> 4. Дополнительные услуги</h3>
                     <div class="checkbox-group">
                         <div class="checkbox-item" onclick="toggleCheckbox('homeAssistant')">
                             <div>
                                 <strong>Установка Home Assistant</strong>
                                 <p style="color: #666; margin-top: 5px;">Сервер, панель управления, интеграции</p>
                             </div>
-                            <div class="price-tag">8 000 RUB</div>
+                            <div class="price-tag">8 000 ₽</div>
                         </div>
                         
                         <div class="checkbox-item" onclick="toggleCheckbox('scenarios')">
@@ -496,7 +490,7 @@
                                 <strong>Настройка сценариев</strong>
                                 <p style="color: #666; margin-top: 5px;">5 готовых сценариев под ваш объект</p>
                             </div>
-                            <div class="price-tag">5 000 RUB</div>
+                            <div class="price-tag">5 000 ₽</div>
                         </div>
                         
                         <div class="checkbox-item" onclick="toggleCheckbox('warranty')">
@@ -504,7 +498,7 @@
                                 <strong>Расширенная гарантия 2 года</strong>
                                 <p style="color: #666; margin-top: 5px;">+1 год к стандартной гарантии</p>
                             </div>
-                            <div class="price-tag">3 000 RUB</div>
+                            <div class="price-tag">3 000 ₽</div>
                         </div>
                     </div>
                 </div>
@@ -518,26 +512,26 @@
                     <!-- Здесь появятся выбранные позиции -->
                     <div class="summary-item">
                         <span>Идет расчет...</span>
-                        <span>0 RUB</span>
+                        <span>0 ₽</span>
                     </div>
                 </div>
                 
                 <div class="total-block">
                     <div class="total-row">
                         <span>Оборудование:</span>
-                        <span id="equipmentTotal">0 RUB</span>
+                        <span id="equipmentTotal">0 ₽</span>
                     </div>
                     <div class="total-row">
                         <span>Работы и монтаж:</span>
-                        <span id="workTotal">0 RUB</span>
+                        <span id="workTotal">0 ₽</span>
                     </div>
                     <div class="total-row">
                         <span>Дополнительные услуги:</span>
-                        <span id="extraTotal">0 RUB</span>
+                        <span id="extraTotal">0 ₽</span>
                     </div>
                     <div class="total-row final">
                         <span>ИТОГО К ОПЛАТЕ:</span>
-                        <span id="finalTotal">0 RUB</span>
+                        <span id="finalTotal">0 ₽</span>
                     </div>
                 </div>
                 
@@ -570,20 +564,25 @@
     <script>
         // Цены и конфигурация
         const prices = {
+            // Контроллеры
             controllers: {
-                wb7: { name: "Wiren Board 7", price: 45000, install: 4 },
-                wb6: { name: "Wiren Board 6", price: 28000, install: 3 }
+                wb8: { name: "Wiren Board 8", price: 23500, install: 4 }
+            },
+            
+            // Модули расширения
+            modules: {
+                zigbeeModule: { name: "WBE2R-R-ZIGBEE v.2 + антенна", price: 3600, install: 0.5 },
+                rs485Module: { name: "WBE2-I-RS485-ISO", price: 1480, install: 0.3 }
             },
             
             // Освещение и подсветки
             lighting: {
                 simple: { name: "Линия освещения вкл/выкл", price: 1500, install: 0.5 },
                 dimmable: { name: "Диммируемая линия освещения", price: 2800, install: 0.7 },
-                backlightLED: { name: "LED подсветка (1 цвет)", price: 4000, install: 1 },
-                backlightCCT: { name: "CCT подсветка (2 цвета)", price: 8000, install: 1.5 },
-                backlightRGB: { name: "RGB подсветка (3 цвета)", price: 12000, install: 2 },
-                backlightRGBW: { name: "RGBW подсветка (4 цвета)", price: 16000, install: 2.5 },
-                backlightZone: { name: "Зона управления подсветкой", price: 2000, install: 0.3 }
+                ledBacklight: { name: "LED подсветка (1 цвет)", price: 4000, install: 1 },
+                cctBacklight: { name: "CCT подсветка (2 цвета)", price: 8000, install: 1.5 },
+                rgbBacklight: { name: "RGB подсветка (3 цвета)", price: 12000, install: 2 },
+                rgbwBacklight: { name: "RGBW подсветка (4 цвета)", price: 16000, install: 2.5 }
             },
             
             // Датчики
@@ -604,13 +603,13 @@
             // Коэффициенты
             markup: 1.3,          // Наценка на оборудование 30%
             workRate: 1500,       // Стоимость часа работы
-            materialsPerM2: 80,   // Материалы за м²
-            roomBase: 2000        // Базовая цена за комнату
+            materialsPerM2: 80,   // Материалы за м² (оставил для совместимости)
+            roomBase: 2000        // Базовая цена (оставил для совместимости)
         };
         
-        let selectedController = 'wb7';
-        let selectedBacklight = 'none';  // 'none', 'led', 'cct', 'rgb', 'rgbw'
+        let selectedController = 'wb8';
         let selectedOptions = {
+            zigbeeModule: false,
             leakSensor: false,
             gasSensor: false,
             homeAssistant: false,
@@ -620,8 +619,7 @@
         
         // Инициализация
         document.addEventListener('DOMContentLoaded', function() {
-            selectController('wb7');
-            selectBacklight('none');
+            selectController('wb8');
             calculate();
         });
         
@@ -629,19 +627,6 @@
             selectedController = id;
             document.querySelectorAll('.radio-item').forEach(item => {
                 item.classList.remove('selected');
-            });
-            event.target.closest('.radio-item').classList.add('selected');
-            calculate();
-        }
-        
-        function selectBacklight(type) {
-            selectedBacklight = type;
-            // Снимаем выделение только у элементов подсветки
-            document.querySelectorAll('.radio-item').forEach(item => {
-                const strongText = item.querySelector('strong').textContent;
-                if (strongText.includes('подсветк') || strongText.includes('Без подсветки')) {
-                    item.classList.remove('selected');
-                }
             });
             event.target.closest('.radio-item').classList.add('selected');
             calculate();
@@ -664,11 +649,13 @@
         
         function calculate() {
             // Получаем значения
-            const area = parseInt(document.getElementById('area').value) || 0;
-            const rooms = parseInt(document.getElementById('rooms').value) || 0;
             const lightSimple = parseInt(document.getElementById('lightSimple').textContent) || 0;
             const lightDimmable = parseInt(document.getElementById('lightDimmable').textContent) || 0;
-            const backlightZones = parseInt(document.getElementById('backlightZones').textContent) || 0;
+            const ledBacklight = parseInt(document.getElementById('ledBacklight').textContent) || 0;
+            const cctBacklight = parseInt(document.getElementById('cctBacklight').textContent) || 0;
+            const rgbBacklight = parseInt(document.getElementById('rgbBacklight').textContent) || 0;
+            const rgbwBacklight = parseInt(document.getElementById('rgbwBacklight').textContent) || 0;
+            const rs485Modules = parseInt(document.getElementById('rs485Modules').textContent) || 0;
             const motionSensors = parseInt(document.getElementById('motionSensors').textContent) || 0;
             const tempSensors = parseInt(document.getElementById('tempSensors').textContent) || 0;
             
@@ -684,11 +671,19 @@
             workHours += controller.install;
             items.push({ name: controller.name, price: controller.price });
             
-            // 2. Базовые системы
-            const baseCost = rooms * prices.roomBase;
-            equipmentCost += baseCost;
-            workHours += rooms * 0.5;
-            items.push({ name: `Базовые системы (${rooms} комнат)`, price: baseCost });
+            // 2. Модули расширения
+            if (selectedOptions.zigbeeModule) {
+                equipmentCost += prices.modules.zigbeeModule.price;
+                workHours += prices.modules.zigbeeModule.install;
+                items.push({ name: prices.modules.zigbeeModule.name, price: prices.modules.zigbeeModule.price });
+            }
+            
+            if (rs485Modules > 0) {
+                const rs485Cost = rs485Modules * prices.modules.rs485Module.price;
+                equipmentCost += rs485Cost;
+                workHours += rs485Modules * prices.modules.rs485Module.install;
+                items.push({ name: `WBE2-I-RS485-ISO (${rs485Modules} шт)`, price: rs485Cost });
+            }
             
             // 3. Освещение вкл/выкл
             if (lightSimple > 0) {
@@ -706,45 +701,39 @@
                 items.push({ name: `Диммируемое освещение (${lightDimmable} линий)`, price: dimmableCost });
             }
             
-            // 5. Декоративная подсветка
-            if (selectedBacklight !== 'none' && backlightZones > 0) {
-                let backlightPrice = 0;
-                let backlightName = '';
-                
-                switch(selectedBacklight) {
-                    case 'led':
-                        backlightPrice = prices.lighting.backlightLED.price;
-                        backlightName = prices.lighting.backlightLED.name;
-                        workHours += prices.lighting.backlightLED.install;
-                        break;
-                    case 'cct':
-                        backlightPrice = prices.lighting.backlightCCT.price;
-                        backlightName = prices.lighting.backlightCCT.name;
-                        workHours += prices.lighting.backlightCCT.install;
-                        break;
-                    case 'rgb':
-                        backlightPrice = prices.lighting.backlightRGB.price;
-                        backlightName = prices.lighting.backlightRGB.name;
-                        workHours += prices.lighting.backlightRGB.install;
-                        break;
-                    case 'rgbw':
-                        backlightPrice = prices.lighting.backlightRGBW.price;
-                        backlightName = prices.lighting.backlightRGBW.name;
-                        workHours += prices.lighting.backlightRGBW.install;
-                        break;
-                }
-                
-                const backlightCost = backlightPrice + (backlightZones * 2000);
-                equipmentCost += backlightCost;
-                workHours += backlightZones * prices.lighting.backlightZone.install;
-                
-                items.push({ 
-                    name: `${backlightName} (${backlightZones} зон)`, 
-                    price: backlightCost 
-                });
+            // 5. LED подсветка
+            if (ledBacklight > 0) {
+                const ledCost = ledBacklight * prices.lighting.ledBacklight.price;
+                equipmentCost += ledCost;
+                workHours += ledBacklight * prices.lighting.ledBacklight.install;
+                items.push({ name: `LED подсветка (${ledBacklight} зон)`, price: ledCost });
             }
             
-            // 6. Датчики движения
+            // 6. CCT подсветка
+            if (cctBacklight > 0) {
+                const cctCost = cctBacklight * prices.lighting.cctBacklight.price;
+                equipmentCost += cctCost;
+                workHours += cctBacklight * prices.lighting.cctBacklight.install;
+                items.push({ name: `CCT подсветка (${cctBacklight} зон)`, price: cctCost });
+            }
+            
+            // 7. RGB подсветка
+            if (rgbBacklight > 0) {
+                const rgbCost = rgbBacklight * prices.lighting.rgbBacklight.price;
+                equipmentCost += rgbCost;
+                workHours += rgbBacklight * prices.lighting.rgbBacklight.install;
+                items.push({ name: `RGB подсветка (${rgbBacklight} зон)`, price: rgbCost });
+            }
+            
+            // 8. RGBW подсветка
+            if (rgbwBacklight > 0) {
+                const rgbwCost = rgbwBacklight * prices.lighting.rgbwBacklight.price;
+                equipmentCost += rgbwCost;
+                workHours += rgbwBacklight * prices.lighting.rgbwBacklight.install;
+                items.push({ name: `RGBW подсветка (${rgbwBacklight} зон)`, price: rgbwCost });
+            }
+            
+            // 9. Датчики движения
             if (motionSensors > 0) {
                 const sensorCost = motionSensors * prices.sensors.motionSensor.price;
                 equipmentCost += sensorCost;
@@ -752,7 +741,7 @@
                 items.push({ name: `Датчики движения (${motionSensors} шт)`, price: sensorCost });
             }
             
-            // 7. Датчики температуры
+            // 10. Датчики температуры
             if (tempSensors > 0) {
                 const tempCost = tempSensors * prices.sensors.tempSensor.price;
                 equipmentCost += tempCost;
@@ -760,7 +749,7 @@
                 items.push({ name: `Датчики температуры (${tempSensors} шт)`, price: tempCost });
             }
             
-            // 8. Опциональные датчики
+            // 11. Опциональные датчики
             if (selectedOptions.leakSensor) {
                 equipmentCost += prices.sensors.leakSensor.price;
                 workHours += prices.sensors.leakSensor.install;
@@ -773,7 +762,7 @@
                 items.push({ name: prices.sensors.gasSensor.name, price: prices.sensors.gasSensor.price });
             }
             
-            // 9. Дополнительные услуги
+            // 12. Дополнительные услуги
             if (selectedOptions.homeAssistant) {
                 extraCost += prices.services.homeAssistant.price;
                 workHours += prices.services.homeAssistant.install;
@@ -791,8 +780,8 @@
                 items.push({ name: prices.services.warranty.name, price: prices.services.warranty.price });
             }
             
-            // Материалы
-            const materialsCost = area * prices.materialsPerM2;
+            // Материалы (фиксированная стоимость)
+            const materialsCost = 5000; // Базовая стоимость материалов
             
             // Итоговый расчет
             const equipmentWithMarkup = equipmentCost * prices.markup;
@@ -812,16 +801,16 @@
                 div.className = 'summary-item';
                 div.innerHTML = `
                     <span>${item.name}</span>
-                    <span>${formatPrice(item.price)} RUB</span>
+                    <span>${formatPrice(item.price)} ₽</span>
                 `;
                 container.appendChild(div);
             });
             
             // Обновляем итоги
-            document.getElementById('equipmentTotal').textContent = formatPrice(equipmentTotal) + ' RUB';
-            document.getElementById('workTotal').textContent = formatPrice(workTotal) + ' RUB';
-            document.getElementById('extraTotal').textContent = formatPrice(extraTotal) + ' RUB';
-            document.getElementById('finalTotal').textContent = formatPrice(finalTotal) + ' RUB';
+            document.getElementById('equipmentTotal').textContent = formatPrice(equipmentTotal) + ' ₽';
+            document.getElementById('workTotal').textContent = formatPrice(workTotal) + ' ₽';
+            document.getElementById('extraTotal').textContent = formatPrice(extraTotal) + ' ₽';
+            document.getElementById('finalTotal').textContent = formatPrice(finalTotal) + ' ₽';
         }
         
         function formatPrice(price) {
