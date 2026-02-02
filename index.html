@@ -78,6 +78,22 @@
             color: #4dabf7;
         }
         
+        .subsection {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            border: 1px solid #e9ecef;
+        }
+        
+        .subsection h4 {
+            color: #495057;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
         .form-group {
             margin: 20px 0;
         }
@@ -440,9 +456,222 @@
                     </div>
                 </div>
                 
+                <!-- Вытяжки -->
+                <div class="section">
+                    <h3><i class="fas fa-fan"></i> 3. Вытяжки</h3>
+                    <div class="subsection">
+                        <h4><i class="fas fa-wind"></i> Вытяжки</h4>
+                        <div class="form-group">
+                            <label>Вытяжки (количество):</label>
+                            <div class="counter">
+                                <button onclick="changeCount('ventilation', -1)">-</button>
+                                <span id="ventilation">0</span>
+                                <button onclick="changeCount('ventilation', 1)">+</button>
+                            </div>
+                            <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
+                                Управление вытяжными вентиляторами и системами
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Розетки -->
+                <div class="section">
+                    <h3><i class="fas fa-plug"></i> 4. Розетки</h3>
+                    <div class="subsection">
+                        <h4><i class="fas fa-power-off"></i> Розетки</h4>
+                        <div class="form-group">
+                            <label>Умные розетки (количество):</label>
+                            <div class="counter">
+                                <button onclick="changeCount('sockets', -1)">-</button>
+                                <span id="sockets">0</span>
+                                <button onclick="changeCount('sockets', 1)">+</button>
+                            </div>
+                            <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
+                                Управление питанием через умные розетки
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Шторы -->
+                <div class="section">
+                    <h3><i class="fas fa-blinds"></i> 5. Шторы и жалюзи</h3>
+                    
+                    <div class="subsection">
+                        <h4><i class="fas fa-sliders-h"></i> Шторы (Modbus)</h4>
+                        <div class="form-group">
+                            <label>Шторы Modbus (количество):</label>
+                            <div class="counter">
+                                <button onclick="changeCount('curtainsModbus', -1)">-</button>
+                                <span id="curtainsModbus">0</span>
+                                <button onclick="changeCount('curtainsModbus', 1)">+</button>
+                            </div>
+                            <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
+                                Управление через протокол Modbus
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="subsection">
+                        <h4><i class="fas fa-exchange-alt"></i> Шторы (сухой контакт)</h4>
+                        <div class="form-group">
+                            <label>Шторы сухой контакт (количество):</label>
+                            <div class="counter">
+                                <button onclick="changeCount('curtainsDryContact', -1)">-</button>
+                                <span id="curtainsDryContact">0</span>
+                                <button onclick="changeCount('curtainsDryContact', 1)">+</button>
+                            </div>
+                            <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
+                                Управление через сухие контакты
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="subsection">
+                        <h4><i class="fas fa-bolt"></i> Шторы (фазное управление)</h4>
+                        <div class="form-group">
+                            <label>Шторы фазное управление (количество):</label>
+                            <div class="counter">
+                                <button onclick="changeCount('curtainsPhase', -1)">-</button>
+                                <span id="curtainsPhase">0</span>
+                                <button onclick="changeCount('curtainsPhase', 1)">+</button>
+                            </div>
+                            <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
+                                Управление через фазное регулирование
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Климат -->
+                <div class="section">
+                    <h3><i class="fas fa-thermometer-half"></i> 6. Климат-контроль</h3>
+                    
+                    <div class="subsection">
+                        <h4><i class="fas fa-temperature-high"></i> Датчики теплого пола</h4>
+                        <div class="form-group">
+                            <label>Датчики теплого пола (количество):</label>
+                            <div class="counter">
+                                <button onclick="changeCount('floorHeatSensors', -1)">-</button>
+                                <span id="floorHeatSensors">0</span>
+                                <button onclick="changeCount('floorHeatSensors', 1)">+</button>
+                            </div>
+                            <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
+                                Температурные датчики для теплого пола
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="subsection">
+                        <h4><i class="fas fa-thermometer"></i> Датчики температуры воздуха</h4>
+                        <div class="form-group">
+                            <label>Датчики температуры воздуха (количество):</label>
+                            <div class="counter">
+                                <button onclick="changeCount('airTempSensors', -1)">-</button>
+                                <span id="airTempSensors">0</span>
+                                <button onclick="changeCount('airTempSensors', 1)">+</button>
+                            </div>
+                            <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
+                                Датчики температуры воздуха в помещениях
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="subsection">
+                        <h4><i class="fas fa-smog"></i> Датчики CO2</h4>
+                        <div class="form-group">
+                            <label>Датчики CO2 (количество):</label>
+                            <div class="counter">
+                                <button onclick="changeCount('co2Sensors', -1)">-</button>
+                                <span id="co2Sensors">0</span>
+                                <button onclick="changeCount('co2Sensors', 1)">+</button>
+                            </div>
+                            <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
+                                Датчики углекислого газа
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="subsection">
+                        <h4><i class="fas fa-tint"></i> Датчики влажности</h4>
+                        <div class="form-group">
+                            <label>Датчики влажности (количество):</label>
+                            <div class="counter">
+                                <button onclick="changeCount('humiditySensors', -1)">-</button>
+                                <span id="humiditySensors">0</span>
+                                <button onclick="changeCount('humiditySensors', 1)">+</button>
+                            </div>
+                            <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
+                                Датчики относительной влажности воздуха
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="subsection">
+                        <h4><i class="fas fa-snowflake"></i> Кондиционеры</h4>
+                        <div class="form-group">
+                            <label>Кондиционеры (количество):</label>
+                            <div class="counter">
+                                <button onclick="changeCount('airConditioners', -1)">-</button>
+                                <span id="airConditioners">0</span>
+                                <button onclick="changeCount('airConditioners', 1)">+</button>
+                            </div>
+                            <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
+                                Управление кондиционерами
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="subsection">
+                        <h4><i class="fas fa-wind"></i> Приточная вентиляция</h4>
+                        <div class="form-group">
+                            <label>Приточная вентиляция (количество):</label>
+                            <div class="counter">
+                                <button onclick="changeCount('supplyVentilation', -1)">-</button>
+                                <span id="supplyVentilation">0</span>
+                                <button onclick="changeCount('supplyVentilation', 1)">+</button>
+                            </div>
+                            <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
+                                Управление приточной вентиляцией
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="subsection">
+                        <h4><i class="fas fa-sliders-h"></i> Терморегуляторы</h4>
+                        <div class="form-group">
+                            <label>Терморегуляторы (количество):</label>
+                            <div class="counter">
+                                <button onclick="changeCount('thermostats', -1)">-</button>
+                                <span id="thermostats">0</span>
+                                <button onclick="changeCount('thermostats', 1)">+</button>
+                            </div>
+                            <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
+                                Программируемые терморегуляторы
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="subsection">
+                        <h4><i class="fas fa-temperature-low"></i> Термоголовки</h4>
+                        <div class="form-group">
+                            <label>Термоголовки (количество):</label>
+                            <div class="counter">
+                                <button onclick="changeCount('thermoHeads', -1)">-</button>
+                                <span id="thermoHeads">0</span>
+                                <button onclick="changeCount('thermoHeads', 1)">+</button>
+                            </div>
+                            <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
+                                Умные термоголовки для радиаторов
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
                 <!-- Датчики и услуги -->
                 <div class="section">
-                    <h3><i class="fas fa-thermometer-half"></i> 3. Датчики и дополнительные услуги</h3>
+                    <h3><i class="fas fa-sensor"></i> 7. Датчики и дополнительные услуги</h3>
                     
                     <div class="form-group">
                         <label>Датчики движения:</label>
@@ -450,15 +679,6 @@
                             <button onclick="changeCount('motionSensors', -1)">-</button>
                             <span id="motionSensors">0</span>
                             <button onclick="changeCount('motionSensors', 1)">+</button>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Датчики температуры:</label>
-                        <div class="counter">
-                            <button onclick="changeCount('tempSensors', -1)">-</button>
-                            <span id="tempSensors">0</span>
-                            <button onclick="changeCount('tempSensors', 1)">+</button>
                         </div>
                     </div>
                     
@@ -571,7 +791,7 @@
         const prices = {
             // Контроллеры (основное оборудование) - БЕЗ наценки
             controllers: {
-                wb8: { name: "Wiren Board 8", price: 23500, install: 0 }
+                wb8: { name: "Wiren Board 8", price: 23500, install: 4 }
             },
             
             // Модули расширения (дополнительное оборудование) - БЕЗ наценки
@@ -582,32 +802,49 @@
             
             // Освещение и подсветки (работы) - БЕЗ наценки
             lighting: {
-                simple: { name: "Освещение вкл/выкл", price: 2000, install: 0 },
-                dimmable: { name: "Диммируемое освещение", price: 2000, install: 0 },
-                ledBacklight: { name: "LED подсветка", price: 2000, install: 0 },
-                cctBacklight: { name: "CCT подсветка", price: 4000, install: 0 },
-                rgbBacklight: { name: "RGB подсветка", price: 6000, install: 0 },
-                rgbwBacklight: { name: "RGBW подсветка", price: 8000, install: 0 }
+                simple: { name: "Освещение вкл/выкл", price: 1500, install: 0.5 },
+                dimmable: { name: "Диммируемое освещение", price: 2800, install: 0.7 },
+                ledBacklight: { name: "LED подсветка", price: 4000, install: 1 },
+                cctBacklight: { name: "CCT подсветка", price: 8000, install: 1.5 },
+                rgbBacklight: { name: "RGB подсветка", price: 12000, install: 2 },
+                rgbwBacklight: { name: "RGBW подсветка", price: 16000, install: 2.5 }
+            },
+            
+            // Вытяжки, розетки, шторы, климат
+            equipment: {
+                ventilation: { name: "Вытяжка", price: 2000, install: 0.5 },
+                sockets: { name: "Умная розетка", price: 2000, install: 0.3 },
+                curtainsModbus: { name: "Шторы Modbus", price: 2000, install: 1 },
+                curtainsDryContact: { name: "Шторы сухой контакт", price: 2000, install: 0.7 },
+                curtainsPhase: { name: "Шторы фазное управление", price: 2000, install: 0.8 },
+                floorHeatSensors: { name: "Датчик теплого пола", price: 2000, install: 0.3 },
+                airTempSensors: { name: "Датчик температуры воздуха", price: 2000, install: 0.3 },
+                co2Sensors: { name: "Датчик CO2", price: 2000, install: 0.4 },
+                humiditySensors: { name: "Датчик влажности", price: 2000, install: 0.3 },
+                airConditioners: { name: "Кондиционер", price: 2000, install: 1 },
+                supplyVentilation: { name: "Приточная вентиляция", price: 2000, install: 1.2 },
+                thermostats: { name: "Терморегулятор", price: 2000, install: 0.5 },
+                thermoHeads: { name: "Термоголовка", price: 2000, install: 0.4 }
             },
             
             // Датчики (дополнительное оборудование) - БЕЗ наценки
             sensors: {
-                motionSensor: { name: "Датчик движения", price: 1200, install: 0 },
-                tempSensor: { name: "Датчик температуры", price: 900, install: 0 },
-                leakSensor: { name: "Датчик протечки", price: 2500, install: 0 },
-                gasSensor: { name: "Датчик газа", price: 3800, install: 0 }
+                motionSensor: { name: "Датчик движения", price: 1200, install: 0.3 },
+                tempSensor: { name: "Датчик температуры", price: 900, install: 0.3 },
+                leakSensor: { name: "Датчик протечки", price: 2500, install: 0.4 },
+                gasSensor: { name: "Датчик газа", price: 3800, install: 0.5 }
             },
             
             // Услуги (дополнительные услуги) - БЕЗ наценки
             services: {
-                homeAssistant: { name: "Установка Home Assistant", price: 8000, install: 0 },
-                scenarios: { name: "Настройка сценариев", price: 5000, install: 0 },
+                homeAssistant: { name: "Установка Home Assistant", price: 8000, install: 3 },
+                scenarios: { name: "Настройка сценариев", price: 5000, install: 2 },
                 warranty: { name: "Расширенная гарантия 2 года", price: 3000, install: 0 }
             },
             
             // Коэффициенты - УБРАНА наценка 30%
-            workRate: 0,       // Стоимость часа работы
-            materialsCost: 0   // Базовые материалы
+            workRate: 1500,       // Стоимость часа работы
+            materialsCost: 5000   // Базовые материалы
         };
         
         let selectedController = 'wb8';
@@ -655,7 +892,7 @@
         function calculate() {
             console.log("=== НАЧАЛО РАСЧЕТА ===");
             
-            // Получаем значения
+            // Получаем значения из всех новых полей
             const lightSimple = parseInt(document.getElementById('lightSimple').textContent) || 0;
             const lightDimmable = parseInt(document.getElementById('lightDimmable').textContent) || 0;
             const ledBacklight = parseInt(document.getElementById('ledBacklight').textContent) || 0;
@@ -664,17 +901,31 @@
             const rgbwBacklight = parseInt(document.getElementById('rgbwBacklight').textContent) || 0;
             const rs485Modules = parseInt(document.getElementById('rs485Modules').textContent) || 0;
             const motionSensors = parseInt(document.getElementById('motionSensors').textContent) || 0;
-            const tempSensors = parseInt(document.getElementById('tempSensors').textContent) || 0;
             
-            console.log("Значения:", {
-                lightSimple, lightDimmable, ledBacklight, cctBacklight,
-                rgbBacklight, rgbwBacklight, rs485Modules, motionSensors, tempSensors
+            // Новые поля
+            const ventilation = parseInt(document.getElementById('ventilation').textContent) || 0;
+            const sockets = parseInt(document.getElementById('sockets').textContent) || 0;
+            const curtainsModbus = parseInt(document.getElementById('curtainsModbus').textContent) || 0;
+            const curtainsDryContact = parseInt(document.getElementById('curtainsDryContact').textContent) || 0;
+            const curtainsPhase = parseInt(document.getElementById('curtainsPhase').textContent) || 0;
+            const floorHeatSensors = parseInt(document.getElementById('floorHeatSensors').textContent) || 0;
+            const airTempSensors = parseInt(document.getElementById('airTempSensors').textContent) || 0;
+            const co2Sensors = parseInt(document.getElementById('co2Sensors').textContent) || 0;
+            const humiditySensors = parseInt(document.getElementById('humiditySensors').textContent) || 0;
+            const airConditioners = parseInt(document.getElementById('airConditioners').textContent) || 0;
+            const supplyVentilation = parseInt(document.getElementById('supplyVentilation').textContent) || 0;
+            const thermostats = parseInt(document.getElementById('thermostats').textContent) || 0;
+            const thermoHeads = parseInt(document.getElementById('thermoHeads').textContent) || 0;
+            
+            console.log("Значения новых полей:", {
+                ventilation, sockets, curtainsModbus, curtainsDryContact, curtainsPhase,
+                floorHeatSensors, airTempSensors, co2Sensors, humiditySensors,
+                airConditioners, supplyVentilation, thermostats, thermoHeads
             });
-            console.log("Выбранные опции:", selectedOptions);
             
-            // Инициализируем категории (БЕЗ наценки)
-            let equipmentCost = 0;           // Оборудование (контроллеры) - БЕЗ наценки
-            let modulesCost = 0;             // Дополнительное оборудование (модули) - БЕЗ наценки
+            // Инициализируем категории
+            let equipmentCost = 0;           // Оборудование (контроллеры)
+            let modulesCost = 0;             // Дополнительное оборудование (модули, датчики, новое оборудование)
             let workCost = 0;                // Работы (освещение/подсветки)
             let extraCost = 0;               // Дополнительные услуги
             
@@ -684,12 +935,11 @@
             // Проверяем, есть ли хоть что-то выбрано
             let hasAnySelection = false;
             
-            // 1. ОБОРУДОВАНИЕ: Контроллер (только если есть другие элементы)
-            // УПРОЩАЕМ: контроллер всегда считается, если выбран
-            if (true) { // Всегда показываем контроллер, так как он выбран по умолчанию
+            // 1. ОБОРУДОВАНИЕ: Контроллер (всегда считаем, так как он выбран по умолчанию)
+            if (true) {
                 hasAnySelection = true;
                 
-                // Добавляем контроллер (БЕЗ наценки)
+                // Добавляем контроллер
                 const controller = prices.controllers[selectedController];
                 equipmentCost += controller.price;
                 workHours += controller.install;
@@ -708,7 +958,7 @@
                 return;
             }
             
-            // 2. ДОПОЛНИТЕЛЬНОЕ ОБОРУДОВАНИЕ: Модули расширения (БЕЗ наценки)
+            // 2. ДОПОЛНИТЕЛЬНОЕ ОБОРУДОВАНИЕ: Модули расширения
             if (selectedOptions.zigbeeModule) {
                 modulesCost += prices.modules.zigbeeModule.price;
                 workHours += prices.modules.zigbeeModule.install;
@@ -717,7 +967,6 @@
                     price: prices.modules.zigbeeModule.price,
                     category: 'modules'
                 });
-                console.log("Добавлен Zigbee модуль:", prices.modules.zigbeeModule.price);
             }
             
             if (rs485Modules > 0) {
@@ -729,10 +978,9 @@
                     price: rs485Price,
                     category: 'modules'
                 });
-                console.log("Добавлены RS485 модули:", rs485Price);
             }
             
-            // 3. РАБОТЫ: Освещение и подсветки (считаем как работы)
+            // 3. РАБОТЫ: Освещение и подсветки
             if (lightSimple > 0) {
                 const simplePrice = lightSimple * prices.lighting.simple.price;
                 workCost += simplePrice;
@@ -742,7 +990,6 @@
                     price: simplePrice,
                     category: 'work'
                 });
-                console.log("Добавлено простое освещение:", simplePrice);
             }
             
             if (lightDimmable > 0) {
@@ -754,7 +1001,6 @@
                     price: dimmablePrice,
                     category: 'work'
                 });
-                console.log("Добавлено диммируемое освещение:", dimmablePrice);
             }
             
             if (ledBacklight > 0) {
@@ -766,7 +1012,6 @@
                     price: ledPrice,
                     category: 'work'
                 });
-                console.log("Добавлена LED подсветка:", ledPrice);
             }
             
             if (cctBacklight > 0) {
@@ -778,7 +1023,6 @@
                     price: cctPrice,
                     category: 'work'
                 });
-                console.log("Добавлена CCT подсветка:", cctPrice);
             }
             
             if (rgbBacklight > 0) {
@@ -790,7 +1034,6 @@
                     price: rgbPrice,
                     category: 'work'
                 });
-                console.log("Добавлена RGB подсветка:", rgbPrice);
             }
             
             if (rgbwBacklight > 0) {
@@ -802,10 +1045,166 @@
                     price: rgbwPrice,
                     category: 'work'
                 });
-                console.log("Добавлена RGBW подсветка:", rgbwPrice);
             }
             
-            // 4. ДОПОЛНИТЕЛЬНОЕ ОБОРУДОВАНИЕ: Датчики (БЕЗ наценки)
+            // 4. НОВОЕ ОБОРУДОВАНИЕ (все по 2000 ₽)
+            // Вытяжки
+            if (ventilation > 0) {
+                const ventilationPrice = ventilation * prices.equipment.ventilation.price;
+                modulesCost += ventilationPrice;
+                workHours += ventilation * prices.equipment.ventilation.install;
+                items.push({ 
+                    name: `Вытяжки (${ventilation} шт)`, 
+                    price: ventilationPrice,
+                    category: 'modules'
+                });
+            }
+            
+            // Розетки
+            if (sockets > 0) {
+                const socketsPrice = sockets * prices.equipment.sockets.price;
+                modulesCost += socketsPrice;
+                workHours += sockets * prices.equipment.sockets.install;
+                items.push({ 
+                    name: `Умные розетки (${sockets} шт)`, 
+                    price: socketsPrice,
+                    category: 'modules'
+                });
+            }
+            
+            // Шторы Modbus
+            if (curtainsModbus > 0) {
+                const curtainsModbusPrice = curtainsModbus * prices.equipment.curtainsModbus.price;
+                modulesCost += curtainsModbusPrice;
+                workHours += curtainsModbus * prices.equipment.curtainsModbus.install;
+                items.push({ 
+                    name: `Шторы Modbus (${curtainsModbus} шт)`, 
+                    price: curtainsModbusPrice,
+                    category: 'modules'
+                });
+            }
+            
+            // Шторы сухой контакт
+            if (curtainsDryContact > 0) {
+                const curtainsDryContactPrice = curtainsDryContact * prices.equipment.curtainsDryContact.price;
+                modulesCost += curtainsDryContactPrice;
+                workHours += curtainsDryContact * prices.equipment.curtainsDryContact.install;
+                items.push({ 
+                    name: `Шторы сухой контакт (${curtainsDryContact} шт)`, 
+                    price: curtainsDryContactPrice,
+                    category: 'modules'
+                });
+            }
+            
+            // Шторы фазное управление
+            if (curtainsPhase > 0) {
+                const curtainsPhasePrice = curtainsPhase * prices.equipment.curtainsPhase.price;
+                modulesCost += curtainsPhasePrice;
+                workHours += curtainsPhase * prices.equipment.curtainsPhase.install;
+                items.push({ 
+                    name: `Шторы фазное управление (${curtainsPhase} шт)`, 
+                    price: curtainsPhasePrice,
+                    category: 'modules'
+                });
+            }
+            
+            // Датчики теплого пола
+            if (floorHeatSensors > 0) {
+                const floorHeatSensorsPrice = floorHeatSensors * prices.equipment.floorHeatSensors.price;
+                modulesCost += floorHeatSensorsPrice;
+                workHours += floorHeatSensors * prices.equipment.floorHeatSensors.install;
+                items.push({ 
+                    name: `Датчики теплого пола (${floorHeatSensors} шт)`, 
+                    price: floorHeatSensorsPrice,
+                    category: 'modules'
+                });
+            }
+            
+            // Датчики температуры воздуха
+            if (airTempSensors > 0) {
+                const airTempSensorsPrice = airTempSensors * prices.equipment.airTempSensors.price;
+                modulesCost += airTempSensorsPrice;
+                workHours += airTempSensors * prices.equipment.airTempSensors.install;
+                items.push({ 
+                    name: `Датчики температуры воздуха (${airTempSensors} шт)`, 
+                    price: airTempSensorsPrice,
+                    category: 'modules'
+                });
+            }
+            
+            // Датчики CO2
+            if (co2Sensors > 0) {
+                const co2SensorsPrice = co2Sensors * prices.equipment.co2Sensors.price;
+                modulesCost += co2SensorsPrice;
+                workHours += co2Sensors * prices.equipment.co2Sensors.install;
+                items.push({ 
+                    name: `Датчики CO2 (${co2Sensors} шт)`, 
+                    price: co2SensorsPrice,
+                    category: 'modules'
+                });
+            }
+            
+            // Датчики влажности
+            if (humiditySensors > 0) {
+                const humiditySensorsPrice = humiditySensors * prices.equipment.humiditySensors.price;
+                modulesCost += humiditySensorsPrice;
+                workHours += humiditySensors * prices.equipment.humiditySensors.install;
+                items.push({ 
+                    name: `Датчики влажности (${humiditySensors} шт)`, 
+                    price: humiditySensorsPrice,
+                    category: 'modules'
+                });
+            }
+            
+            // Кондиционеры
+            if (airConditioners > 0) {
+                const airConditionersPrice = airConditioners * prices.equipment.airConditioners.price;
+                modulesCost += airConditionersPrice;
+                workHours += airConditioners * prices.equipment.airConditioners.install;
+                items.push({ 
+                    name: `Кондиционеры (${airConditioners} шт)`, 
+                    price: airConditionersPrice,
+                    category: 'modules'
+                });
+            }
+            
+            // Приточная вентиляция
+            if (supplyVentilation > 0) {
+                const supplyVentilationPrice = supplyVentilation * prices.equipment.supplyVentilation.price;
+                modulesCost += supplyVentilationPrice;
+                workHours += supplyVentilation * prices.equipment.supplyVentilation.install;
+                items.push({ 
+                    name: `Приточная вентиляция (${supplyVentilation} шт)`, 
+                    price: supplyVentilationPrice,
+                    category: 'modules'
+                });
+            }
+            
+            // Терморегуляторы
+            if (thermostats > 0) {
+                const thermostatsPrice = thermostats * prices.equipment.thermostats.price;
+                modulesCost += thermostatsPrice;
+                workHours += thermostats * prices.equipment.thermostats.install;
+                items.push({ 
+                    name: `Терморегуляторы (${thermostats} шт)`, 
+                    price: thermostatsPrice,
+                    category: 'modules'
+                });
+            }
+            
+            // Термоголовки
+            if (thermoHeads > 0) {
+                const thermoHeadsPrice = thermoHeads * prices.equipment.thermoHeads.price;
+                modulesCost += thermoHeadsPrice;
+                workHours += thermoHeads * prices.equipment.thermoHeads.install;
+                items.push({ 
+                    name: `Термоголовки (${thermoHeads} шт)`, 
+                    price: thermoHeadsPrice,
+                    category: 'modules'
+                });
+            }
+            
+            // 5. ДОПОЛНИТЕЛЬНОЕ ОБОРУДОВАНИЕ: Датчики
             if (motionSensors > 0) {
                 const motionPrice = motionSensors * prices.sensors.motionSensor.price;
                 modulesCost += motionPrice;
@@ -815,19 +1214,6 @@
                     price: motionPrice,
                     category: 'modules'
                 });
-                console.log("Добавлены датчики движения:", motionPrice);
-            }
-            
-            if (tempSensors > 0) {
-                const tempPrice = tempSensors * prices.sensors.tempSensor.price;
-                modulesCost += tempPrice;
-                workHours += tempSensors * prices.sensors.tempSensor.install;
-                items.push({ 
-                    name: `Датчики температуры (${tempSensors} шт)`, 
-                    price: tempPrice,
-                    category: 'modules'
-                });
-                console.log("Добавлены датчики температуры:", tempPrice);
             }
             
             if (selectedOptions.leakSensor) {
@@ -838,7 +1224,6 @@
                     price: prices.sensors.leakSensor.price,
                     category: 'modules'
                 });
-                console.log("Добавлен датчик протечки:", prices.sensors.leakSensor.price);
             }
             
             if (selectedOptions.gasSensor) {
@@ -849,10 +1234,9 @@
                     price: prices.sensors.gasSensor.price,
                     category: 'modules'
                 });
-                console.log("Добавлен датчик газа:", prices.sensors.gasSensor.price);
             }
             
-            // 5. ДОПОЛНИТЕЛЬНЫЕ УСЛУГИ (БЕЗ наценки)
+            // 6. ДОПОЛНИТЕЛЬНЫЕ УСЛУГИ
             if (selectedOptions.homeAssistant) {
                 extraCost += prices.services.homeAssistant.price;
                 workHours += prices.services.homeAssistant.install;
@@ -861,7 +1245,6 @@
                     price: prices.services.homeAssistant.price,
                     category: 'extra'
                 });
-                console.log("Добавлена установка Home Assistant:", prices.services.homeAssistant.price);
             }
             
             if (selectedOptions.scenarios) {
@@ -872,7 +1255,6 @@
                     price: prices.services.scenarios.price,
                     category: 'extra'
                 });
-                console.log("Добавлена настройка сценариев:", prices.services.scenarios.price);
             }
             
             if (selectedOptions.warranty) {
@@ -882,13 +1264,12 @@
                     price: prices.services.warranty.price,
                     category: 'extra'
                 });
-                console.log("Добавлена расширенная гарантия:", prices.services.warranty.price);
             }
             
             // Материалы (только если есть оборудование)
             const materialsCost = (equipmentCost + modulesCost) > 0 ? prices.materialsCost : 0;
             
-            // Итоговый расчет БЕЗ наценки
+            // Итоговый расчет
             const workHoursCost = workHours * prices.workRate;
             const workTotal = workCost + workHoursCost + materialsCost;
             
