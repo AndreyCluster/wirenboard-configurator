@@ -571,7 +571,7 @@
         const prices = {
             // Контроллеры (основное оборудование) - БЕЗ наценки
             controllers: {
-                wb8: { name: "Wiren Board 8", price: 23500, install: 4 }
+                wb8: { name: "Wiren Board 8", price: 23500, install: 0 }
             },
             
             // Модули расширения (дополнительное оборудование) - БЕЗ наценки
@@ -582,32 +582,32 @@
             
             // Освещение и подсветки (работы) - БЕЗ наценки
             lighting: {
-                simple: { name: "Освещение вкл/выкл", price: 1500, install: 0.5 },
-                dimmable: { name: "Диммируемое освещение", price: 2800, install: 0.7 },
-                ledBacklight: { name: "LED подсветка", price: 4000, install: 1 },
-                cctBacklight: { name: "CCT подсветка", price: 8000, install: 1.5 },
-                rgbBacklight: { name: "RGB подсветка", price: 12000, install: 2 },
-                rgbwBacklight: { name: "RGBW подсветка", price: 16000, install: 2.5 }
+                simple: { name: "Освещение вкл/выкл", price: 2000, install: 0 },
+                dimmable: { name: "Диммируемое освещение", price: 2000, install: 0 },
+                ledBacklight: { name: "LED подсветка", price: 2000, install: 0 },
+                cctBacklight: { name: "CCT подсветка", price: 4000, install: 0 },
+                rgbBacklight: { name: "RGB подсветка", price: 6000, install: 0 },
+                rgbwBacklight: { name: "RGBW подсветка", price: 8000, install: 0 }
             },
             
             // Датчики (дополнительное оборудование) - БЕЗ наценки
             sensors: {
-                motionSensor: { name: "Датчик движения", price: 1200, install: 0.3 },
-                tempSensor: { name: "Датчик температуры", price: 900, install: 0.3 },
-                leakSensor: { name: "Датчик протечки", price: 2500, install: 0.4 },
-                gasSensor: { name: "Датчик газа", price: 3800, install: 0.5 }
+                motionSensor: { name: "Датчик движения", price: 1200, install: 0 },
+                tempSensor: { name: "Датчик температуры", price: 900, install: 0 },
+                leakSensor: { name: "Датчик протечки", price: 2500, install: 0 },
+                gasSensor: { name: "Датчик газа", price: 3800, install: 0 }
             },
             
             // Услуги (дополнительные услуги) - БЕЗ наценки
             services: {
-                homeAssistant: { name: "Установка Home Assistant", price: 8000, install: 3 },
-                scenarios: { name: "Настройка сценариев", price: 5000, install: 2 },
+                homeAssistant: { name: "Установка Home Assistant", price: 8000, install: 0 },
+                scenarios: { name: "Настройка сценариев", price: 5000, install: 0 },
                 warranty: { name: "Расширенная гарантия 2 года", price: 3000, install: 0 }
             },
             
             // Коэффициенты - УБРАНА наценка 30%
-            workRate: 1500,       // Стоимость часа работы
-            materialsCost: 5000   // Базовые материалы
+            workRate: 0,       // Стоимость часа работы
+            materialsCost: 0   // Базовые материалы
         };
         
         let selectedController = 'wb8';
