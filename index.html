@@ -334,23 +334,6 @@
         .contact-info a:hover {
             text-decoration: underline;
         }
-        
-        .item-group {
-            margin: 15px 0;
-            padding: 15px;
-            background: white;
-            border-radius: 10px;
-            border: 1px solid #e9ecef;
-        }
-        
-        .item-group h4 {
-            color: #495057;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 1.1em;
-        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -924,6 +907,7 @@
             let extraCost = 0;
             
             let workHours = 0;
+            let hasAdditionalItems = false; // Флаг, есть ли дополнительные элементы
             const items = [];
             
             // 1. ОБОРУДОВАНИЕ: Контроллер
@@ -945,6 +929,7 @@
                     price: prices.modules.zigbeeModule.price,
                     category: 'modules'
                 });
+                hasAdditionalItems = true;
             }
             
             if (rs485Modules > 0) {
@@ -956,6 +941,7 @@
                     price: rs485Price,
                     category: 'modules'
                 });
+                hasAdditionalItems = true;
             }
             
             // 3. РАБОТЫ: Освещение и подсветки
@@ -968,6 +954,7 @@
                     price: simplePrice,
                     category: 'work'
                 });
+                hasAdditionalItems = true;
             }
             
             if (lightDimmable > 0) {
@@ -979,6 +966,7 @@
                     price: dimmablePrice,
                     category: 'work'
                 });
+                hasAdditionalItems = true;
             }
             
             if (ledBacklight > 0) {
@@ -990,6 +978,7 @@
                     price: ledPrice,
                     category: 'work'
                 });
+                hasAdditionalItems = true;
             }
             
             if (cctBacklight > 0) {
@@ -1001,6 +990,7 @@
                     price: cctPrice,
                     category: 'work'
                 });
+                hasAdditionalItems = true;
             }
             
             if (rgbBacklight > 0) {
@@ -1012,6 +1002,7 @@
                     price: rgbPrice,
                     category: 'work'
                 });
+                hasAdditionalItems = true;
             }
             
             if (rgbwBacklight > 0) {
@@ -1023,6 +1014,7 @@
                     price: rgbwPrice,
                     category: 'work'
                 });
+                hasAdditionalItems = true;
             }
             
             // 4. НОВОЕ ОБОРУДОВАНИЕ (все по 2000 ₽, install: 0)
@@ -1035,6 +1027,7 @@
                     price: ventilationPrice,
                     category: 'modules'
                 });
+                hasAdditionalItems = true;
             }
             
             if (sockets > 0) {
@@ -1046,6 +1039,7 @@
                     price: socketsPrice,
                     category: 'modules'
                 });
+                hasAdditionalItems = true;
             }
             
             if (curtainsModbus > 0) {
@@ -1057,6 +1051,7 @@
                     price: curtainsModbusPrice,
                     category: 'modules'
                 });
+                hasAdditionalItems = true;
             }
             
             if (curtainsDryContact > 0) {
@@ -1068,6 +1063,7 @@
                     price: curtainsDryContactPrice,
                     category: 'modules'
                 });
+                hasAdditionalItems = true;
             }
             
             if (curtainsPhase > 0) {
@@ -1079,6 +1075,7 @@
                     price: curtainsPhasePrice,
                     category: 'modules'
                 });
+                hasAdditionalItems = true;
             }
             
             if (floorHeatSensors > 0) {
@@ -1090,6 +1087,7 @@
                     price: floorHeatSensorsPrice,
                     category: 'modules'
                 });
+                hasAdditionalItems = true;
             }
             
             if (airTempSensors > 0) {
@@ -1101,6 +1099,7 @@
                     price: airTempSensorsPrice,
                     category: 'modules'
                 });
+                hasAdditionalItems = true;
             }
             
             if (co2Sensors > 0) {
@@ -1112,6 +1111,7 @@
                     price: co2SensorsPrice,
                     category: 'modules'
                 });
+                hasAdditionalItems = true;
             }
             
             if (humiditySensors > 0) {
@@ -1123,6 +1123,7 @@
                     price: humiditySensorsPrice,
                     category: 'modules'
                 });
+                hasAdditionalItems = true;
             }
             
             if (airConditioners > 0) {
@@ -1134,6 +1135,7 @@
                     price: airConditionersPrice,
                     category: 'modules'
                 });
+                hasAdditionalItems = true;
             }
             
             if (supplyVentilation > 0) {
@@ -1145,6 +1147,7 @@
                     price: supplyVentilationPrice,
                     category: 'modules'
                 });
+                hasAdditionalItems = true;
             }
             
             if (thermostats > 0) {
@@ -1156,6 +1159,7 @@
                     price: thermostatsPrice,
                     category: 'modules'
                 });
+                hasAdditionalItems = true;
             }
             
             if (thermoHeads > 0) {
@@ -1167,6 +1171,7 @@
                     price: thermoHeadsPrice,
                     category: 'modules'
                 });
+                hasAdditionalItems = true;
             }
             
             // 5. ДОПОЛНИТЕЛЬНОЕ ОБОРУДОВАНИЕ: Датчики
@@ -1179,6 +1184,7 @@
                     price: motionPrice,
                     category: 'modules'
                 });
+                hasAdditionalItems = true;
             }
             
             if (selectedOptions.leakSensor) {
@@ -1189,6 +1195,7 @@
                     price: prices.sensors.leakSensor.price,
                     category: 'modules'
                 });
+                hasAdditionalItems = true;
             }
             
             if (selectedOptions.gasSensor) {
@@ -1199,6 +1206,7 @@
                     price: prices.sensors.gasSensor.price,
                     category: 'modules'
                 });
+                hasAdditionalItems = true;
             }
             
             // 6. ДОПОЛНИТЕЛЬНЫЕ УСЛУГИ
@@ -1210,6 +1218,7 @@
                     price: prices.services.homeAssistant.price,
                     category: 'extra'
                 });
+                hasAdditionalItems = true;
             }
             
             if (selectedOptions.scenarios) {
@@ -1220,6 +1229,7 @@
                     price: prices.services.scenarios.price,
                     category: 'extra'
                 });
+                hasAdditionalItems = true;
             }
             
             if (selectedOptions.warranty) {
@@ -1229,10 +1239,11 @@
                     price: prices.services.warranty.price,
                     category: 'extra'
                 });
+                hasAdditionalItems = true;
             }
             
-            // Материалы
-            const materialsCost = (equipmentCost + modulesCost) > 0 ? prices.materialsCost : 0;
+            // Материалы добавляются только если есть дополнительные элементы
+            const materialsCost = hasAdditionalItems ? prices.materialsCost : 0;
             
             // Итоговый расчет
             const workHoursCost = workHours * prices.workRate;
