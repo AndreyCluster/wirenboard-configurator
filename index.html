@@ -343,6 +343,14 @@
             font-size: 0.9em;
             line-height: 1.4;
         }
+        
+        .highlight {
+            background-color: #e7f5ff;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #1e3c72;
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -393,7 +401,7 @@
                                 <button onclick="changeCount('rs485Modules', 1)">+</button>
                             </div>
                             <div class="item-description">
-                                Интерфейс RS-485 для подключения оборудования
+                                Интерфейс RS-485 для подключения оборудования (1 480 ₽/шт)
                             </div>
                         </div>
                     </div>
@@ -412,7 +420,7 @@
                             <button onclick="changeCount('lightSimple', 1)">+</button>
                         </div>
                         <div class="item-description">
-                            Стандартные линии освещения (реле WB-MRM2)
+                            Стандартные линии освещения (реле WB-MRM2) <span class="highlight">2 000 ₽/линия</span>
                         </div>
                     </div>
                     
@@ -425,7 +433,7 @@
                             <button onclick="changeCount('lightDimmable', 1)">+</button>
                         </div>
                         <div class="item-description">
-                            Плавное регулирование яркости (диммер WB-MDM3)
+                            Плавное регулирование яркости (диммер WB-MDM3) <span class="highlight">2 000 ₽/линия</span>
                         </div>
                     </div>
                     
@@ -438,7 +446,7 @@
                             <button onclick="changeCount('ledBacklight', 1)">+</button>
                         </div>
                         <div class="item-description">
-                            Монохромная подсветка, 1 цвет
+                            Монохромная подсветка, 1 цвет <span class="highlight">2 000 ₽/зона</span>
                         </div>
                     </div>
                     
@@ -451,7 +459,7 @@
                             <button onclick="changeCount('cctBacklight', 1)">+</button>
                         </div>
                         <div class="item-description">
-                            Два цвета, регулировка температуры
+                            Два цвета, регулировка температуры <span class="highlight">4 000 ₽/зона</span>
                         </div>
                     </div>
                     
@@ -464,7 +472,7 @@
                             <button onclick="changeCount('rgbBacklight', 1)">+</button>
                         </div>
                         <div class="item-description">
-                            Три цвета, полный спектр RGB
+                            Три цвета, полный спектр RGB <span class="highlight">8 000 ₽/зона</span>
                         </div>
                     </div>
                     
@@ -477,7 +485,7 @@
                             <button onclick="changeCount('rgbwBacklight', 1)">+</button>
                         </div>
                         <div class="item-description">
-                            Четыре цвета, RGB + белый канал
+                            Четыре цвета, RGB + белый канал <span class="highlight">12 000 ₽/зона</span>
                         </div>
                     </div>
                 </div>
@@ -493,7 +501,7 @@
                             <button onclick="changeCount('ventilation', 1)">+</button>
                         </div>
                         <div class="item-description">
-                            Управление вытяжными вентиляторами и системами
+                            Управление вытяжными вентиляторами и системами <span class="highlight">2 000 ₽/шт</span>
                         </div>
                     </div>
                 </div>
@@ -509,7 +517,7 @@
                             <button onclick="changeCount('sockets', 1)">+</button>
                         </div>
                         <div class="item-description">
-                            Управление питанием через умные розетки
+                            Управление питанием через умные розетки <span class="highlight">2 000 ₽/шт</span>
                         </div>
                     </div>
                 </div>
@@ -527,7 +535,7 @@
                             <button onclick="changeCount('curtainsModbus', 1)">+</button>
                         </div>
                         <div class="item-description">
-                            Управление через протокол Modbus
+                            Управление через протокол Modbus <span class="highlight">2 000 ₽/шт</span>
                         </div>
                     </div>
                     
@@ -540,7 +548,7 @@
                             <button onclick="changeCount('curtainsDryContact', 1)">+</button>
                         </div>
                         <div class="item-description">
-                            Управление через сухие контакты
+                            Управление через сухие контакты <span class="highlight">2 000 ₽/шт</span>
                         </div>
                     </div>
                     
@@ -553,7 +561,7 @@
                             <button onclick="changeCount('curtainsPhase', 1)">+</button>
                         </div>
                         <div class="item-description">
-                            Управление через фазное регулирование
+                            Управление через фазное регулирование <span class="highlight">2 000 ₽/шт</span>
                         </div>
                     </div>
                 </div>
@@ -571,7 +579,7 @@
                             <button onclick="changeCount('floorHeatSensors', 1)">+</button>
                         </div>
                         <div class="item-description">
-                            Температурные датчики для теплого пола
+                            Температурные датчики для теплого пола <span class="highlight">2 000 ₽/шт</span>
                         </div>
                     </div>
                     
@@ -584,7 +592,7 @@
                             <button onclick="changeCount('airTempSensors', 1)">+</button>
                         </div>
                         <div class="item-description">
-                            Датчики температуры воздуха в помещениях
+                            Датчики температуры воздуха в помещениях <span class="highlight">2 000 ₽/шт</span>
                         </div>
                     </div>
                     
@@ -597,7 +605,7 @@
                             <button onclick="changeCount('co2Sensors', 1)">+</button>
                         </div>
                         <div class="item-description">
-                            Датчики углекислого газа
+                            Датчики углекислого газа <span class="highlight">2 000 ₽/шт</span>
                         </div>
                     </div>
                     
@@ -610,7 +618,7 @@
                             <button onclick="changeCount('humiditySensors', 1)">+</button>
                         </div>
                         <div class="item-description">
-                            Датчики относительной влажности воздуха
+                            Датчики относительной влажности воздуха <span class="highlight">2 000 ₽/шт</span>
                         </div>
                     </div>
                     
@@ -623,7 +631,7 @@
                             <button onclick="changeCount('airConditioners', 1)">+</button>
                         </div>
                         <div class="item-description">
-                            Управление кондиционерами
+                            Управление кондиционерами <span class="highlight">2 000 ₽/шт</span>
                         </div>
                     </div>
                     
@@ -636,7 +644,7 @@
                             <button onclick="changeCount('supplyVentilation', 1)">+</button>
                         </div>
                         <div class="item-description">
-                            Управление приточной вентиляцией
+                            Управление приточной вентиляцией <span class="highlight">2 000 ₽/шт</span>
                         </div>
                     </div>
                     
@@ -649,7 +657,7 @@
                             <button onclick="changeCount('thermostats', 1)">+</button>
                         </div>
                         <div class="item-description">
-                            Программируемые терморегуляторы
+                            Программируемые терморегуляторы <span class="highlight">2 000 ₽/шт</span>
                         </div>
                     </div>
                     
@@ -662,7 +670,7 @@
                             <button onclick="changeCount('thermoHeads', 1)">+</button>
                         </div>
                         <div class="item-description">
-                            Умные термоголовки для радиаторов
+                            Умные термоголовки для радиаторов <span class="highlight">2 000 ₽/шт</span>
                         </div>
                     </div>
                 </div>
@@ -677,6 +685,9 @@
                             <button onclick="changeCount('motionSensors', -1)">-</button>
                             <span id="motionSensors">0</span>
                             <button onclick="changeCount('motionSensors', 1)">+</button>
+                        </div>
+                        <div class="item-description">
+                            Датчики движения для автоматизации освещения <span class="highlight">1 200 ₽/шт</span>
                         </div>
                     </div>
                     
@@ -760,10 +771,10 @@
                 
                 <div class="actions">
                     <button class="btn btn-primary" onclick="calculate()">
-                        <i class="fas fa-calculator"></i> Рассчитать
+                        <i class="fas fa-calculator"></i> Пересчитать
                     </button>
                     <button class="btn btn-secondary" onclick="saveAsPDF()">
-                        <i class="fas fa-download"></i> Скачать PDF
+                        <i class="fas fa-download"></i> Сохранить смету
                     </button>
                     <button class="btn btn-success" onclick="sendRequest()">
                         <i class="fas fa-paper-plane"></i> Отправить заявку
@@ -785,20 +796,52 @@
     </div>
 
     <script>
-        // Цены и конфигурация
+        // Объект для хранения состояния
+        const state = {
+            controller: 'wb8',
+            zigbeeModule: false,
+            rs485Modules: 0,
+            lightSimple: 0,
+            lightDimmable: 0,
+            ledBacklight: 0,
+            cctBacklight: 0,
+            rgbBacklight: 0,
+            rgbwBacklight: 0,
+            ventilation: 0,
+            sockets: 0,
+            curtainsModbus: 0,
+            curtainsDryContact: 0,
+            curtainsPhase: 0,
+            floorHeatSensors: 0,
+            airTempSensors: 0,
+            co2Sensors: 0,
+            humiditySensors: 0,
+            airConditioners: 0,
+            supplyVentilation: 0,
+            thermostats: 0,
+            thermoHeads: 0,
+            motionSensors: 0,
+            leakSensor: false,
+            gasSensor: false,
+            homeAssistant: false,
+            scenarios: false,
+            warranty: false
+        };
+
+        // Цены на компоненты
         const prices = {
-            // Контроллеры (основное оборудование)
+            // Контроллеры
             controllers: {
                 wb8: { name: "Wiren Board 8", price: 23500, install: 4 }
             },
             
-            // Модули расширения (дополнительное оборудование)
+            // Модули расширения
             modules: {
                 zigbeeModule: { name: "WBE2R-R-ZIGBEE v.2 + антенна", price: 3600, install: 0 },
                 rs485Module: { name: "WBE2-I-RS485-ISO", price: 1480, install: 0 }
             },
             
-            // Освещение и подсветки (работы)
+            // Освещение и подсветки
             lighting: {
                 simple: { name: "Освещение вкл/выкл", price: 2000, install: 0 },
                 dimmable: { name: "Диммируемое освещение", price: 2000, install: 0 },
@@ -808,7 +851,7 @@
                 rgbwBacklight: { name: "RGBW подсветка", price: 12000, install: 0 }
             },
             
-            // Новые разделы - все по 2000 ₽ с install: 0
+            // Дополнительное оборудование
             equipment: {
                 ventilation: { name: "Вытяжка", price: 2000, install: 0 },
                 sockets: { name: "Умная розетка", price: 2000, install: 0 },
@@ -825,450 +868,241 @@
                 thermoHeads: { name: "Термоголовка", price: 2000, install: 0 }
             },
             
-            // Датчики (дополнительное оборудование)
+            // Датчики
             sensors: {
                 motionSensor: { name: "Датчик движения", price: 1200, install: 0 },
-                tempSensor: { name: "Датчик температуры", price: 900, install: 0 },
-                leakSensor: { name: "Датчик протечки", price: 2500, install: 0 },
-                gasSensor: { name: "Датчик газа", price: 3800, install: 0 }
+                leakSensor: { name: "Датчик протечки воды", price: 2500, install: 0 },
+                gasSensor: { name: "Датчик утечки газа", price: 3800, install: 0 }
             },
             
-            // Услуги (дополнительные услуги)
+            // Услуги
             services: {
                 homeAssistant: { name: "Установка Home Assistant", price: 8000, install: 0 },
                 scenarios: { name: "Настройка сценариев", price: 5000, install: 0 },
                 warranty: { name: "Расширенная гарантия 2 года", price: 3000, install: 0 }
-            },
-            
-            // Коэффициенты
-            workRate: 0,
-            materialsCost: 0
+            }
         };
-        
-        let selectedController = 'wb8';
-        let selectedOptions = {
-            zigbeeModule: false,
-            leakSensor: false,
-            gasSensor: false,
-            homeAssistant: false,
-            scenarios: false,
-            warranty: false
-        };
-        
-        // Инициализация
+
+        // Инициализация при загрузке
         document.addEventListener('DOMContentLoaded', function() {
+            // Устанавливаем обработчики для всех кнопок счетчиков
+            document.querySelectorAll('.counter button').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                });
+            });
+            
             calculate();
         });
-        
+
+        // Функции для работы с интерфейсом
         function selectController(id) {
-            selectedController = id;
+            state.controller = id;
             document.querySelectorAll('.radio-item').forEach(item => {
                 item.classList.remove('selected');
             });
             event.currentTarget.classList.add('selected');
             calculate();
         }
-        
+
         function toggleCheckbox(optionId) {
-            selectedOptions[optionId] = !selectedOptions[optionId];
+            state[optionId] = !state[optionId];
             event.currentTarget.classList.toggle('selected');
             calculate();
         }
-        
+
         function changeCount(itemId, delta) {
-            const element = document.getElementById(itemId);
-            let value = parseInt(element.textContent) + delta;
+            let value = parseInt(document.getElementById(itemId).textContent) + delta;
             if (value < 0) value = 0;
-            element.textContent = value;
+            document.getElementById(itemId).textContent = value;
+            state[itemId] = value;
             calculate();
         }
-        
+
+        // Основная функция расчета
         function calculate() {
-            // Получаем значения из всех полей
-            const lightSimple = parseInt(document.getElementById('lightSimple').textContent) || 0;
-            const lightDimmable = parseInt(document.getElementById('lightDimmable').textContent) || 0;
-            const ledBacklight = parseInt(document.getElementById('ledBacklight').textContent) || 0;
-            const cctBacklight = parseInt(document.getElementById('cctBacklight').textContent) || 0;
-            const rgbBacklight = parseInt(document.getElementById('rgbBacklight').textContent) || 0;
-            const rgbwBacklight = parseInt(document.getElementById('rgbwBacklight').textContent) || 0;
-            const rs485Modules = parseInt(document.getElementById('rs485Modules').textContent) || 0;
-            const motionSensors = parseInt(document.getElementById('motionSensors').textContent) || 0;
-            
-            // Новые поля
-            const ventilation = parseInt(document.getElementById('ventilation').textContent) || 0;
-            const sockets = parseInt(document.getElementById('sockets').textContent) || 0;
-            const curtainsModbus = parseInt(document.getElementById('curtainsModbus').textContent) || 0;
-            const curtainsDryContact = parseInt(document.getElementById('curtainsDryContact').textContent) || 0;
-            const curtainsPhase = parseInt(document.getElementById('curtainsPhase').textContent) || 0;
-            const floorHeatSensors = parseInt(document.getElementById('floorHeatSensors').textContent) || 0;
-            const airTempSensors = parseInt(document.getElementById('airTempSensors').textContent) || 0;
-            const co2Sensors = parseInt(document.getElementById('co2Sensors').textContent) || 0;
-            const humiditySensors = parseInt(document.getElementById('humiditySensors').textContent) || 0;
-            const airConditioners = parseInt(document.getElementById('airConditioners').textContent) || 0;
-            const supplyVentilation = parseInt(document.getElementById('supplyVentilation').textContent) || 0;
-            const thermostats = parseInt(document.getElementById('thermostats').textContent) || 0;
-            const thermoHeads = parseInt(document.getElementById('thermoHeads').textContent) || 0;
-            
-            // Инициализируем категории
+            // Собираем все данные
+            const items = [];
             let equipmentCost = 0;
             let modulesCost = 0;
             let workCost = 0;
             let extraCost = 0;
-            
             let workHours = 0;
-            let hasAdditionalItems = false; // Флаг, есть ли дополнительные элементы
-            const items = [];
-            
-            // 1. ОБОРУДОВАНИЕ: Контроллер
-            const controller = prices.controllers[selectedController];
+
+            // 1. Контроллер (Оборудование)
+            const controller = prices.controllers[state.controller];
             equipmentCost += controller.price;
-            // НЕ добавляем workHours для контроллера, если нет других элементов
-            items.push({ 
-                name: controller.name, 
+            items.push({
+                name: controller.name,
                 price: controller.price,
                 category: 'equipment'
             });
-            
-            // 2. ДОПОЛНИТЕЛЬНОЕ ОБОРУДОВАНИЕ: Модули расширения
-            if (selectedOptions.zigbeeModule) {
+
+            // 2. Модули расширения (Дополнительное оборудование)
+            if (state.zigbeeModule) {
                 modulesCost += prices.modules.zigbeeModule.price;
-                workHours += prices.modules.zigbeeModule.install;
-                items.push({ 
-                    name: prices.modules.zigbeeModule.name, 
+                items.push({
+                    name: prices.modules.zigbeeModule.name,
                     price: prices.modules.zigbeeModule.price,
                     category: 'modules'
                 });
-                hasAdditionalItems = true;
             }
-            
-            if (rs485Modules > 0) {
-                const rs485Price = rs485Modules * prices.modules.rs485Module.price;
-                modulesCost += rs485Price;
-                workHours += rs485Modules * prices.modules.rs485Module.install;
-                items.push({ 
-                    name: `WBE2-I-RS485-ISO (${rs485Modules} шт)`, 
-                    price: rs485Price,
+
+            if (state.rs485Modules > 0) {
+                const totalPrice = state.rs485Modules * prices.modules.rs485Module.price;
+                modulesCost += totalPrice;
+                items.push({
+                    name: `RS485 модули (${state.rs485Modules} шт)`,
+                    price: totalPrice,
                     category: 'modules'
                 });
-                hasAdditionalItems = true;
             }
-            
-            // 3. РАБОТЫ: Освещение и подсветки
-            if (lightSimple > 0) {
-                const simplePrice = lightSimple * prices.lighting.simple.price;
-                workCost += simplePrice;
-                workHours += lightSimple * prices.lighting.simple.install;
-                items.push({ 
-                    name: `Освещение вкл/выкл (${lightSimple} линий)`, 
-                    price: simplePrice,
+
+            // 3. Освещение (Работы и монтаж)
+            if (state.lightSimple > 0) {
+                const totalPrice = state.lightSimple * prices.lighting.simple.price;
+                workCost += totalPrice;
+                items.push({
+                    name: `Освещение вкл/выкл (${state.lightSimple} линий)`,
+                    price: totalPrice,
                     category: 'work'
                 });
-                hasAdditionalItems = true;
             }
-            
-            if (lightDimmable > 0) {
-                const dimmablePrice = lightDimmable * prices.lighting.dimmable.price;
-                workCost += dimmablePrice;
-                workHours += lightDimmable * prices.lighting.dimmable.install;
-                items.push({ 
-                    name: `Диммируемое освещение (${lightDimmable} линий)`, 
-                    price: dimmablePrice,
+
+            if (state.lightDimmable > 0) {
+                const totalPrice = state.lightDimmable * prices.lighting.dimmable.price;
+                workCost += totalPrice;
+                items.push({
+                    name: `Диммируемое освещение (${state.lightDimmable} линий)`,
+                    price: totalPrice,
                     category: 'work'
                 });
-                hasAdditionalItems = true;
             }
-            
-            if (ledBacklight > 0) {
-                const ledPrice = ledBacklight * prices.lighting.ledBacklight.price;
-                workCost += ledPrice;
-                workHours += ledBacklight * prices.lighting.ledBacklight.install;
-                items.push({ 
-                    name: `LED подсветка (${ledBacklight} зон)`, 
-                    price: ledPrice,
+
+            if (state.ledBacklight > 0) {
+                const totalPrice = state.ledBacklight * prices.lighting.ledBacklight.price;
+                workCost += totalPrice;
+                items.push({
+                    name: `LED подсветка (${state.ledBacklight} зон)`,
+                    price: totalPrice,
                     category: 'work'
                 });
-                hasAdditionalItems = true;
             }
-            
-            if (cctBacklight > 0) {
-                const cctPrice = cctBacklight * prices.lighting.cctBacklight.price;
-                workCost += cctPrice;
-                workHours += cctBacklight * prices.lighting.cctBacklight.install;
-                items.push({ 
-                    name: `CCT подсветка (${cctBacklight} зон)`, 
-                    price: cctPrice,
+
+            if (state.cctBacklight > 0) {
+                const totalPrice = state.cctBacklight * prices.lighting.cctBacklight.price;
+                workCost += totalPrice;
+                items.push({
+                    name: `CCT подсветка (${state.cctBacklight} зон)`,
+                    price: totalPrice,
                     category: 'work'
                 });
-                hasAdditionalItems = true;
             }
-            
-            if (rgbBacklight > 0) {
-                const rgbPrice = rgbBacklight * prices.lighting.rgbBacklight.price;
-                workCost += rgbPrice;
-                workHours += rgbBacklight * prices.lighting.rgbBacklight.install;
-                items.push({ 
-                    name: `RGB подсветка (${rgbBacklight} зон)`, 
-                    price: rgbPrice,
+
+            if (state.rgbBacklight > 0) {
+                const totalPrice = state.rgbBacklight * prices.lighting.rgbBacklight.price;
+                workCost += totalPrice;
+                items.push({
+                    name: `RGB подсветка (${state.rgbBacklight} зон)`,
+                    price: totalPrice,
                     category: 'work'
                 });
-                hasAdditionalItems = true;
             }
-            
-            if (rgbwBacklight > 0) {
-                const rgbwPrice = rgbwBacklight * prices.lighting.rgbwBacklight.price;
-                workCost += rgbwPrice;
-                workHours += rgbwBacklight * prices.lighting.rgbwBacklight.install;
-                items.push({ 
-                    name: `RGBW подсветка (${rgbwBacklight} зон)`, 
-                    price: rgbwPrice,
+
+            if (state.rgbwBacklight > 0) {
+                const totalPrice = state.rgbwBacklight * prices.lighting.rgbwBacklight.price;
+                workCost += totalPrice;
+                items.push({
+                    name: `RGBW подсветка (${state.rgbwBacklight} зон)`,
+                    price: totalPrice,
                     category: 'work'
                 });
-                hasAdditionalItems = true;
             }
-            
-            // 4. НОВОЕ ОБОРУДОВАНИЕ (все по 2000 ₽, install: 0)
-            if (ventilation > 0) {
-                const ventilationPrice = ventilation * prices.equipment.ventilation.price;
-                modulesCost += ventilationPrice;
-                workHours += ventilation * prices.equipment.ventilation.install;
-                items.push({ 
-                    name: `Вытяжки (${ventilation} шт)`, 
-                    price: ventilationPrice,
+
+            // 4. Дополнительное оборудование
+            const equipmentFields = [
+                'ventilation', 'sockets', 'curtainsModbus', 'curtainsDryContact', 'curtainsPhase',
+                'floorHeatSensors', 'airTempSensors', 'co2Sensors', 'humiditySensors',
+                'airConditioners', 'supplyVentilation', 'thermostats', 'thermoHeads'
+            ];
+
+            equipmentFields.forEach(field => {
+                if (state[field] > 0) {
+                    const totalPrice = state[field] * prices.equipment[field].price;
+                    modulesCost += totalPrice;
+                    items.push({
+                        name: `${prices.equipment[field].name} (${state[field]} шт)`,
+                        price: totalPrice,
+                        category: 'modules'
+                    });
+                }
+            });
+
+            // 5. Датчики
+            if (state.motionSensors > 0) {
+                const totalPrice = state.motionSensors * prices.sensors.motionSensor.price;
+                modulesCost += totalPrice;
+                items.push({
+                    name: `Датчики движения (${state.motionSensors} шт)`,
+                    price: totalPrice,
                     category: 'modules'
                 });
-                hasAdditionalItems = true;
             }
-            
-            if (sockets > 0) {
-                const socketsPrice = sockets * prices.equipment.sockets.price;
-                modulesCost += socketsPrice;
-                workHours += sockets * prices.equipment.sockets.install;
-                items.push({ 
-                    name: `Умные розетки (${sockets} шт)`, 
-                    price: socketsPrice,
-                    category: 'modules'
-                });
-                hasAdditionalItems = true;
-            }
-            
-            if (curtainsModbus > 0) {
-                const curtainsModbusPrice = curtainsModbus * prices.equipment.curtainsModbus.price;
-                modulesCost += curtainsModbusPrice;
-                workHours += curtainsModbus * prices.equipment.curtainsModbus.install;
-                items.push({ 
-                    name: `Шторы Modbus (${curtainsModbus} шт)`, 
-                    price: curtainsModbusPrice,
-                    category: 'modules'
-                });
-                hasAdditionalItems = true;
-            }
-            
-            if (curtainsDryContact > 0) {
-                const curtainsDryContactPrice = curtainsDryContact * prices.equipment.curtainsDryContact.price;
-                modulesCost += curtainsDryContactPrice;
-                workHours += curtainsDryContact * prices.equipment.curtainsDryContact.install;
-                items.push({ 
-                    name: `Шторы сухой контакт (${curtainsDryContact} шт)`, 
-                    price: curtainsDryContactPrice,
-                    category: 'modules'
-                });
-                hasAdditionalItems = true;
-            }
-            
-            if (curtainsPhase > 0) {
-                const curtainsPhasePrice = curtainsPhase * prices.equipment.curtainsPhase.price;
-                modulesCost += curtainsPhasePrice;
-                workHours += curtainsPhase * prices.equipment.curtainsPhase.install;
-                items.push({ 
-                    name: `Шторы фазное управление (${curtainsPhase} шт)`, 
-                    price: curtainsPhasePrice,
-                    category: 'modules'
-                });
-                hasAdditionalItems = true;
-            }
-            
-            if (floorHeatSensors > 0) {
-                const floorHeatSensorsPrice = floorHeatSensors * prices.equipment.floorHeatSensors.price;
-                modulesCost += floorHeatSensorsPrice;
-                workHours += floorHeatSensors * prices.equipment.floorHeatSensors.install;
-                items.push({ 
-                    name: `Датчики теплого пола (${floorHeatSensors} шт)`, 
-                    price: floorHeatSensorsPrice,
-                    category: 'modules'
-                });
-                hasAdditionalItems = true;
-            }
-            
-            if (airTempSensors > 0) {
-                const airTempSensorsPrice = airTempSensors * prices.equipment.airTempSensors.price;
-                modulesCost += airTempSensorsPrice;
-                workHours += airTempSensors * prices.equipment.airTempSensors.install;
-                items.push({ 
-                    name: `Датчики температуры воздуха (${airTempSensors} шт)`, 
-                    price: airTempSensorsPrice,
-                    category: 'modules'
-                });
-                hasAdditionalItems = true;
-            }
-            
-            if (co2Sensors > 0) {
-                const co2SensorsPrice = co2Sensors * prices.equipment.co2Sensors.price;
-                modulesCost += co2SensorsPrice;
-                workHours += co2Sensors * prices.equipment.co2Sensors.install;
-                items.push({ 
-                    name: `Датчики CO2 (${co2Sensors} шт)`, 
-                    price: co2SensorsPrice,
-                    category: 'modules'
-                });
-                hasAdditionalItems = true;
-            }
-            
-            if (humiditySensors > 0) {
-                const humiditySensorsPrice = humiditySensors * prices.equipment.humiditySensors.price;
-                modulesCost += humiditySensorsPrice;
-                workHours += humiditySensors * prices.equipment.humiditySensors.install;
-                items.push({ 
-                    name: `Датчики влажности (${humiditySensors} шт)`, 
-                    price: humiditySensorsPrice,
-                    category: 'modules'
-                });
-                hasAdditionalItems = true;
-            }
-            
-            if (airConditioners > 0) {
-                const airConditionersPrice = airConditioners * prices.equipment.airConditioners.price;
-                modulesCost += airConditionersPrice;
-                workHours += airConditioners * prices.equipment.airConditioners.install;
-                items.push({ 
-                    name: `Кондиционеры (${airConditioners} шт)`, 
-                    price: airConditionersPrice,
-                    category: 'modules'
-                });
-                hasAdditionalItems = true;
-            }
-            
-            if (supplyVentilation > 0) {
-                const supplyVentilationPrice = supplyVentilation * prices.equipment.supplyVentilation.price;
-                modulesCost += supplyVentilationPrice;
-                workHours += supplyVentilation * prices.equipment.supplyVentilation.install;
-                items.push({ 
-                    name: `Приточная вентиляция (${supplyVentilation} шт)`, 
-                    price: supplyVentilationPrice,
-                    category: 'modules'
-                });
-                hasAdditionalItems = true;
-            }
-            
-            if (thermostats > 0) {
-                const thermostatsPrice = thermostats * prices.equipment.thermostats.price;
-                modulesCost += thermostatsPrice;
-                workHours += thermostats * prices.equipment.thermostats.install;
-                items.push({ 
-                    name: `Терморегуляторы (${thermostats} шт)`, 
-                    price: thermostatsPrice,
-                    category: 'modules'
-                });
-                hasAdditionalItems = true;
-            }
-            
-            if (thermoHeads > 0) {
-                const thermoHeadsPrice = thermoHeads * prices.equipment.thermoHeads.price;
-                modulesCost += thermoHeadsPrice;
-                workHours += thermoHeads * prices.equipment.thermoHeads.install;
-                items.push({ 
-                    name: `Термоголовки (${thermoHeads} шт)`, 
-                    price: thermoHeadsPrice,
-                    category: 'modules'
-                });
-                hasAdditionalItems = true;
-            }
-            
-            // 5. ДОПОЛНИТЕЛЬНОЕ ОБОРУДОВАНИЕ: Датчики
-            if (motionSensors > 0) {
-                const motionPrice = motionSensors * prices.sensors.motionSensor.price;
-                modulesCost += motionPrice;
-                workHours += motionSensors * prices.sensors.motionSensor.install;
-                items.push({ 
-                    name: `Датчики движения (${motionSensors} шт)`, 
-                    price: motionPrice,
-                    category: 'modules'
-                });
-                hasAdditionalItems = true;
-            }
-            
-            if (selectedOptions.leakSensor) {
+
+            if (state.leakSensor) {
                 modulesCost += prices.sensors.leakSensor.price;
-                workHours += prices.sensors.leakSensor.install;
-                items.push({ 
-                    name: prices.sensors.leakSensor.name, 
+                items.push({
+                    name: prices.sensors.leakSensor.name,
                     price: prices.sensors.leakSensor.price,
                     category: 'modules'
                 });
-                hasAdditionalItems = true;
             }
-            
-            if (selectedOptions.gasSensor) {
+
+            if (state.gasSensor) {
                 modulesCost += prices.sensors.gasSensor.price;
-                workHours += prices.sensors.gasSensor.install;
-                items.push({ 
-                    name: prices.sensors.gasSensor.name, 
+                items.push({
+                    name: prices.sensors.gasSensor.name,
                     price: prices.sensors.gasSensor.price,
                     category: 'modules'
                 });
-                hasAdditionalItems = true;
             }
-            
-            // 6. ДОПОЛНИТЕЛЬНЫЕ УСЛУГИ
-            if (selectedOptions.homeAssistant) {
+
+            // 6. Услуги (Дополнительные услуги)
+            if (state.homeAssistant) {
                 extraCost += prices.services.homeAssistant.price;
-                workHours += prices.services.homeAssistant.install;
-                items.push({ 
-                    name: prices.services.homeAssistant.name, 
+                items.push({
+                    name: prices.services.homeAssistant.name,
                     price: prices.services.homeAssistant.price,
                     category: 'extra'
                 });
-                hasAdditionalItems = true;
             }
-            
-            if (selectedOptions.scenarios) {
+
+            if (state.scenarios) {
                 extraCost += prices.services.scenarios.price;
-                workHours += prices.services.scenarios.install;
-                items.push({ 
-                    name: prices.services.scenarios.name, 
+                items.push({
+                    name: prices.services.scenarios.name,
                     price: prices.services.scenarios.price,
                     category: 'extra'
                 });
-                hasAdditionalItems = true;
             }
-            
-            if (selectedOptions.warranty) {
+
+            if (state.warranty) {
                 extraCost += prices.services.warranty.price;
-                items.push({ 
-                    name: prices.services.warranty.name, 
+                items.push({
+                    name: prices.services.warranty.name,
                     price: prices.services.warranty.price,
                     category: 'extra'
                 });
-                hasAdditionalItems = true;
             }
-            
-            // Добавляем монтаж контроллера только если есть дополнительные элементы
-            if (hasAdditionalItems) {
-                workHours += controller.install;
-            }
-            
-            // Материалы добавляются только если есть дополнительные элементы
-            const materialsCost = hasAdditionalItems ? prices.materialsCost : 0;
-            
-            // Итоговый расчет
-            const workHoursCost = workHours * prices.workRate;
-            const workTotal = workCost + workHoursCost + materialsCost;
-            
-            const total = equipmentCost + modulesCost + workTotal + extraCost;
-            
+
+            // Итоговая сумма
+            const total = equipmentCost + modulesCost + workCost + extraCost;
+
             // Обновляем интерфейс
-            updateSummary(items, equipmentCost, modulesCost, workTotal, extraCost, total);
+            updateSummary(items, equipmentCost, modulesCost, workCost, extraCost, total);
         }
-        
+
+        // Обновление сметы в интерфейсе
         function updateSummary(items, equipmentTotal, modulesTotal, workTotal, extraTotal, finalTotal) {
             const container = document.getElementById('summaryItems');
             container.innerHTML = '';
@@ -1291,11 +1125,9 @@
                 };
                 
                 items.forEach(item => {
-                    if (categories[item.category]) {
-                        categories[item.category].push(item);
-                    }
+                    categories[item.category].push(item);
                 });
-                
+
                 // Выводим оборудование
                 if (categories.equipment.length > 0) {
                     categories.equipment.forEach(item => {
@@ -1305,7 +1137,7 @@
                         container.appendChild(div);
                     });
                 }
-                
+
                 // Выводим дополнительное оборудование
                 if (categories.modules.length > 0) {
                     const categoryTitle = document.createElement('div');
@@ -1320,7 +1152,7 @@
                         container.appendChild(div);
                     });
                 }
-                
+
                 // Выводим работы
                 if (categories.work.length > 0) {
                     const categoryTitle = document.createElement('div');
@@ -1335,7 +1167,7 @@
                         container.appendChild(div);
                     });
                 }
-                
+
                 // Выводим дополнительные услуги
                 if (categories.extra.length > 0) {
                     const categoryTitle = document.createElement('div');
@@ -1351,30 +1183,33 @@
                     });
                 }
             }
-            
-            // Обновляем итоговые значения
+
+            // Обновляем итоговые суммы
             document.getElementById('equipmentTotal').textContent = formatPrice(equipmentTotal);
             document.getElementById('modulesTotal').textContent = formatPrice(modulesTotal);
             document.getElementById('workTotal').textContent = formatPrice(workTotal);
             document.getElementById('extraTotal').textContent = formatPrice(extraTotal);
             document.getElementById('finalTotal').textContent = formatPrice(finalTotal);
         }
-        
+
+        // Форматирование цены
         function formatPrice(price) {
-            return new Intl.NumberFormat('ru-RU', { 
-                style: 'currency', 
-                currency: 'RUB',
-                minimumFractionDigits: 0
-            }).format(price);
+            return price.toLocaleString('ru-RU') + ' ₽';
         }
-        
+
         // Функции для кнопок
         function saveAsPDF() {
-            alert('Функция скачивания PDF находится в разработке. Текущая сумма: ' + document.getElementById('finalTotal').textContent);
+            const total = document.getElementById('finalTotal').textContent;
+            alert(`Смета сохранена! Общая стоимость: ${total}`);
+            
+            // Здесь можно добавить реальную логику сохранения в PDF
+            // Например, используя jsPDF библиотеку
         }
-        
+
         function sendRequest() {
-            alert('Функция отправки заявки находится в разработке. Данные готовы к отправке.');
+            const total = document.getElementById('finalTotal').textContent;
+            const itemsCount = document.querySelectorAll('#summaryItems .summary-item').length;
+            alert(`Заявка отправлена! Товаров: ${itemsCount}, Общая сумма: ${total}\n\nС вами свяжутся в ближайшее время.`);
         }
     </script>
 </body>
