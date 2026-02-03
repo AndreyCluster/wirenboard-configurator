@@ -818,22 +818,22 @@
             
             // Датчики (дополнительное оборудование)
             sensors: {
-                motionSensor: { name: "Датчик движения", price: 1200, install: 0.3 },
-                tempSensor: { name: "Датчик температуры", price: 900, install: 0.3 },
-                leakSensor: { name: "Датчик протечки", price: 2500, install: 0.4 },
-                gasSensor: { name: "Датчик газа", price: 3800, install: 0.5 }
+                motionSensor: { name: "Датчик движения", price: 1200, install: 0 },
+                tempSensor: { name: "Датчик температуры", price: 900, install: 0 },
+                leakSensor: { name: "Датчик протечки", price: 2500, install: 0 },
+                gasSensor: { name: "Датчик газа", price: 3800, install: 0 }
             },
             
             // Услуги (дополнительные услуги)
             services: {
-                homeAssistant: { name: "Установка Home Assistant", price: 8000, install: 3 },
-                scenarios: { name: "Настройка сценариев", price: 5000, install: 2 },
+                homeAssistant: { name: "Установка Home Assistant", price: 8000, install: 0 },
+                scenarios: { name: "Настройка сценариев", price: 5000, install: 0 },
                 warranty: { name: "Расширенная гарантия 2 года", price: 3000, install: 0 }
             },
             
             // Коэффициенты
-            workRate: 1500,
-            materialsCost: 5000
+            workRate: 0,
+            materialsCost: 0
         };
         
         let selectedController = 'wb8';
