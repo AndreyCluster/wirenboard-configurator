@@ -109,22 +109,6 @@
             color: #4dabf7;
         }
         
-        .subsection {
-            background: white;
-            border-radius: 10px;
-            padding: 20px;
-            margin: 15px 0;
-            border: 1px solid #e9ecef;
-        }
-        
-        .subsection h4 {
-            color: #495057;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
         .form-group {
             margin: 20px 0;
         }
@@ -350,6 +334,23 @@
         .contact-info a:hover {
             text-decoration: underline;
         }
+        
+        .item-group {
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .item-group h4 {
+            color: #495057;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.1em;
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -425,7 +426,7 @@
                     
                     <!-- Диммируемое освещение -->
                     <div class="form-group">
-                        <label>Диммируемое освещение:</label>
+                        <label>Диммируемое освещение (линий):</label>
                         <div class="counter">
                             <button onclick="changeCount('lightDimmable', -1)">-</button>
                             <span id="lightDimmable">0</span>
@@ -438,7 +439,7 @@
                     
                     <!-- LED подсветка (счетчик) -->
                     <div class="form-group">
-                        <label>LED подсветка:</label>
+                        <label>LED подсветка (зоны):</label>
                         <div class="counter">
                             <button onclick="changeCount('ledBacklight', -1)">-</button>
                             <span id="ledBacklight">0</span>
@@ -451,7 +452,7 @@
                     
                     <!-- CCT подсветка (счетчик) -->
                     <div class="form-group">
-                        <label>CCT подсветка:</label>
+                        <label>CCT подсветка (зоны):</label>
                         <div class="counter">
                             <button onclick="changeCount('cctBacklight', -1)">-</button>
                             <span id="cctBacklight">0</span>
@@ -464,7 +465,7 @@
                     
                     <!-- RGB подсветка (счетчик) -->
                     <div class="form-group">
-                        <label>RGB подсветка:</label>
+                        <label>RGB подсветка (зоны):</label>
                         <div class="counter">
                             <button onclick="changeCount('rgbBacklight', -1)">-</button>
                             <span id="rgbBacklight">0</span>
@@ -477,7 +478,7 @@
                     
                     <!-- RGBW подсветка (счетчик) -->
                     <div class="form-group">
-                        <label>RGBW подсветка:</label>
+                        <label>RGBW подсветка (зоны):</label>
                         <div class="counter">
                             <button onclick="changeCount('rgbwBacklight', -1)">-</button>
                             <span id="rgbwBacklight">0</span>
@@ -492,38 +493,32 @@
                 <!-- Вытяжки -->
                 <div class="section">
                     <h3><i class="fas fa-fan"></i> 3. Вытяжки</h3>
-                    <div class="subsection">
-                        <h4><i class="fas fa-wind"></i> Вытяжки</h4>
-                        <div class="form-group">
-                            <label>Вытяжки:</label>
-                            <div class="counter">
-                                <button onclick="changeCount('ventilation', -1)">-</button>
-                                <span id="ventilation">0</span>
-                                <button onclick="changeCount('ventilation', 1)">+</button>
-                            </div>
-                            <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
-                                Управление вытяжными вентиляторами и системами
-                            </p>
+                    <div class="form-group">
+                        <label>Вытяжки (количество):</label>
+                        <div class="counter">
+                            <button onclick="changeCount('ventilation', -1)">-</button>
+                            <span id="ventilation">0</span>
+                            <button onclick="changeCount('ventilation', 1)">+</button>
                         </div>
+                        <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
+                            Управление вытяжными вентиляторами и системами
+                        </p>
                     </div>
                 </div>
                 
                 <!-- Розетки -->
                 <div class="section">
                     <h3><i class="fas fa-plug"></i> 4. Розетки</h3>
-                    <div class="subsection">
-                        <h4><i class="fas fa-power-off"></i> Розетки</h4>
-                        <div class="form-group">
-                            <label>Умные розетки:</label>
-                            <div class="counter">
-                                <button onclick="changeCount('sockets', -1)">-</button>
-                                <span id="sockets">0</span>
-                                <button onclick="changeCount('sockets', 1)">+</button>
-                            </div>
-                            <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
-                                Управление питанием через умные розетки
-                            </p>
+                    <div class="form-group">
+                        <label>Умные розетки (количество):</label>
+                        <div class="counter">
+                            <button onclick="changeCount('sockets', -1)">-</button>
+                            <span id="sockets">0</span>
+                            <button onclick="changeCount('sockets', 1)">+</button>
                         </div>
+                        <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
+                            Управление питанием через умные розетки
+                        </p>
                     </div>
                 </div>
                 
@@ -531,49 +526,43 @@
                 <div class="section">
                     <h3><i class="fas fa-blinds"></i> 5. Шторы и жалюзи</h3>
                     
-                    <div class="subsection">
-                        <h4><i class="fas fa-sliders-h"></i> Шторы (Modbus)</h4>
-                        <div class="form-group">
-                            <label>Шторы Modbus:</label>
-                            <div class="counter">
-                                <button onclick="changeCount('curtainsModbus', -1)">-</button>
-                                <span id="curtainsModbus">0</span>
-                                <button onclick="changeCount('curtainsModbus', 1)">+</button>
-                            </div>
-                            <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
-                                Управление через протокол Modbus
-                            </p>
+                    <!-- Шторы Modbus -->
+                    <div class="form-group">
+                        <label>Шторы Modbus (количество):</label>
+                        <div class="counter">
+                            <button onclick="changeCount('curtainsModbus', -1)">-</button>
+                            <span id="curtainsModbus">0</span>
+                            <button onclick="changeCount('curtainsModbus', 1)">+</button>
                         </div>
+                        <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
+                            Управление через протокол Modbus
+                        </p>
                     </div>
                     
-                    <div class="subsection">
-                        <h4><i class="fas fa-exchange-alt"></i> Шторы (сухой контакт)</h4>
-                        <div class="form-group">
-                            <label>Шторы сухой контакт:</label>
-                            <div class="counter">
-                                <button onclick="changeCount('curtainsDryContact', -1)">-</button>
-                                <span id="curtainsDryContact">0</span>
-                                <button onclick="changeCount('curtainsDryContact', 1)">+</button>
-                            </div>
-                            <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
-                                Управление через сухие контакты
-                            </p>
+                    <!-- Шторы сухой контакт -->
+                    <div class="form-group">
+                        <label>Шторы сухой контакт (количество):</label>
+                        <div class="counter">
+                            <button onclick="changeCount('curtainsDryContact', -1)">-</button>
+                            <span id="curtainsDryContact">0</span>
+                            <button onclick="changeCount('curtainsDryContact', 1)">+</button>
                         </div>
+                        <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
+                            Управление через сухие контакты
+                        </p>
                     </div>
                     
-                    <div class="subsection">
-                        <h4><i class="fas fa-bolt"></i> Шторы (фазное управление)</h4>
-                        <div class="form-group">
-                            <label>Шторы фазное управление:</label>
-                            <div class="counter">
-                                <button onclick="changeCount('curtainsPhase', -1)">-</button>
-                                <span id="curtainsPhase">0</span>
-                                <button onclick="changeCount('curtainsPhase', 1)">+</button>
-                            </div>
-                            <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
-                                Управление через фазное регулирование
-                            </p>
+                    <!-- Шторы фазное управление -->
+                    <div class="form-group">
+                        <label>Шторы фазное управление (количество):</label>
+                        <div class="counter">
+                            <button onclick="changeCount('curtainsPhase', -1)">-</button>
+                            <span id="curtainsPhase">0</span>
+                            <button onclick="changeCount('curtainsPhase', 1)">+</button>
                         </div>
+                        <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
+                            Управление через фазное регулирование
+                        </p>
                     </div>
                 </div>
                 
@@ -581,124 +570,108 @@
                 <div class="section">
                     <h3><i class="fas fa-thermometer-half"></i> 6. Климат-контроль</h3>
                     
-                    <div class="subsection">
-                        <h4><i class="fas fa-temperature-high"></i> Датчики теплого пола</h4>
-                        <div class="form-group">
-                            <label>Датчики теплого пола:</label>
-                            <div class="counter">
-                                <button onclick="changeCount('floorHeatSensors', -1)">-</button>
-                                <span id="floorHeatSensors">0</span>
-                                <button onclick="changeCount('floorHeatSensors', 1)">+</button>
-                            </div>
-                            <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
-                                Температурные датчики для теплого пола
-                            </p>
+                    <!-- Датчики теплого пола -->
+                    <div class="form-group">
+                        <label>Датчики теплого пола (количество):</label>
+                        <div class="counter">
+                            <button onclick="changeCount('floorHeatSensors', -1)">-</button>
+                            <span id="floorHeatSensors">0</span>
+                            <button onclick="changeCount('floorHeatSensors', 1)">+</button>
                         </div>
+                        <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
+                            Температурные датчики для теплого пола
+                        </p>
                     </div>
                     
-                    <div class="subsection">
-                        <h4><i class="fas fa-thermometer"></i> Датчики температуры воздуха</h4>
-                        <div class="form-group">
-                            <label>Датчики температуры воздуха:</label>
-                            <div class="counter">
-                                <button onclick="changeCount('airTempSensors', -1)">1</button>
-                                <span id="airTempSensors">0</span>
-                                <button onclick="changeCount('airTempSensors', 1)">+</button>
-                            </div>
-                            <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
-                                Датчики температуры воздуха в помещениях
-                            </p>
+                    <!-- Датчики температуры воздуха -->
+                    <div class="form-group">
+                        <label>Датчики температуры воздуха (количество):</label>
+                        <div class="counter">
+                            <button onclick="changeCount('airTempSensors', -1)">-</button>
+                            <span id="airTempSensors">0</span>
+                            <button onclick="changeCount('airTempSensors', 1)">+</button>
                         </div>
+                        <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
+                            Датчики температуры воздуха в помещениях
+                        </p>
                     </div>
                     
-                    <div class="subsection">
-                        <h4><i class="fas fa-smog"></i> Датчики CO2</h4>
-                        <div class="form-group">
-                            <label>Датчики CO2:</label>
-                            <div class="counter">
-                                <button onclick="changeCount('co2Sensors', -1)">-</button>
-                                <span id="co2Sensors">0</span>
-                                <button onclick="changeCount('co2Sensors', 1)">+</button>
-                            </div>
-                            <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
-                                Датчики углекислого газа
-                            </p>
+                    <!-- Датчики CO2 -->
+                    <div class="form-group">
+                        <label>Датчики CO2 (количество):</label>
+                        <div class="counter">
+                            <button onclick="changeCount('co2Sensors', -1)">-</button>
+                            <span id="co2Sensors">0</span>
+                            <button onclick="changeCount('co2Sensors', 1)">+</button>
                         </div>
+                        <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
+                            Датчики углекислого газа
+                        </p>
                     </div>
                     
-                    <div class="subsection">
-                        <h4><i class="fas fa-tint"></i> Датчики влажности</h4>
-                        <div class="form-group">
-                            <label>Датчики влажности:</label>
-                            <div class="counter">
-                                <button onclick="changeCount('humiditySensors', -1)">-</button>
-                                <span id="humiditySensors">0</span>
-                                <button onclick="changeCount('humiditySensors', 1)">+</button>
-                            </div>
-                            <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
-                                Датчики относительной влажности воздуха
-                            </p>
+                    <!-- Датчики влажности -->
+                    <div class="form-group">
+                        <label>Датчики влажности (количество):</label>
+                        <div class="counter">
+                            <button onclick="changeCount('humiditySensors', -1)">-</button>
+                            <span id="humiditySensors">0</span>
+                            <button onclick="changeCount('humiditySensors', 1)">+</button>
                         </div>
+                        <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
+                            Датчики относительной влажности воздуха
+                        </p>
                     </div>
                     
-                    <div class="subsection">
-                        <h4><i class="fas fa-snowflake"></i> Кондиционеры</h4>
-                        <div class="form-group">
-                            <label>Кондиционеры:</label>
-                            <div class="counter">
-                                <button onclick="changeCount('airConditioners', -1)">-</button>
-                                <span id="airConditioners">0</span>
-                                <button onclick="changeCount('airConditioners', 1)">+</button>
-                            </div>
-                            <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
-                                Управление кондиционерами
-                            </p>
+                    <!-- Кондиционеры -->
+                    <div class="form-group">
+                        <label>Кондиционеры (количество):</label>
+                        <div class="counter">
+                            <button onclick="changeCount('airConditioners', -1)">-</button>
+                            <span id="airConditioners">0</span>
+                            <button onclick="changeCount('airConditioners', 1)">+</button>
                         </div>
+                        <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
+                            Управление кондиционерами
+                        </p>
                     </div>
                     
-                    <div class="subsection">
-                        <h4><i class="fas fa-wind"></i> Приточная вентиляция</h4>
-                        <div class="form-group">
-                            <label>Приточная вентиляция:</label>
-                            <div class="counter">
-                                <button onclick="changeCount('supplyVentilation', -1)">-</button>
-                                <span id="supplyVentilation">0</span>
-                                <button onclick="changeCount('supplyVentilation', 1)">+</button>
-                            </div>
-                            <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
-                                Управление приточной вентиляцией
-                            </p>
+                    <!-- Приточная вентиляция -->
+                    <div class="form-group">
+                        <label>Приточная вентиляция (количество):</label>
+                        <div class="counter">
+                            <button onclick="changeCount('supplyVentilation', -1)">-</button>
+                            <span id="supplyVentilation">0</span>
+                            <button onclick="changeCount('supplyVentilation', 1)">+</button>
                         </div>
+                        <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
+                            Управление приточной вентиляцией
+                        </p>
                     </div>
                     
-                    <div class="subsection">
-                        <h4><i class="fas fa-sliders-h"></i> Терморегуляторы</h4>
-                        <div class="form-group">
-                            <label>Терморегуляторы:</label>
-                            <div class="counter">
-                                <button onclick="changeCount('thermostats', -1)">-</button>
-                                <span id="thermostats">0</span>
-                                <button onclick="changeCount('thermostats', 1)">+</button>
-                            </div>
-                            <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
-                                Программируемые терморегуляторы
-                            </p>
+                    <!-- Терморегуляторы -->
+                    <div class="form-group">
+                        <label>Терморегуляторы (количество):</label>
+                        <div class="counter">
+                            <button onclick="changeCount('thermostats', -1)">-</button>
+                            <span id="thermostats">0</span>
+                            <button onclick="changeCount('thermostats', 1)">+</button>
                         </div>
+                        <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
+                            Программируемые терморегуляторы
+                        </p>
                     </div>
                     
-                    <div class="subsection">
-                        <h4><i class="fas fa-temperature-low"></i> Термоголовки</h4>
-                        <div class="form-group">
-                            <label>Термоголовки:</label>
-                            <div class="counter">
-                                <button onclick="changeCount('thermoHeads', -1)">-</button>
-                                <span id="thermoHeads">0</span>
-                                <button onclick="changeCount('thermoHeads', 1)">+</button>
-                            </div>
-                            <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
-                                Умные термоголовки для радиаторов
-                            </p>
+                    <!-- Термоголовки -->
+                    <div class="form-group">
+                        <label>Термоголовки (количество):</label>
+                        <div class="counter">
+                            <button onclick="changeCount('thermoHeads', -1)">-</button>
+                            <span id="thermoHeads">0</span>
+                            <button onclick="changeCount('thermoHeads', 1)">+</button>
                         </div>
+                        <p style="color: #666; margin-top: 5px; font-size: 0.9em;">
+                            Умные термоголовки для радиаторов
+                        </p>
                     </div>
                 </div>
                 
@@ -820,20 +793,20 @@
     </div>
 
     <script>
-        // Цены и конфигурация (БЕЗ НАЦЕНКИ)
+        // Цены и конфигурация
         const prices = {
-            // Контроллеры (основное оборудование) - БЕЗ наценки
+            // Контроллеры (основное оборудование)
             controllers: {
                 wb8: { name: "Wiren Board 8", price: 23500, install: 4 }
             },
             
-            // Модули расширения (дополнительное оборудование) - БЕЗ наценки
+            // Модули расширения (дополнительное оборудование)
             modules: {
                 zigbeeModule: { name: "WBE2R-R-ZIGBEE v.2 + антенна", price: 3600, install: 0.5 },
                 rs485Module: { name: "WBE2-I-RS485-ISO", price: 1480, install: 0.3 }
             },
             
-            // Освещение и подсветки (работы) - БЕЗ наценки
+            // Освещение и подсветки (работы)
             lighting: {
                 simple: { name: "Освещение вкл/выкл", price: 1500, install: 0.5 },
                 dimmable: { name: "Диммируемое освещение", price: 2800, install: 0.7 },
@@ -843,7 +816,7 @@
                 rgbwBacklight: { name: "RGBW подсветка", price: 16000, install: 2.5 }
             },
             
-            // Новые разделы - все по 2000 ₽ как указано с install: 0
+            // Новые разделы - все по 2000 ₽ с install: 0
             equipment: {
                 ventilation: { name: "Вытяжка", price: 2000, install: 0 },
                 sockets: { name: "Умная розетка", price: 2000, install: 0 },
@@ -860,7 +833,7 @@
                 thermoHeads: { name: "Термоголовка", price: 2000, install: 0 }
             },
             
-            // Датчики (дополнительное оборудование) - БЕЗ наценки
+            // Датчики (дополнительное оборудование)
             sensors: {
                 motionSensor: { name: "Датчик движения", price: 1200, install: 0.3 },
                 tempSensor: { name: "Датчик температуры", price: 900, install: 0.3 },
@@ -868,16 +841,16 @@
                 gasSensor: { name: "Датчик газа", price: 3800, install: 0.5 }
             },
             
-            // Услуги (дополнительные услуги) - БЕЗ наценки
+            // Услуги (дополнительные услуги)
             services: {
                 homeAssistant: { name: "Установка Home Assistant", price: 8000, install: 3 },
                 scenarios: { name: "Настройка сценариев", price: 5000, install: 2 },
                 warranty: { name: "Расширенная гарантия 2 года", price: 3000, install: 0 }
             },
             
-            // Коэффициенты - УБРАНА наценка 30%
-            workRate: 1500,       // Стоимость часа работы
-            materialsCost: 5000   // Базовые материалы
+            // Коэффициенты
+            workRate: 1500,
+            materialsCost: 5000
         };
         
         let selectedController = 'wb8';
