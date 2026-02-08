@@ -18,7 +18,7 @@
             padding: 20px;
             color: #e0e0e0;
             background-image: 
-                radial-gradient(circle at 10% 20%, rgba(255, 94, 0, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 10% 20%, rgba(255, 215, 0, 0.05) 0%, transparent 20%),
                 radial-gradient(circle at 90% 80%, rgba(0, 112, 255, 0.05) 0%, transparent 20%),
                 url('data:image/svg+xml,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M0,0 L100,0 L100,100 L0,100 Z" fill="none" stroke="%23333" stroke-width="1"/></svg>');
         }
@@ -33,7 +33,7 @@
             display: flex;
             flex-direction: column;
             height: 95vh;
-            border: 2px solid #ff5e00;
+            border: 2px solid #ffd700;
             position: relative;
         }
         
@@ -44,7 +44,7 @@
             left: 0;
             right: 0;
             height: 4px;
-            background: linear-gradient(90deg, #ff5e00, #0070ff, #ff5e00);
+            background: linear-gradient(90deg, #ffd700, #0070ff, #ffd700);
         }
         
         header {
@@ -53,7 +53,7 @@
             padding: 25px 40px;
             text-align: center;
             flex-shrink: 0;
-            border-bottom: 3px solid #ff5e00;
+            border-bottom: 3px solid #ffd700;
             position: relative;
             overflow: hidden;
         }
@@ -66,7 +66,7 @@
             right: 0;
             height: 100%;
             background-image: 
-                linear-gradient(45deg, transparent 45%, rgba(255, 94, 0, 0.1) 50%, transparent 55%),
+                linear-gradient(45deg, transparent 45%, rgba(255, 215, 0, 0.1) 50%, transparent 55%),
                 linear-gradient(-45deg, transparent 45%, rgba(0, 112, 255, 0.1) 50%, transparent 55%);
             background-size: 40px 40px;
         }
@@ -78,7 +78,7 @@
             letter-spacing: 2px;
             color: #ffffff;
             text-transform: uppercase;
-            text-shadow: 2px 2px 0 #ff5e00, 4px 4px 0 rgba(0,0,0,0.5);
+            text-shadow: 2px 2px 0 #ffd700, 4px 4px 0 rgba(0,0,0,0.5);
             position: relative;
         }
         
@@ -110,7 +110,7 @@
             overflow-y: auto;
             max-height: 100%;
             background: #252525;
-            border-right: 3px solid #ff5e00;
+            border-right: 3px solid #ffd700;
             padding: 0;
         }
         
@@ -125,12 +125,12 @@
         }
         
         .left-panel::-webkit-scrollbar-thumb {
-            background: #ff5e00;
+            background: #ffd700;
             border: 2px solid #333;
         }
         
         .left-panel::-webkit-scrollbar-thumb:hover {
-            background: #ff8a3d;
+            background: #ffed4a;
         }
         
         .section {
@@ -150,14 +150,14 @@
             left: -2px;
             right: -2px;
             bottom: -2px;
-            background: linear-gradient(45deg, transparent 45%, rgba(255, 94, 0, 0.3) 50%, transparent 55%);
+            background: linear-gradient(45deg, transparent 45%, rgba(255, 215, 0, 0.3) 50%, transparent 55%);
             z-index: -1;
         }
         
         .section:hover {
-            border-color: #ff5e00;
+            border-color: #ffd700;
             transform: translateY(-2px);
-            box-shadow: 8px 8px 0 rgba(255, 94, 0, 0.2);
+            box-shadow: 8px 8px 0 rgba(255, 215, 0, 0.2);
         }
         
         .section h3 {
@@ -171,7 +171,7 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             padding-bottom: 15px;
-            border-bottom: 2px solid #ff5e00;
+            border-bottom: 2px solid #ffd700;
             position: relative;
         }
         
@@ -182,12 +182,12 @@
             left: 0;
             width: 100px;
             height: 2px;
-            background: linear-gradient(90deg, #ff5e00, #0070ff);
+            background: linear-gradient(90deg, #ffd700, #0070ff);
         }
         
         .section h3 i {
-            color: #ff5e00;
-            background: rgba(255, 94, 0, 0.1);
+            color: #ffd700;
+            background: rgba(255, 215, 0, 0.1);
             padding: 12px;
             border-radius: 6px;
             width: 50px;
@@ -195,7 +195,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid #ff5e00;
+            border: 1px solid #ffd700;
         }
         
         .form-group {
@@ -218,7 +218,7 @@
             content: '▸';
             position: absolute;
             left: 0;
-            color: #ff5e00;
+            color: #ffd700;
             font-size: 1.2em;
         }
         
@@ -249,7 +249,7 @@
             left: 0;
             width: 4px;
             height: 100%;
-            background: #ff5e00;
+            background: #ffd700;
             transform: scaleY(0);
             transition: transform 0.3s ease;
         }
@@ -259,15 +259,15 @@
         }
         
         .radio-item:hover, .checkbox-item:hover {
-            border-color: #ff5e00;
+            border-color: #ffd700;
             background: #444;
-            box-shadow: 3px 3px 0 rgba(255, 94, 0, 0.3);
+            box-shadow: 3px 3px 0 rgba(255, 215, 0, 0.3);
         }
         
         .radio-item.selected, .checkbox-item.selected {
-            border-color: #ff5e00;
+            border-color: #ffd700;
             background: #444;
-            box-shadow: inset 0 0 20px rgba(255, 94, 0, 0.2);
+            box-shadow: inset 0 0 20px rgba(255, 215, 0, 0.2);
         }
         
         .radio-item.selected::before, .checkbox-item.selected::before {
@@ -275,7 +275,7 @@
         }
         
         .price-tag {
-            background: linear-gradient(135deg, #ff5e00, #ff8a3d);
+            background: linear-gradient(135deg, #ffd700, #ffed4a);
             color: #1a1a1a;
             padding: 8px 16px;
             border-radius: 0;
@@ -285,7 +285,7 @@
             letter-spacing: 1px;
             min-width: 120px;
             text-align: center;
-            border: 1px solid #ff8a3d;
+            border: 1px solid #ffed4a;
             box-shadow: 2px 2px 0 rgba(0,0,0,0.3);
         }
         
@@ -299,9 +299,9 @@
         .counter button {
             width: 50px;
             height: 50px;
-            border: 2px solid #ff5e00;
+            border: 2px solid #ffd700;
             background: transparent;
-            color: #ff5e00;
+            color: #ffd700;
             border-radius: 0;
             font-size: 24px;
             cursor: pointer;
@@ -321,7 +321,7 @@
             left: 50%;
             width: 0;
             height: 0;
-            background: rgba(255, 94, 0, 0.2);
+            background: rgba(255, 215, 0, 0.2);
             border-radius: 50%;
             transform: translate(-50%, -50%);
             transition: width 0.3s, height 0.3s;
@@ -333,7 +333,7 @@
         }
         
         .counter button:hover {
-            background: #ff5e00;
+            background: #ffd700;
             color: #1a1a1a;
             transform: scale(1.1);
         }
@@ -379,7 +379,7 @@
             left: 0;
             width: 100%;
             height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255, 94, 0, 0.5), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.5), transparent);
         }
         
         .summary-items-container {
@@ -440,7 +440,7 @@
         
         .category-title {
             font-weight: bold;
-            color: #ff5e00;
+            color: #ffd700;
             margin-top: 20px;
             padding-top: 20px;
             border-top: 2px solid #444;
@@ -455,7 +455,7 @@
             content: '◈';
             position: absolute;
             left: 0;
-            color: #ff5e00;
+            color: #ffd700;
             font-size: 1.5em;
         }
         
@@ -474,7 +474,7 @@
             left: -2px;
             right: -2px;
             bottom: -2px;
-            border: 1px solid rgba(255, 94, 0, 0.3);
+            border: 1px solid rgba(255, 215, 0, 0.3);
             pointer-events: none;
         }
         
@@ -490,7 +490,7 @@
         .total-row.final {
             font-size: 2em;
             font-weight: bold;
-            color: #ff5e00;
+            color: #ffd700;
             margin-top: 25px;
             padding-top: 20px;
             border-top: 3px solid #555;
@@ -542,9 +542,9 @@
         }
         
         .btn-primary {
-            background: linear-gradient(135deg, #ff5e00, #ff8a3d);
+            background: linear-gradient(135deg, #ffd700, #ffed4a);
             color: #1a1a1a;
-            border-color: #ff5e00;
+            border-color: #ffd700;
         }
         
         .btn-secondary {
@@ -565,7 +565,7 @@
         }
         
         .btn-primary:hover {
-            background: linear-gradient(135deg, #ff8a3d, #ff5e00);
+            background: linear-gradient(135deg, #ffed4a, #ffd700);
         }
         
         .btn-secondary:hover {
@@ -590,7 +590,7 @@
             position: absolute;
             top: -15px;
             left: 20px;
-            background: #ff5e00;
+            background: #ffd700;
             color: #1a1a1a;
             width: 30px;
             height: 30px;
@@ -613,7 +613,7 @@
         
         .notes p::before {
             content: '•';
-            color: #ff5e00;
+            color: #ffd700;
             position: absolute;
             left: 0;
             font-size: 1.5em;
@@ -646,7 +646,7 @@
         }
         
         .contact-info a {
-            color: #ff5e00;
+            color: #ffd700;
             text-decoration: none;
             font-weight: bold;
             transition: all 0.3s;
@@ -661,7 +661,7 @@
             left: 0;
             width: 0;
             height: 1px;
-            background: #ff5e00;
+            background: #ffd700;
             transition: width 0.3s;
         }
         
@@ -670,7 +670,7 @@
         }
         
         .contact-info a:hover {
-            color: #ff8a3d;
+            color: #ffed4a;
         }
         
         /* Дополнительные стили */
@@ -682,7 +682,7 @@
         }
         
         .highlight {
-            color: #ff5e00;
+            color: #ffd700;
             font-weight: bold;
         }
         
@@ -721,7 +721,7 @@
         /* Декоративные элементы */
         .industrial-border {
             height: 4px;
-            background: repeating-linear-gradient(90deg, #ff5e00, #ff5e00 10px, transparent 10px, transparent 20px);
+            background: repeating-linear-gradient(90deg, #ffd700, #ffd700 10px, transparent 10px, transparent 20px);
         }
         
         .bolt {
@@ -751,8 +751,8 @@
             right: 0;
             bottom: 0;
             background-image: 
-                linear-gradient(90deg, transparent 95%, rgba(255, 94, 0, 0.1) 100%),
-                linear-gradient(0deg, transparent 95%, rgba(255, 94, 0, 0.1) 100%);
+                linear-gradient(90deg, transparent 95%, rgba(255, 215, 0, 0.1) 100%),
+                linear-gradient(0deg, transparent 95%, rgba(255, 215, 0, 0.1) 100%);
             background-size: 50px 25px;
             pointer-events: none;
         }
@@ -794,7 +794,7 @@
                     
                     <!-- Модули расширения -->
                     <div class="form-group" style="margin-top: 30px;">
-                        <h4 style="color: #ff5e00; margin-bottom: 20px; font-size: 1.2em;">
+                        <h4 style="color: #ffd700; margin-bottom: 20px; font-size: 1.2em;">
                             <i class="fas fa-puzzle-piece"></i> ДОПОЛНИТЕЛЬНЫЕ МОДУЛИ
                         </h4>
                         
@@ -809,14 +809,14 @@
                         
                         <!-- RS485 модуль -->
                         <div class="form-group" style="margin-top: 25px;">
-                            <label>WBE2-I-RS485-ISO (КОЛИЧЕСТВО):</label>
+                            <label>WBE2-I-RS485-ISO</label>
                             <div class="counter">
                                 <button onclick="changeCount('rs485Modules', -1)">-</button>
                                 <span id="rs485Modules">0</span>
                                 <button onclick="changeCount('rs485Modules', 1)">+</button>
                             </div>
                             <div class="item-description">
-                                Промышленный интерфейс RS-485 с гальванической развязкой <span class="highlight">1 480 ₽/ШТ</span>
+                                Промышленный интерфейс RS-485 с гальванической развязкой
                             </div>
                         </div>
                     </div>
@@ -827,74 +827,74 @@
                     <h3><i class="fas fa-lightbulb"></i> ОСВЕЩЕНИЕ И ПОДСВЕТКА</h3>
                     
                     <div class="form-group">
-                        <label>СТАНДАРТНОЕ ОСВЕЩЕНИЕ (ЛИНИИ):</label>
+                        <label>СТАНДАРТНОЕ ОСВЕЩЕНИЕ</label>
                         <div class="counter">
                             <button onclick="changeCount('lightSimple', -1)">-</button>
                             <span id="lightSimple">0</span>
                             <button onclick="changeCount('lightSimple', 1)">+</button>
                         </div>
                         <div class="item-description">
-                            Релейные модули WB-MRM2 <span class="highlight">2 000 ₽/ЛИНИЯ</span>
+                            Релейные модули WB-MRM2
                         </div>
                     </div>
                     
                     <div class="form-group">
-                        <label>ДИММИРУЕМОЕ ОСВЕЩЕНИЕ (ЛИНИИ):</label>
+                        <label>ДИММИРУЕМОЕ ОСВЕЩЕНИЕ</label>
                         <div class="counter">
-                            <button onclick="changeCount('lightDimmable', -1)">-</button>
+                            <button onclick="changeCount('lightDimmable', -1)">  -</button>
                             <span id="lightDimmable">0</span>
                             <button onclick="changeCount('lightDimmable', 1)">+</button>
                         </div>
                         <div class="item-description">
-                            Диммеры WB-MDM3 с ШИМ управлением <span class="highlight">2 000 ₽/ЛИНИЯ</span>
+                            Диммеры WB-MDM3 с ШИМ управлением
                         </div>
                     </div>
                     
                     <div class="form-group">
-                        <label>LED ПОДСВЕТКА (ЗОНЫ):</label>
+                        <label>LED ПОДСВЕТКА</label>
                         <div class="counter">
                             <button onclick="changeCount('ledBacklight', -1)">-</button>
                             <span id="ledBacklight">0</span>
                             <button onclick="changeCount('ledBacklight', 1)">+</button>
                         </div>
                         <div class="item-description">
-                            Монохромная LED подсветка <span class="highlight">2 000 ₽/ЗОНА</span>
+                            Монохромная LED подсветка
                         </div>
                     </div>
                     
                     <div class="form-group">
-                        <label>CCT ПОДСВЕТКА (ЗОНЫ):</label>
+                        <label>CCT ПОДСВЕТКА</label>
                         <div class="counter">
                             <button onclick="changeCount('cctBacklight', -1)">-</button>
                             <span id="cctBacklight">0</span>
                             <button onclick="changeCount('cctBacklight', 1)">+</button>
                         </div>
                         <div class="item-description">
-                            Два цвета, регулировка цветовой температуры <span class="highlight">4 000 ₽/ЗОНА</span>
+                            Два цвета, регулировка цветовой температуры
                         </div>
                     </div>
                     
                     <div class="form-group">
-                        <label>RGB ПОДСВЕТКА (ЗОНЫ):</label>
+                        <label>RGB ПОДСВЕТКА</label>
                         <div class="counter">
                             <button onclick="changeCount('rgbBacklight', -1)">-</button>
                             <span id="rgbBacklight">0</span>
                             <button onclick="changeCount('rgbBacklight', 1)">+</button>
                         </div>
                         <div class="item-description">
-                            Полный RGB спектр <span class="highlight">8 000 ₽/ЗОНА</span>
+                            Полный RGB спектр
                         </div>
                     </div>
                     
                     <div class="form-group">
-                        <label>RGBW ПОДСВЕТКА (ЗОНЫ):</label>
+                        <label>RGBW ПОДСВЕТКА</label>
                         <div class="counter">
                             <button onclick="changeCount('rgbwBacklight', -1)">-</button>
                             <span id="rgbwBacklight">0</span>
                             <button onclick="changeCount('rgbwBacklight', 1)">+</button>
                         </div>
                         <div class="item-description">
-                            RGB + белый канал <span class="highlight">12 000 ₽/ЗОНА</span>
+                            RGB + белый канал
                         </div>
                     </div>
                 </div>
@@ -904,50 +904,50 @@
                     <h3><i class="fas fa-fan"></i> ВЕНТИЛЯЦИЯ И КЛИМАТ</h3>
                     
                     <div class="form-group">
-                        <label>ВЫТЯЖКИ (КОЛИЧЕСТВО):</label>
+                        <label>ВЫТЯЖКИ</label>
                         <div class="counter">
                             <button onclick="changeCount('ventilation', -1)">-</button>
                             <span id="ventilation">0</span>
                             <button onclick="changeCount('ventilation', 1)">+</button>
                         </div>
                         <div class="item-description">
-                            Управление вытяжными системами <span class="highlight">2 000 ₽/ШТ</span>
+                            Управление вытяжными системами
                         </div>
                     </div>
                     
                     <div class="form-group">
-                        <label>ПРИТОЧНАЯ ВЕНТИЛЯЦИЯ:</label>
+                        <label>ПРИТОЧНАЯ ВЕНТИЛЯЦИЯ</label>
                         <div class="counter">
                             <button onclick="changeCount('supplyVentilation', -1)">-</button>
                             <span id="supplyVentilation">0</span>
                             <button onclick="changeCount('supplyVentilation', 1)">+</button>
                         </div>
                         <div class="item-description">
-                            Системы приточной вентиляции <span class="highlight">2 000 ₽/ШТ</span>
+                            Системы приточной вентиляции
                         </div>
                     </div>
                     
                     <div class="form-group">
-                        <label>КОНДИЦИОНЕРЫ:</label>
+                        <label>КОНДИЦИОНЕРЫ</label>
                         <div class="counter">
                             <button onclick="changeCount('airConditioners', -1)">-</button>
                             <span id="airConditioners">0</span>
                             <button onclick="changeCount('airConditioners', 1)">+</button>
                         </div>
                         <div class="item-description">
-                            Управление климатическими системами <span class="highlight">2 000 ₽/ШТ</span>
+                            Управление климатическими системами
                         </div>
                     </div>
                     
                     <div class="form-group">
-                        <label>ТЕРМОГОЛОВКИ:</label>
+                        <label>ТЕРМОГОЛОВКИ</label>
                         <div class="counter">
                             <button onclick="changeCount('thermoHeads', -1)">-</button>
                             <span id="thermoHeads">0</span>
                             <button onclick="changeCount('thermoHeads', 1)">+</button>
                         </div>
                         <div class="item-description">
-                            Умные термоголовки для радиаторов <span class="highlight">2 000 ₽/ШТ</span>
+                            Умные термоголовки для радиаторов
                         </div>
                     </div>
                 </div>
@@ -957,14 +957,14 @@
                     <h3><i class="fas fa-sensor"></i> ДАТЧИКИ И БЕЗОПАСНОСТЬ</h3>
                     
                     <div class="form-group">
-                        <label>ДАТЧИКИ ДВИЖЕНИЯ:</label>
+                        <label>ДАТЧИКИ ДВИЖЕНИЯ</label>
                         <div class="counter">
                             <button onclick="changeCount('motionSensors', -1)">-</button>
                             <span id="motionSensors">0</span>
                             <button onclick="changeCount('motionSensors', 1)">+</button>
                         </div>
                         <div class="item-description">
-                            PIR датчики движения <span class="highlight">1 200 ₽/ШТ</span>
+                            PIR датчики движения
                         </div>
                     </div>
                     
@@ -1115,33 +1115,7 @@
         // Инициализация
         document.addEventListener('DOMContentLoaded', function() {
             calculate();
-            
-            // Добавляем звуковые эффекты для кнопок
-            document.querySelectorAll('.counter button, .radio-item, .checkbox-item').forEach(element => {
-                element.addEventListener('click', function() {
-                    playClickSound();
-                });
-            });
         });
-
-        function playClickSound() {
-            // Создаем звук клика
-            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            const oscillator = audioContext.createOscillator();
-            const gainNode = audioContext.createGain();
-            
-            oscillator.connect(gainNode);
-            gainNode.connect(audioContext.destination);
-            
-            oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
-            oscillator.frequency.exponentialRampToValueAtTime(400, audioContext.currentTime + 0.1);
-            
-            gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
-            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
-            
-            oscillator.start();
-            oscillator.stop(audioContext.currentTime + 0.1);
-        }
 
         function selectController(id) {
             state.controller = id;
@@ -1210,40 +1184,107 @@
                 });
             }
 
-            // 3. Освещение
-            const lightingFields = [
-                'lightSimple', 'lightDimmable', 'ledBacklight', 
-                'cctBacklight', 'rgbBacklight', 'rgbwBacklight'
-            ];
+            // 3. Освещение (добавляем в работу)
+            if (state.lightSimple > 0) {
+                const totalPrice = state.lightSimple * prices.lighting.simple.price;
+                workCost += totalPrice;
+                items.push({
+                    name: `${prices.lighting.simple.name} (${state.lightSimple})`,
+                    price: totalPrice,
+                    category: 'work'
+                });
+            }
 
-            lightingFields.forEach(field => {
-                if (state[field] > 0) {
-                    const totalPrice = state[field] * prices.lighting[field].price;
-                    workCost += totalPrice;
-                    items.push({
-                        name: `${prices.lighting[field].name} (${state[field]})`,
-                        price: totalPrice,
-                        category: 'work'
-                    });
-                }
-            });
+            if (state.lightDimmable > 0) {
+                const totalPrice = state.lightDimmable * prices.lighting.dimmable.price;
+                workCost += totalPrice;
+                items.push({
+                    name: `${prices.lighting.dimmable.name} (${state.lightDimmable})`,
+                    price: totalPrice,
+                    category: 'work'
+                });
+            }
+
+            if (state.ledBacklight > 0) {
+                const totalPrice = state.ledBacklight * prices.lighting.ledBacklight.price;
+                workCost += totalPrice;
+                items.push({
+                    name: `${prices.lighting.ledBacklight.name} (${state.ledBacklight})`,
+                    price: totalPrice,
+                    category: 'work'
+                });
+            }
+
+            if (state.cctBacklight > 0) {
+                const totalPrice = state.cctBacklight * prices.lighting.cctBacklight.price;
+                workCost += totalPrice;
+                items.push({
+                    name: `${prices.lighting.cctBacklight.name} (${state.cctBacklight})`,
+                    price: totalPrice,
+                    category: 'work'
+                });
+            }
+
+            if (state.rgbBacklight > 0) {
+                const totalPrice = state.rgbBacklight * prices.lighting.rgbBacklight.price;
+                workCost += totalPrice;
+                items.push({
+                    name: `${prices.lighting.rgbBacklight.name} (${state.rgbBacklight})`,
+                    price: totalPrice,
+                    category: 'work'
+                });
+            }
+
+            if (state.rgbwBacklight > 0) {
+                const totalPrice = state.rgbwBacklight * prices.lighting.rgbwBacklight.price;
+                workCost += totalPrice;
+                items.push({
+                    name: `${prices.lighting.rgbwBacklight.name} (${state.rgbwBacklight})`,
+                    price: totalPrice,
+                    category: 'work'
+                });
+            }
 
             // 4. Оборудование
-            const equipmentFields = [
-                'ventilation', 'supplyVentilation', 'airConditioners', 'thermoHeads'
-            ];
+            if (state.ventilation > 0) {
+                const totalPrice = state.ventilation * prices.equipment.ventilation.price;
+                modulesCost += totalPrice;
+                items.push({
+                    name: `${prices.equipment.ventilation.name} (${state.ventilation} ШТ)`,
+                    price: totalPrice,
+                    category: 'modules'
+                });
+            }
 
-            equipmentFields.forEach(field => {
-                if (state[field] > 0) {
-                    const totalPrice = state[field] * prices.equipment[field].price;
-                    modulesCost += totalPrice;
-                    items.push({
-                        name: `${prices.equipment[field].name} (${state[field]} ШТ)`,
-                        price: totalPrice,
-                        category: 'modules'
-                    });
-                }
-            });
+            if (state.supplyVentilation > 0) {
+                const totalPrice = state.supplyVentilation * prices.equipment.supplyVentilation.price;
+                modulesCost += totalPrice;
+                items.push({
+                    name: `${prices.equipment.supplyVentilation.name} (${state.supplyVentilation} ШТ)`,
+                    price: totalPrice,
+                    category: 'modules'
+                });
+            }
+
+            if (state.airConditioners > 0) {
+                const totalPrice = state.airConditioners * prices.equipment.airConditioners.price;
+                modulesCost += totalPrice;
+                items.push({
+                    name: `${prices.equipment.airConditioners.name} (${state.airConditioners} ШТ)`,
+                    price: totalPrice,
+                    category: 'modules'
+                });
+            }
+
+            if (state.thermoHeads > 0) {
+                const totalPrice = state.thermoHeads * prices.equipment.thermoHeads.price;
+                modulesCost += totalPrice;
+                items.push({
+                    name: `${prices.equipment.thermoHeads.name} (${state.thermoHeads} ШТ)`,
+                    price: totalPrice,
+                    category: 'modules'
+                });
+            }
 
             // 5. Датчики
             if (state.motionSensors > 0) {
@@ -1373,9 +1414,9 @@
             
             // Анимация изменения итоговой суммы
             const finalTotalElement = document.getElementById('finalTotal');
-            finalTotalElement.style.color = '#ff8a3d';
+            finalTotalElement.style.color = '#ffed4a';
             setTimeout(() => {
-                finalTotalElement.style.color = '#ff5e00';
+                finalTotalElement.style.color = '#ffd700';
             }, 300);
         }
 
@@ -1391,25 +1432,6 @@
         function saveConfiguration() {
             const total = document.getElementById('finalTotal').textContent;
             const config = JSON.stringify(state, null, 2);
-            
-            // Создаем эффект печати
-            const printSound = () => {
-                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                const oscillator = audioContext.createOscillator();
-                const gainNode = audioContext.createGain();
-                
-                oscillator.connect(gainNode);
-                gainNode.connect(audioContext.destination);
-                
-                oscillator.frequency.setValueAtTime(600, audioContext.currentTime);
-                gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
-                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
-                
-                oscillator.start();
-                oscillator.stop(audioContext.currentTime + 0.2);
-            };
-            
-            printSound();
             
             // Сохраняем файл
             const blob = new Blob([config], { type: 'application/json' });
@@ -1428,27 +1450,6 @@
 
         function sendRequest() {
             const total = document.getElementById('finalTotal').textContent;
-            
-            // Эффект отправки
-            const sendSound = () => {
-                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                const oscillator = audioContext.createOscillator();
-                const gainNode = audioContext.createGain();
-                
-                oscillator.connect(gainNode);
-                gainNode.connect(audioContext.destination);
-                
-                oscillator.frequency.setValueAtTime(400, audioContext.currentTime);
-                oscillator.frequency.exponentialRampToValueAtTime(800, audioContext.currentTime + 0.3);
-                
-                gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
-                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
-                
-                oscillator.start();
-                oscillator.stop(audioContext.currentTime + 0.3);
-            };
-            
-            sendSound();
             
             // Создаем модальное окно
             const modal = document.createElement('div');
@@ -1469,7 +1470,7 @@
             modalContent.style.cssText = `
                 background: #2c2c2c;
                 padding: 40px;
-                border: 3px solid #ff5e00;
+                border: 3px solid #ffd700;
                 max-width: 500px;
                 width: 90%;
                 color: white;
@@ -1477,12 +1478,12 @@
             `;
             
             modalContent.innerHTML = `
-                <h3 style="color: #ff5e00; margin-bottom: 20px;">ЗАПРОС ОТПРАВЛЕН</h3>
+                <h3 style="color: #ffd700; margin-bottom: 20px;">ЗАПРОС ОТПРАВЛЕН</h3>
                 <p style="margin-bottom: 20px;">Ваша конфигурация успешно отправлена нашим специалистам.</p>
-                <p style="font-size: 1.2em; margin-bottom: 30px;">Общая стоимость: <strong style="color: #ff5e00">${total}</strong></p>
+                <p style="font-size: 1.2em; margin-bottom: 30px;">Общая стоимость: <strong style="color: #ffd700">${total}</strong></p>
                 <p style="margin-bottom: 30px;">Мы свяжемся с вами в течение 2 часов для уточнения деталей.</p>
                 <button onclick="this.closest('div').remove()" style="
-                    background: #ff5e00;
+                    background: #ffd700;
                     color: #1a1a1a;
                     border: none;
                     padding: 15px 30px;
@@ -1504,10 +1505,10 @@
                 position: fixed;
                 top: 20px;
                 right: 20px;
-                background: #ff5e00;
+                background: #ffd700;
                 color: #1a1a1a;
                 padding: 15px 25px;
-                border: 2px solid #ff8a3d;
+                border: 2px solid #ffed4a;
                 z-index: 1000;
                 font-weight: bold;
                 text-transform: uppercase;
