@@ -1505,15 +1505,15 @@
                             String(date.getMonth() + 1).padStart(2, '0') + '-' + 
                             String(date.getDate()).padStart(2, '0');
             
-            // Используем точку с запятой как разделитель (стандарт для русского Excel)
-            let csvContent = 'SEP=;\r\n';
+            // Создаем CSV в кодировке Windows-1251 (стандартная для русского Excel)
+            let csvContent = '';
             
             // Основной заголовок
             csvContent += 'СМЕТА ПРОЕКТА УМНОГО ДОМА\r\n';
             csvContent += 'Дата создания: ' + timestamp + '\r\n\r\n';
             
-            // Заголовки таблицы с точкой с запятой как разделителем
-            csvContent += '№;Категория;Наименование;Кол-во;Ед.изм.;Цена;Сумма\r\n';
+            // Заголовки таблицы с разделителем табуляции (наиболее надежный способ)
+            csvContent += '№\tКатегория\tНаименование\tКол-во\tЕд.изм.\tЦена\tСумма\r\n';
             
             let lineNumber = 1;
             
@@ -1528,23 +1528,20 @@
             // Добавляем все позиции
             window.currentItems.forEach((item) => {
                 const categoryName = categories[item.category] || item.category;
-                // Экранируем кавычки в названиях
-                const itemName = item.name.replace(/"/g, '""');
-                
-                csvContent += lineNumber + ';' + 
-                             categoryName + ';"' + itemName + '";' + 
-                             item.count + ';' + item.unit + ';' + 
-                             item.unitPrice + ';' + item.price + '\r\n';
+                csvContent += lineNumber + '\t' + 
+                             categoryName + '\t' + item.name + '\t' + 
+                             item.count + '\t' + item.unit + '\t' + 
+                             item.unitPrice + '\t' + item.price + '\r\n';
                 lineNumber++;
             });
             
             csvContent += '\r\n';
             
             // Добавляем итоги
-            csvContent += 'ИТОГО ОБОРУДОВАНИЕ:;;;;;' + window.currentTotals.equipmentTotal + '\r\n';
-            csvContent += 'ИТОГО МОДУЛИ:;;;;;' + window.currentTotals.modulesTotal + '\r\n';
-            csvContent += 'ИТОГО МОНТАЖ:;;;;;' + window.currentTotals.workTotal + '\r\n\r\n';
-            csvContent += 'ВСЕГО К ОПЛАТЕ:;;;;;' + window.currentTotals.finalTotal + '\r\n\r\n';
+            csvContent += 'ИТОГО ОБОРУДОВАНИЕ:\t\t\t\t\t' + window.currentTotals.equipmentTotal + '\r\n';
+            csvContent += 'ИТОГО МОДУЛИ:\t\t\t\t\t' + window.currentTotals.modulesTotal + '\r\n';
+            csvContent += 'ИТОГО МОНТАЖ:\t\t\t\t\t' + window.currentTotals.workTotal + '\r\n\r\n';
+            csvContent += 'ВСЕГО К ОПЛАТЕ:\t\t\t\t\t' + window.currentTotals.finalTotal + '\r\n\r\n';
             
             // Примечания
             csvContent += 'Примечания:\r\n';
@@ -1554,13 +1551,37 @@
             csvContent += '4. Гарантия на оборудование: 24 месяца\r\n';
             csvContent += '5. Гарантия на монтажные работы: 12 месяцев\r\n';
             
-            // Добавляем BOM (Byte Order Mark) для корректного отображения кириллицы
-            const BOM = '\uFEFF';
-            const finalContent = BOM + csvContent;
+            // Преобразуем в Windows-1251 кодировку
+            function toWin1251(str) {
+                const win1251 = {
+                    'А': 0xC0, 'Б': 0xC1, 'В': 0xC2, 'Г': 0xC3, 'Д': 0xC4, 'Е': 0xC5, 'Ж': 0xC6, 'З': 0xC7,
+                    'И': 0xC8, 'Й': 0xC9, 'К': 0xCA, 'Л': 0xCB, 'М': 0xCC, 'Н': 0xCD, 'О': 0xCE, 'П': 0xCF,
+                    'Р': 0xD0, 'С': 0xD1, 'Т': 0xD2, 'У': 0xD3, 'Ф': 0xD4, 'Х': 0xD5, 'Ц': 0xD6, 'Ч': 0xD7,
+                    'Ш': 0xD8, 'Щ': 0xD9, 'Ъ': 0xDA, 'Ы': 0xDB, 'Ь': 0xDC, 'Э': 0xDD, 'Ю': 0xDE, 'Я': 0xDF,
+                    'а': 0xE0, 'б': 0xE1, 'в': 0xE2, 'г': 0xE3, 'д': 0xE4, 'е': 0xE5, 'ж': 0xE6, 'з': 0xE7,
+                    'и': 0xE8, 'й': 0xE9, 'к': 0xEA, 'л': 0xEB, 'м': 0xEC, 'н': 0xED, 'о': 0xEE, 'п': 0xEF,
+                    'р': 0xF0, 'с': 0xF1, 'т': 0xF2, 'у': 0xF3, 'ф': 0xF4, 'х': 0xF5, 'ц': 0xF6, 'ч': 0xF7,
+                    'ш': 0xF8, 'щ': 0xF9, 'ъ': 0xFA, 'ы': 0xFB, 'ь': 0xFC, 'э': 0xFD, 'ю': 0xFE, 'я': 0xFF
+                };
+                
+                let result = '';
+                for (let i = 0; i < str.length; i++) {
+                    const char = str[i];
+                    if (char >= 'А' && char <= 'я' && win1251[char]) {
+                        result += String.fromCharCode(win1251[char]);
+                    } else {
+                        result += char;
+                    }
+                }
+                return result;
+            }
             
-            // Создаем Blob
-            const blob = new Blob([finalContent], { 
-                type: 'text/csv;charset=utf-8'
+            // Конвертируем в Windows-1251
+            const win1251Content = toWin1251(csvContent);
+            
+            // Создаем Blob с правильной кодировкой
+            const blob = new Blob([win1251Content], { 
+                type: 'text/plain;charset=windows-1251'
             });
             
             // Создаем ссылку для скачивания
@@ -1568,100 +1589,16 @@
             const a = document.createElement('a');
             a.href = url;
             
-            // Используем расширение .csv с правильным именем
-            a.download = `смета-умный-дом-${dateStr}.csv`;
+            // Сохраняем как CSV - Excel откроет корректно
+            a.download = `смета-${dateStr}.csv`;
             
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
             
-            // Показываем инструкцию
-            showExcelInstructions();
-        }
-
-        function showExcelInstructions() {
-            // Создаем модальное окно с инструкцией
-            const modal = document.createElement('div');
-            modal.style.cssText = `
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background: rgba(0,0,0,0.9);
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                z-index: 1000;
-            `;
-            
-            const modalContent = document.createElement('div');
-            modalContent.style.cssText = `
-                background: #2c2c2c;
-                padding: 40px;
-                border: 3px solid #ffd700;
-                max-width: 600px;
-                width: 90%;
-                color: white;
-                text-align: center;
-                font-family: 'Courier New', monospace;
-            `;
-            
-            modalContent.innerHTML = `
-                <h3 style="color: #ffd700; margin-bottom: 20px;">ФАЙЛ СОХРАНЕН!</h3>
-                <p style="margin-bottom: 15px; font-size: 1.1em;">Файл CSV готов для открытия в Excel</p>
-                <p style="margin-bottom: 25px;">Общая стоимость: <strong style="color: #ffd700">${formatPrice(window.currentTotals.finalTotal)}</strong></p>
-                
-                <div style="background: #333; padding: 20px; margin: 20px 0; border: 1px solid #444; text-align: left;">
-                    <h4 style="color: #ffed4a; margin-bottom: 15px;">ИНСТРУКЦИЯ ДЛЯ ОТКРЫТИЯ В EXCEL:</h4>
-                    
-                    <div style="margin-bottom: 15px;">
-                        <p style="color: #ffd700; margin-bottom: 5px;">СПОСОБ 1 (рекомендуемый):</p>
-                        <p>1. Дважды кликните по файлу .csv</p>
-                        <p>2. Excel откроет файл автоматически</p>
-                        <p>3. Если данные не разделились по столбцам:</p>
-                        <p>4. Закройте файл</p>
-                        <p>5. Откройте Excel → Файл → Открыть</p>
-                        <p>6. Выберите файл .csv</p>
-                        <p>7. В мастере импорта выберите:</p>
-                        <p style="margin-left: 20px;">- Разделитель: точка с запятой (;)</p>
-                        <p style="margin-left: 20px;">- Формат файла: Unicode (UTF-8)</p>
-                    </div>
-                    
-                    <div>
-                        <p style="color: #ffd700; margin-bottom: 5px;">СПОСОБ 2 (если не работает):</p>
-                        <p>1. Откройте Excel</p>
-                        <p>2. Перейдите на вкладку "Данные"</p>
-                        <p>3. Нажмите "Получить данные" → "Из файла" → "Из текста/CSV"</p>
-                        <p>4. Выберите сохраненный файл</p>
-                        <p>5. В окне импорта установите:</p>
-                        <p style="margin-left: 20px;">- Кодировка: 65001: Unicode (UTF-8)</p>
-                        <p style="margin-left: 20px;">- Разделитель: точка с запятой (;)</p>
-                        <p>6. Нажмите "Загрузить"</p>
-                    </div>
-                </div>
-                
-                <p style="margin-bottom: 25px; color: #cccccc; font-size: 0.9em;">
-                    Файл также можно открыть в Google Sheets: Файл → Импорт → Загрузить → Выбрать разделитель ";"
-                </p>
-                
-                <button onclick="this.closest('div').remove()" style="
-                    background: #ffd700;
-                    color: #1a1a1a;
-                    border: none;
-                    padding: 15px 30px;
-                    font-size: 16px;
-                    cursor: pointer;
-                    font-weight: bold;
-                    text-transform: uppercase;
-                    letter-spacing: 1px;
-                    margin-top: 10px;
-                ">ПОНЯТНО</button>
-            `;
-            
-            modal.appendChild(modalContent);
-            document.body.appendChild(modal);
+            // Простое уведомление вместо инструкции
+            showNotification(`Смета сохранена в Excel! Файл: смета-${dateStr}.csv`);
         }
 
         function sendRequest() {
