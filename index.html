@@ -1121,8 +1121,7 @@
 
         // Инициализация при загрузке страницы
         document.addEventListener('DOMContentLoaded', function() {
-            // Инициализируем все счетчики
-            updateAllCounters();
+            // Вызываем расчет сразу
             calculate();
         });
 
@@ -1141,11 +1140,11 @@
             item.classList.toggle('selected');
             
             // Обновляем конфиг
-            if (type.startsWith('zigbee')) {
+            if (type === 'zigbeeModule') {
                 config.modules.zigbeeModule = item.classList.contains('selected');
-            } else if (type.startsWith('leak')) {
+            } else if (type === 'leakSensor') {
                 config.sensors.leakSensor = item.classList.contains('selected');
-            } else if (type.startsWith('gas')) {
+            } else if (type === 'gasSensor') {
                 config.sensors.gasSensor = item.classList.contains('selected');
             }
             
@@ -1165,6 +1164,8 @@
                 currentValue = config.sensors[type] || 0;
             } else if (type.includes('rs485')) {
                 currentValue = config.modules[type] || 0;
+            } else {
+                return;
             }
             
             // Изменяем значение с проверкой на минимальное
@@ -1184,29 +1185,6 @@
             // Обновляем отображение
             document.getElementById(type).textContent = newValue;
             calculate();
-        }
-
-        // Функция обновления всех счетчиков
-        function updateAllCounters() {
-            // Обновляем счетчики освещения
-            for (const key in config.lighting) {
-                document.getElementById(key).textContent = config.lighting[key];
-            }
-            
-            // Обновляем счетчики вентиляции
-            for (const key in config.ventilation) {
-                document.getElementById(key).textContent = config.ventilation[key];
-            }
-            
-            // Обновляем счетчики датчиков
-            for (const key in config.sensors) {
-                if (key !== 'leakSensor' && key !== 'gasSensor') {
-                    document.getElementById(key).textContent = config.sensors[key];
-                }
-            }
-            
-            // Обновляем счетчики модулей
-            document.getElementById('rs485Modules').textContent = config.modules.rs485Modules;
         }
 
         // Функция расчета сметы
@@ -1341,7 +1319,7 @@
             if (config.ventilation.supplyVentilation > 0) {
                 const total = config.ventilation.supplyVentilation * prices.ventilation.supplyVentilation;
                 equipmentTotal += total;
-                workTotal += config.ventilation.supplyVentilation * prices.work.perLine * 2; // Сложный монтаж
+                workTotal += config.ventilation.supplyVentilation * prices.work.perLine * 2;
                 summaryItems.push({
                     category: 'ОБОРУДОВАНИЕ',
                     name: 'Приточная вентиляция',
@@ -1456,28 +1434,25 @@
                 });
             }
             
-            // Добавляем монтажные работы в смету
-            if (workTotal > 0) {
-                summaryItems.push({
-                    category: 'МОНТАЖ',
-                    name: 'Монтаж и установка оборудования',
-                    count: 1,
-                    unit: 'комплекс',
-                    price: workTotal,
-                    total: workTotal
-                });
+            // Добавляем монтажные работы в смету (группируем)
+            let totalLines = 0;
+            totalLines += config.lighting.lightSimple;
+            totalLines += config.lighting.lightDimmable;
+            totalLines += config.lighting.ledBacklight;
+            totalLines += config.lighting.cctBacklight;
+            totalLines += config.lighting.rgbBacklight;
+            totalLines += config.lighting.rgbwBacklight;
+            totalLines += config.ventilation.ventilation;
+            totalLines += config.ventilation.supplyVentilation * 2; // Сложный монтаж
+            totalLines += config.ventilation.airConditioners;
+            totalLines += config.sensors.motionSensors;
+            
+            if (totalLines > 0) {
+                workTotal += totalLines * prices.work.perLine;
             }
             
-            // Добавляем установку контроллера
+            // Установка контроллера
             workTotal += prices.work.controllerInstall;
-            summaryItems.push({
-                category: 'МОНТАЖ',
-                name: 'Установка и настройка контроллера',
-                count: 1,
-                unit: 'шт',
-                price: prices.work.controllerInstall,
-                total: prices.work.controllerInstall
-            });
             
             // Обновляем итоговые суммы
             document.getElementById('equipmentTotal').textContent = formatPrice(equipmentTotal);
@@ -1488,11 +1463,11 @@
             document.getElementById('finalTotal').textContent = formatPrice(finalTotal);
             
             // Обновляем список сметы
-            updateSummaryList(summaryItems);
+            updateSummaryList(summaryItems, workTotal);
         }
 
         // Функция обновления списка сметы
-        function updateSummaryList(items) {
+        function updateSummaryList(items, workTotal) {
             const container = document.getElementById('summaryItems');
             container.innerHTML = '';
             
@@ -1507,10 +1482,12 @@
             }
             
             let currentCategory = '';
+            let hasWorkCategory = false;
             
+            // Сначала добавляем оборудование и модули
             items.forEach((item, index) => {
                 // Добавляем заголовок категории если она изменилась
-                if (item.category !== currentCategory) {
+                if (item.category !== currentCategory && item.category !== 'МОНТАЖ') {
                     currentCategory = item.category;
                     const categoryTitle = document.createElement('div');
                     categoryTitle.className = 'category-title';
@@ -1518,20 +1495,45 @@
                     container.appendChild(categoryTitle);
                 }
                 
-                // Добавляем элемент сметы
+                // Добавляем элемент сметы (кроме работ)
+                if (item.category !== 'МОНТАЖ') {
+                    const summaryItem = document.createElement('div');
+                    summaryItem.className = 'summary-item';
+                    summaryItem.innerHTML = `
+                        <div>
+                            <strong>${item.name}</strong>
+                            <div style="font-size: 0.85em; color: #999; margin-top: 4px;">
+                                ${item.count} ${item.unit} × ${formatPrice(item.price)}
+                            </div>
+                        </div>
+                        <span>${formatPrice(item.total)}</span>
+                    `;
+                    container.appendChild(summaryItem);
+                } else {
+                    hasWorkCategory = true;
+                }
+            });
+            
+            // Добавляем работы отдельной категорией
+            if (hasWorkCategory || workTotal > 0) {
+                const workTitle = document.createElement('div');
+                workTitle.className = 'category-title';
+                workTitle.textContent = 'МОНТАЖ';
+                container.appendChild(workTitle);
+                
                 const summaryItem = document.createElement('div');
                 summaryItem.className = 'summary-item';
                 summaryItem.innerHTML = `
                     <div>
-                        <strong>${item.name}</strong>
+                        <strong>Монтаж и установка оборудования</strong>
                         <div style="font-size: 0.85em; color: #999; margin-top: 4px;">
-                            ${item.count} ${item.unit} × ${formatPrice(item.price)}
+                            Комплекс работ по установке и настройке
                         </div>
                     </div>
-                    <span>${formatPrice(item.total)}</span>
+                    <span>${formatPrice(workTotal)}</span>
                 `;
                 container.appendChild(summaryItem);
-            });
+            }
         }
 
         // Функция форматирования цены
@@ -1569,81 +1571,211 @@
             excelData.push([]);
             excelData.push(["№", "Категория", "Наименование", "Кол-во", "Ед.изм.", "Цена", "Сумма"]);
             
-            // Собираем все элементы из сметы
-            const items = Array.from(document.querySelectorAll('#summaryItems .summary-item'));
+            // Получаем данные из конфигурации
             let itemNumber = 1;
             
-            // Группируем по категориям
-            const categories = {};
-            let currentCategory = '';
+            // 1. Контроллер
+            excelData.push([
+                itemNumber++,
+                "ОБОРУДОВАНИЕ",
+                "WIREN BOARD 8",
+                1,
+                "шт",
+                prices.controller.wb8,
+                prices.controller.wb8
+            ]);
             
-            // Проходим по всем элементам DOM
-            const domItems = document.querySelectorAll('#summaryItems > div');
-            domItems.forEach(element => {
-                if (element.classList.contains('category-title')) {
-                    currentCategory = element.textContent;
-                    categories[currentCategory] = [];
-                } else if (element.classList.contains('summary-item')) {
-                    if (currentCategory) {
-                        const nameElement = element.querySelector('strong');
-                        const detailsElement = element.querySelector('div > div');
-                        const priceElement = element.querySelector('span:last-child');
-                        
-                        if (nameElement && priceElement) {
-                            const name = nameElement.textContent;
-                            const priceText = priceElement.textContent;
-                            const price = parseInt(priceText.replace(/[^0-9]/g, '')) || 0;
-                            
-                            // Парсим количество из деталей
-                            let count = 1;
-                            let unit = 'шт';
-                            if (detailsElement) {
-                                const details = detailsElement.textContent;
-                                const countMatch = details.match(/(\d+)\s+(\S+)/);
-                                if (countMatch) {
-                                    count = parseInt(countMatch[1]);
-                                    unit = countMatch[2];
-                                }
-                            }
-                            
-                            // Рассчитываем цену за единицу
-                            const unitPrice = price / count;
-                            
-                            categories[currentCategory].push({
-                                name: name,
-                                count: count,
-                                unit: unit,
-                                price: unitPrice,
-                                total: price
-                            });
-                        }
-                    }
-                }
-            });
+            // 2. Освещение
+            if (config.lighting.lightSimple > 0) {
+                excelData.push([
+                    itemNumber++,
+                    "ОБОРУДОВАНИЕ",
+                    "WB-MRM2 (релейный модуль)",
+                    config.lighting.lightSimple,
+                    "шт",
+                    prices.lighting.lightSimple,
+                    config.lighting.lightSimple * prices.lighting.lightSimple
+                ]);
+            }
             
-            // Добавляем данные в Excel
-            for (const category in categories) {
-                categories[category].forEach(item => {
-                    excelData.push([
-                        itemNumber++,
-                        category,
-                        item.name,
-                        item.count,
-                        item.unit,
-                        item.price,
-                        item.total
-                    ]);
-                });
-            });
+            if (config.lighting.lightDimmable > 0) {
+                excelData.push([
+                    itemNumber++,
+                    "ОБОРУДОВАНИЕ",
+                    "WB-MDM3 (диммер)",
+                    config.lighting.lightDimmable,
+                    "шт",
+                    prices.lighting.lightDimmable,
+                    config.lighting.lightDimmable * prices.lighting.lightDimmable
+                ]);
+            }
             
-            excelData.push([]);
+            if (config.lighting.ledBacklight > 0) {
+                excelData.push([
+                    itemNumber++,
+                    "ОБОРУДОВАНИЕ",
+                    "LED подсветка (монохром)",
+                    config.lighting.ledBacklight,
+                    "линий",
+                    prices.lighting.ledBacklight,
+                    config.lighting.ledBacklight * prices.lighting.ledBacklight
+                ]);
+            }
             
-            // Добавляем итоги
+            if (config.lighting.cctBacklight > 0) {
+                excelData.push([
+                    itemNumber++,
+                    "ОБОРУДОВАНИЕ",
+                    "CCT подсветка (2 цвета)",
+                    config.lighting.cctBacklight,
+                    "линий",
+                    prices.lighting.cctBacklight,
+                    config.lighting.cctBacklight * prices.lighting.cctBacklight
+                ]);
+            }
+            
+            if (config.lighting.rgbBacklight > 0) {
+                excelData.push([
+                    itemNumber++,
+                    "ОБОРУДОВАНИЕ",
+                    "RGB подсветка",
+                    config.lighting.rgbBacklight,
+                    "линий",
+                    prices.lighting.rgbBacklight,
+                    config.lighting.rgbBacklight * prices.lighting.rgbBacklight
+                ]);
+            }
+            
+            if (config.lighting.rgbwBacklight > 0) {
+                excelData.push([
+                    itemNumber++,
+                    "ОБОРУДОВАНИЕ",
+                    "RGBW подсветка",
+                    config.lighting.rgbwBacklight,
+                    "линий",
+                    prices.lighting.rgbwBacklight,
+                    config.lighting.rgbwBacklight * prices.lighting.rgbwBacklight
+                ]);
+            }
+            
+            // 3. Вентиляция
+            if (config.ventilation.ventilation > 0) {
+                excelData.push([
+                    itemNumber++,
+                    "ОБОРУДОВАНИЕ",
+                    "Управление вытяжками",
+                    config.ventilation.ventilation,
+                    "линий",
+                    prices.ventilation.ventilation,
+                    config.ventilation.ventilation * prices.ventilation.ventilation
+                ]);
+            }
+            
+            if (config.ventilation.supplyVentilation > 0) {
+                excelData.push([
+                    itemNumber++,
+                    "ОБОРУДОВАНИЕ",
+                    "Приточная вентиляция",
+                    config.ventilation.supplyVentilation,
+                    "систем",
+                    prices.ventilation.supplyVentilation,
+                    config.ventilation.supplyVentilation * prices.ventilation.supplyVentilation
+                ]);
+            }
+            
+            if (config.ventilation.airConditioners > 0) {
+                excelData.push([
+                    itemNumber++,
+                    "ОБОРУДОВАНИЕ",
+                    "Управление кондиционерами",
+                    config.ventilation.airConditioners,
+                    "шт",
+                    prices.ventilation.airConditioners,
+                    config.ventilation.airConditioners * prices.ventilation.airConditioners
+                ]);
+            }
+            
+            if (config.ventilation.thermoHeads > 0) {
+                excelData.push([
+                    itemNumber++,
+                    "ОБОРУДОВАНИЕ",
+                    "Умные термоголовки",
+                    config.ventilation.thermoHeads,
+                    "шт",
+                    prices.ventilation.thermoHeads,
+                    config.ventilation.thermoHeads * prices.ventilation.thermoHeads
+                ]);
+            }
+            
+            // 4. Датчики
+            if (config.sensors.motionSensors > 0) {
+                excelData.push([
+                    itemNumber++,
+                    "ОБОРУДОВАНИЕ",
+                    "Датчики движения PIR",
+                    config.sensors.motionSensors,
+                    "шт",
+                    prices.sensors.motionSensor,
+                    config.sensors.motionSensors * prices.sensors.motionSensor
+                ]);
+            }
+            
+            if (config.sensors.leakSensor) {
+                excelData.push([
+                    itemNumber++,
+                    "ОБОРУДОВАНИЕ",
+                    "Датчик протечки воды WB-MSW",
+                    1,
+                    "шт",
+                    prices.sensors.leakSensor,
+                    prices.sensors.leakSensor
+                ]);
+            }
+            
+            if (config.sensors.gasSensor) {
+                excelData.push([
+                    itemNumber++,
+                    "ОБОРУДОВАНИЕ",
+                    "Датчик утечки газа CH4/CO",
+                    1,
+                    "шт",
+                    prices.sensors.gasSensor,
+                    prices.sensors.gasSensor
+                ]);
+            }
+            
+            // 5. Модули
+            if (config.modules.zigbeeModule) {
+                excelData.push([
+                    itemNumber++,
+                    "МОДУЛИ",
+                    "WBE2R-R-ZIGBEE v.2 + антенна",
+                    1,
+                    "шт",
+                    prices.modules.zigbeeModule,
+                    prices.modules.zigbeeModule
+                ]);
+            }
+            
+            if (config.modules.rs485Modules > 0) {
+                excelData.push([
+                    itemNumber++,
+                    "МОДУЛИ",
+                    "WBE2-I-RS485-ISO",
+                    config.modules.rs485Modules,
+                    "шт",
+                    prices.modules.rs485Module,
+                    config.modules.rs485Modules * prices.modules.rs485Module
+                ]);
+            }
+            
+            // Получаем итоги
             const equipmentTotal = parseInt(document.getElementById('equipmentTotal').textContent.replace(/[^0-9]/g, '')) || 0;
             const modulesTotal = parseInt(document.getElementById('modulesTotal').textContent.replace(/[^0-9]/g, '')) || 0;
             const workTotal = parseInt(document.getElementById('workTotal').textContent.replace(/[^0-9]/g, '')) || 0;
             const finalTotal = parseInt(document.getElementById('finalTotal').textContent.replace(/[^0-9]/g, '')) || 0;
             
+            excelData.push([]);
             excelData.push(["ИТОГО ОБОРУДОВАНИЕ:", "", "", "", "", "", equipmentTotal]);
             excelData.push(["ИТОГО МОДУЛИ:", "", "", "", "", "", modulesTotal]);
             excelData.push(["ИТОГО МОНТАЖ:", "", "", "", "", "", workTotal]);
@@ -1712,15 +1844,19 @@
                     item.classList.remove('selected');
                 });
                 
-                document.querySelectorAll('.radio-item').forEach(item => {
-                    item.classList.remove('selected');
-                });
-                
-                // Выбираем контроллер по умолчанию
-                document.querySelector('.radio-item').classList.add('selected');
-                
                 // Обновляем счетчики
-                updateAllCounters();
+                document.getElementById('lightSimple').textContent = '0';
+                document.getElementById('lightDimmable').textContent = '0';
+                document.getElementById('ledBacklight').textContent = '0';
+                document.getElementById('cctBacklight').textContent = '0';
+                document.getElementById('rgbBacklight').textContent = '0';
+                document.getElementById('rgbwBacklight').textContent = '0';
+                document.getElementById('ventilation').textContent = '0';
+                document.getElementById('supplyVentilation').textContent = '0';
+                document.getElementById('airConditioners').textContent = '0';
+                document.getElementById('thermoHeads').textContent = '0';
+                document.getElementById('motionSensors').textContent = '0';
+                document.getElementById('rs485Modules').textContent = '0';
                 
                 // Пересчитываем
                 calculate();
