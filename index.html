@@ -114,7 +114,6 @@
             padding: 0;
         }
         
-        /* Стили для скроллбара в стиле лофт */
         .left-panel::-webkit-scrollbar {
             width: 12px;
         }
@@ -684,7 +683,6 @@
             color: #ffed4a;
         }
         
-        /* Дополнительные стили */
         .item-description {
             color: #999;
             font-size: 0.9em;
@@ -697,7 +695,6 @@
             font-weight: bold;
         }
         
-        /* Анимации */
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -717,7 +714,6 @@
             animation: fadeIn 0.3s ease-out;
         }
         
-        /* Декоративные элементы */
         .industrial-border {
             height: 4px;
             background: repeating-linear-gradient(90deg, #ffd700, #ffd700 10px, transparent 10px, transparent 20px);
@@ -737,7 +733,6 @@
         .bolt:nth-child(3) { bottom: 10px; left: 10px; }
         .bolt:nth-child(4) { bottom: 10px; right: 10px; }
         
-        /* Кирпичный фон */
         .brick-bg {
             position: relative;
         }
@@ -1510,16 +1505,19 @@
                             String(date.getMonth() + 1).padStart(2, '0') + '-' + 
                             String(date.getDate()).padStart(2, '0');
             
-            // Создаем CSV структуру для Excel
+            // Создаем CSV с правильным форматированием для Excel
             let csvContent = '';
+            
+            // Добавляем BOM для правильного отображения кириллицы в Excel
+            const BOM = '\uFEFF';
+            csvContent = BOM;
             
             // Основной заголовок
             csvContent += 'СМЕТА ПРОЕКТА УМНОГО ДОМА\r\n';
-            csvContent += `Дата создания: ${timestamp}\r\n`;
-            csvContent += '\r\n';
+            csvContent += `Дата создания: ${timestamp}\r\n\r\n`;
             
-            // Заголовки таблицы
-            csvContent += '№;Категория;Наименование;Кол-во;Ед.изм.;Цена;Сумма\r\n';
+            // Заголовки таблицы с запятой как разделителем (стандарт для Excel)
+            csvContent += '№,Категория,Наименование,Кол-во,Ед.изм.,Цена,Сумма\r\n';
             
             let lineNumber = 1;
             
@@ -1534,20 +1532,22 @@
             // Добавляем все позиции
             window.currentItems.forEach((item) => {
                 const categoryName = categories[item.category] || item.category;
+                // Экранируем запятые в названиях
+                const itemName = item.name.replace(/,/g, ';');
                 
-                csvContent += `${lineNumber};${categoryName};"${item.name}";${item.count};${item.unit};${item.unitPrice};${item.price}\r\n`;
+                csvContent += `${lineNumber},${categoryName},"${itemName}",${item.count},${item.unit},${item.unitPrice},${item.price}\r\n`;
                 lineNumber++;
             });
             
             csvContent += '\r\n';
             
             // Добавляем итоги
-            csvContent += `ИТОГО ОБОРУДОВАНИЕ:;${window.currentTotals.equipmentTotal}\r\n`;
-            csvContent += `ИТОГО МОДУЛИ:;${window.currentTotals.modulesTotal}\r\n`;
-            csvContent += `ИТОГО МОНТАЖ:;${window.currentTotals.workTotal}\r\n`;
-            csvContent += '\r\n';
-            csvContent += `ВСЕГО К ОПЛАТЕ:;${window.currentTotals.finalTotal}\r\n`;
-            csvContent += '\r\n';
+            csvContent += `ИТОГО ОБОРУДОВАНИЕ:,,,,,${window.currentTotals.equipmentTotal}\r\n`;
+            csvContent += `ИТОГО МОДУЛИ:,,,,,${window.currentTotals.modulesTotal}\r\n`;
+            csvContent += `ИТОГО МОНТАЖ:,,,,,${window.currentTotals.workTotal}\r\n\r\n`;
+            csvContent += `ВСЕГО К ОПЛАТЕ:,,,,,${window.currentTotals.finalTotal}\r\n\r\n`;
+            
+            // Примечания
             csvContent += 'Примечания:\r\n';
             csvContent += '1. Цены указаны в российских рублях без учета НДС\r\n';
             csvContent += '2. Стоимость является предварительной\r\n';
@@ -1555,9 +1555,9 @@
             csvContent += '4. Гарантия на оборудование: 24 месяца\r\n';
             csvContent += '5. Гарантия на монтажные работы: 12 месяцев\r\n';
             
-            // Создаем Blob
+            // Создаем Blob с UTF-8
             const blob = new Blob([csvContent], { 
-                type: 'text/csv;charset=windows-1251'
+                type: 'text/csv;charset=utf-8'
             });
             
             // Создаем ссылку для скачивания
@@ -1565,7 +1565,7 @@
             const a = document.createElement('a');
             a.href = url;
             
-            // Используем расширение .csv
+            // Используем расширение .csv (лучше всего работает с Excel)
             a.download = `смета-умный-дом-${dateStr}.csv`;
             
             document.body.appendChild(a);
@@ -1614,24 +1614,22 @@
                     <h4 style="color: #ffed4a; margin-bottom: 15px;">ИНСТРУКЦИЯ ДЛЯ ОТКРЫТИЯ В EXCEL:</h4>
                     
                     <div style="margin-bottom: 15px;">
-                        <p style="color: #ffd700; margin-bottom: 5px;">СПОСОБ 1 (простой):</p>
-                        <p>1. Откройте Excel</p>
-                        <p>2. Перейдите на вкладку "Данные"</p>
-                        <p>3. Нажмите "Получить данные" → "Из файла" → "Из текста/CSV"</p>
-                        <p>4. Выберите сохраненный файл</p>
-                        <p>5. В окне импорта выберите кодировку: <strong>1251: Кириллица (Windows)</strong></p>
+                        <p style="color: #ffd700; margin-bottom: 5px;">СПОСОБ 1 (рекомендуемый):</p>
+                        <p>1. Сохраните файл на компьютер</p>
+                        <p>2. Откройте Excel</p>
+                        <p>3. Перейдите на вкладку "Данные"</p>
+                        <p>4. Нажмите "Получить данные" → "Из файла" → "Из текста/CSV"</p>
+                        <p>5. Выберите сохраненный файл</p>
                         <p>6. Нажмите "Загрузить"</p>
                     </div>
                     
                     <div>
-                        <p style="color: #ffd700; margin-bottom: 5px;">СПОСОБ 2:</p>
+                        <p style="color: #ffd700; margin-bottom: 5px;">СПОСОБ 2 (простой):</p>
                         <p>1. Дважды кликните по файлу .csv</p>
-                        <p>2. Если отображаются "кракозябры":</p>
-                        <p>3. Закройте файл</p>
+                        <p>2. Excel откроет файл автоматически</p>
+                        <p>3. Если есть проблемы с кодировкой:</p>
                         <p>4. Откройте через меню Файл → Открыть</p>
-                        <p>5. В мастере импорта выберите:</p>
-                        <p style="margin-left: 20px;">- Кодировка: Windows (1251)</p>
-                        <p style="margin-left: 20px;">- Разделитель: точка с запятой (;)</p>
+                        <p>5. В мастере импорта выберите кодировку: Windows (1251)</p>
                     </div>
                 </div>
                 
