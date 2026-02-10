@@ -780,7 +780,7 @@
                 <div class="section">
                     <h3><i class="fas fa-microchip"></i> КОНТРОЛЛЕР</h3>
                     <div class="radio-group">
-                        <div class="radio-item selected" onclick="selectController('wb8')">
+                        <div class="radio-item selected" data-type="wb8">
                             <div>
                                 <strong>WIREN BOARD 8</strong>
                                 <div class="item-description">Промышленный контроллер, 40 слотов, защищенное исполнение</div>
@@ -796,7 +796,7 @@
                         </h4>
                         
                         <!-- Zigbee модуль -->
-                        <div class="checkbox-item" onclick="toggleCheckbox('zigbeeModule')">
+                        <div class="checkbox-item" data-type="zigbeeModule">
                             <div>
                                 <strong>WBE2R-R-ZIGBEE v.2 + АНТЕННА</strong>
                                 <div class="item-description">Zigbee 3.0 координатор для беспроводных устройств</div>
@@ -808,9 +808,9 @@
                         <div class="form-group" style="margin-top: 25px;">
                             <label>WBE2-I-RS485-ISO</label>
                             <div class="counter">
-                                <button onclick="changeCount('rs485Modules', -1)">-</button>
+                                <button data-action="decrease" data-target="rs485Modules">-</button>
                                 <span id="rs485Modules">0</span>
-                                <button onclick="changeCount('rs485Modules', 1)">+</button>
+                                <button data-action="increase" data-target="rs485Modules">+</button>
                             </div>
                             <div class="item-description">
                                 Промышленный интерфейс RS-485 с гальванической развязкой
@@ -826,9 +826,9 @@
                     <div class="form-group">
                         <label>СТАНДАРТНОЕ ОСВЕЩЕНИЕ</label>
                         <div class="counter">
-                            <button onclick="changeCount('lightSimple', -1)">-</button>
+                            <button data-action="decrease" data-target="lightSimple">-</button>
                             <span id="lightSimple">0</span>
-                            <button onclick="changeCount('lightSimple', 1)">+</button>
+                            <button data-action="increase" data-target="lightSimple">+</button>
                         </div>
                         <div class="item-description">
                             Релейные модули WB-MRM2
@@ -838,9 +838,9 @@
                     <div class="form-group">
                         <label>ДИММИРУЕМОЕ ОСВЕЩЕНИЕ</label>
                         <div class="counter">
-                            <button onclick="changeCount('lightDimmable', -1)">-</button>
+                            <button data-action="decrease" data-target="lightDimmable">-</button>
                             <span id="lightDimmable">0</span>
-                            <button onclick="changeCount('lightDimmable', 1)">+</button>
+                            <button data-action="increase" data-target="lightDimmable">+</button>
                         </div>
                         <div class="item-description">
                             Диммеры WB-MDM3 с ШИМ управлением
@@ -850,9 +850,9 @@
                     <div class="form-group">
                         <label>LED ПОДСВЕТКА</label>
                         <div class="counter">
-                            <button onclick="changeCount('ledBacklight', -1)">-</button>
+                            <button data-action="decrease" data-target="ledBacklight">-</button>
                             <span id="ledBacklight">0</span>
-                            <button onclick="changeCount('ledBacklight', 1)">+</button>
+                            <button data-action="increase" data-target="ledBacklight">+</button>
                         </div>
                         <div class="item-description">
                             Монохромная LED подсветка
@@ -862,9 +862,9 @@
                     <div class="form-group">
                         <label>CCT ПОДСВЕТКА</label>
                         <div class="counter">
-                            <button onclick="changeCount('cctBacklight', -1)">-</button>
+                            <button data-action="decrease" data-target="cctBacklight">-</button>
                             <span id="cctBacklight">0</span>
-                            <button onclick="changeCount('cctBacklight', 1)">+</button>
+                            <button data-action="increase" data-target="cctBacklight">+</button>
                         </div>
                         <div class="item-description">
                             Два цвета, регулировка цветовой температуры
@@ -874,9 +874,9 @@
                     <div class="form-group">
                         <label>RGB ПОДСВЕТКА</label>
                         <div class="counter">
-                            <button onclick="changeCount('rgbBacklight', -1)">-</button>
+                            <button data-action="decrease" data-target="rgbBacklight">-</button>
                             <span id="rgbBacklight">0</span>
-                            <button onclick="changeCount('rgbBacklight', 1)">+</button>
+                            <button data-action="increase" data-target="rgbBacklight">+</button>
                         </div>
                         <div class="item-description">
                             Полный RGB спектр
@@ -886,9 +886,9 @@
                     <div class="form-group">
                         <label>RGBW ПОДСВЕТКА</label>
                         <div class="counter">
-                            <button onclick="changeCount('rgbwBacklight', -1)">-</button>
+                            <button data-action="decrease" data-target="rgbwBacklight">-</button>
                             <span id="rgbwBacklight">0</span>
-                            <button onclick="changeCount('rgbwBacklight', 1)">+</button>
+                            <button data-action="increase" data-target="rgbwBacklight">+</button>
                         </div>
                         <div class="item-description">
                             RGB + белый канал
@@ -903,9 +903,9 @@
                     <div class="form-group">
                         <label>ВЫТЯЖКИ</label>
                         <div class="counter">
-                            <button onclick="changeCount('ventilation', -1)">-</button>
+                            <button data-action="decrease" data-target="ventilation">-</button>
                             <span id="ventilation">0</span>
-                            <button onclick="changeCount('ventilation', 1)">+</button>
+                            <button data-action="increase" data-target="ventilation">+</button>
                         </div>
                         <div class="item-description">
                             Управление вытяжными системами
@@ -915,9 +915,9 @@
                     <div class="form-group">
                         <label>ПРИТОЧНАЯ ВЕНТИЛЯЦИЯ</label>
                         <div class="counter">
-                            <button onclick="changeCount('supplyVentilation', -1)">-</button>
+                            <button data-action="decrease" data-target="supplyVentilation">-</button>
                             <span id="supplyVentilation">0</span>
-                            <button onclick="changeCount('supplyVentilation', 1)">+</button>
+                            <button data-action="increase" data-target="supplyVentilation">+</button>
                         </div>
                         <div class="item-description">
                             Системы приточной вентиляции
@@ -927,9 +927,9 @@
                     <div class="form-group">
                         <label>КОНДИЦИОНЕРЫ</label>
                         <div class="counter">
-                            <button onclick="changeCount('airConditioners', -1)">-</button>
+                            <button data-action="decrease" data-target="airConditioners">-</button>
                             <span id="airConditioners">0</span>
-                            <button onclick="changeCount('airConditioners', 1)">+</button>
+                            <button data-action="increase" data-target="airConditioners">+</button>
                         </div>
                         <div class="item-description">
                             Управление климатическими системами
@@ -939,9 +939,9 @@
                     <div class="form-group">
                         <label>ТЕРМОГОЛОВКИ</label>
                         <div class="counter">
-                            <button onclick="changeCount('thermoHeads', -1)">-</button>
+                            <button data-action="decrease" data-target="thermoHeads">-</button>
                             <span id="thermoHeads">0</span>
-                            <button onclick="changeCount('thermoHeads', 1)">+</button>
+                            <button data-action="increase" data-target="thermoHeads">+</button>
                         </div>
                         <div class="item-description">
                             Умные термоголовки для радиаторов
@@ -956,9 +956,9 @@
                     <div class="form-group">
                         <label>ДАТЧИКИ ДВИЖЕНИЯ</label>
                         <div class="counter">
-                            <button onclick="changeCount('motionSensors', -1)">-</button>
+                            <button data-action="decrease" data-target="motionSensors">-</button>
                             <span id="motionSensors">0</span>
-                            <button onclick="changeCount('motionSensors', 1)">+</button>
+                            <button data-action="increase" data-target="motionSensors">+</button>
                         </div>
                         <div class="item-description">
                             PIR датчики движения
@@ -966,7 +966,7 @@
                     </div>
                     
                     <div class="checkbox-group">
-                        <div class="checkbox-item" onclick="toggleCheckbox('leakSensor')">
+                        <div class="checkbox-item" data-type="leakSensor">
                             <div>
                                 <strong>ДАТЧИК ПРОТЕЧКИ ВОДЫ</strong>
                                 <div class="item-description">Проводные датчики WB-MSW с сиреной</div>
@@ -974,7 +974,7 @@
                             <div class="price-tag">2 500 ₽</div>
                         </div>
                         
-                        <div class="checkbox-item" onclick="toggleCheckbox('gasSensor')">
+                        <div class="checkbox-item" data-type="gasSensor">
                             <div>
                                 <strong>ДАТЧИК УТЕЧКИ ГАЗА</strong>
                                 <div class="item-description">CH4/CO детектор с автоматическим отключением</div>
@@ -1024,16 +1024,16 @@
                 </div>
                 
                 <div class="actions">
-                    <button class="btn btn-primary" onclick="calculate()">
+                    <button class="btn btn-primary" id="calculateBtn">
                         <i class="fas fa-calculator"></i> РАССЧИТАТЬ
                     </button>
-                    <button class="btn btn-success" onclick="saveConfiguration()">
+                    <button class="btn btn-success" id="saveJsonBtn">
                         <i class="fas fa-save"></i> JSON
                     </button>
-                    <button class="btn btn-excel" onclick="exportToExcel()">
+                    <button class="btn btn-excel" id="exportExcelBtn">
                         <i class="fas fa-file-excel"></i> EXCEL
                     </button>
-                    <button class="btn btn-secondary" onclick="resetConfig()">
+                    <button class="btn btn-secondary" id="resetBtn">
                         <i class="fas fa-redo"></i> СБРОС
                     </button>
                 </div>
@@ -1121,22 +1121,65 @@
 
         // Инициализация при загрузке страницы
         document.addEventListener('DOMContentLoaded', function() {
+            // Назначаем обработчики событий
+            setupEventListeners();
+            
             // Вызываем расчет сразу
             calculate();
         });
+
+        // Настройка обработчиков событий
+        function setupEventListeners() {
+            // Обработчики для контроллеров
+            document.querySelectorAll('.radio-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    selectController(this.dataset.type);
+                });
+            });
+            
+            // Обработчики для чекбоксов
+            document.querySelectorAll('.checkbox-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    toggleCheckbox(this.dataset.type);
+                });
+            });
+            
+            // Обработчики для кнопок счетчиков
+            document.querySelectorAll('.counter button').forEach(button => {
+                button.addEventListener('click', function() {
+                    const action = this.dataset.action;
+                    const target = this.dataset.target;
+                    changeCount(target, action === 'increase' ? 1 : -1);
+                });
+            });
+            
+            // Обработчики для кнопок управления
+            document.getElementById('calculateBtn').addEventListener('click', calculate);
+            document.getElementById('saveJsonBtn').addEventListener('click', saveConfiguration);
+            document.getElementById('exportExcelBtn').addEventListener('click', exportToExcel);
+            document.getElementById('resetBtn').addEventListener('click', resetConfig);
+        }
 
         // Функция выбора контроллера
         function selectController(type) {
             config.controller = type;
             const items = document.querySelectorAll('.radio-item');
             items.forEach(item => item.classList.remove('selected'));
-            event.currentTarget.classList.add('selected');
+            
+            // Находим и выделяем выбранный элемент
+            const selectedItem = document.querySelector(`.radio-item[data-type="${type}"]`);
+            if (selectedItem) {
+                selectedItem.classList.add('selected');
+            }
+            
             calculate();
         }
 
         // Функция переключения чекбоксов
         function toggleCheckbox(type) {
-            const item = event.currentTarget;
+            const item = document.querySelector(`.checkbox-item[data-type="${type}"]`);
+            if (!item) return;
+            
             item.classList.toggle('selected');
             
             // Обновляем конфиг
@@ -1434,24 +1477,19 @@
                 });
             }
             
-            // Добавляем монтажные работы в смету (группируем)
-            let totalLines = 0;
-            totalLines += config.lighting.lightSimple;
-            totalLines += config.lighting.lightDimmable;
-            totalLines += config.lighting.ledBacklight;
-            totalLines += config.lighting.cctBacklight;
-            totalLines += config.lighting.rgbBacklight;
-            totalLines += config.lighting.rgbwBacklight;
-            totalLines += config.ventilation.ventilation;
-            totalLines += config.ventilation.supplyVentilation * 2; // Сложный монтаж
-            totalLines += config.ventilation.airConditioners;
-            totalLines += config.sensors.motionSensors;
-            
-            if (totalLines > 0) {
-                workTotal += totalLines * prices.work.perLine;
+            // Добавляем монтажные работы
+            if (workTotal > 0) {
+                summaryItems.push({
+                    category: 'МОНТАЖ',
+                    name: 'Монтаж и установка оборудования',
+                    count: 1,
+                    unit: 'комплекс',
+                    price: workTotal,
+                    total: workTotal
+                });
             }
             
-            // Установка контроллера
+            // Добавляем установку контроллера
             workTotal += prices.work.controllerInstall;
             
             // Обновляем итоговые суммы
@@ -1463,11 +1501,11 @@
             document.getElementById('finalTotal').textContent = formatPrice(finalTotal);
             
             // Обновляем список сметы
-            updateSummaryList(summaryItems, workTotal);
+            updateSummaryList(summaryItems);
         }
 
         // Функция обновления списка сметы
-        function updateSummaryList(items, workTotal) {
+        function updateSummaryList(items) {
             const container = document.getElementById('summaryItems');
             container.innerHTML = '';
             
@@ -1482,12 +1520,10 @@
             }
             
             let currentCategory = '';
-            let hasWorkCategory = false;
             
-            // Сначала добавляем оборудование и модули
             items.forEach((item, index) => {
                 // Добавляем заголовок категории если она изменилась
-                if (item.category !== currentCategory && item.category !== 'МОНТАЖ') {
+                if (item.category !== currentCategory) {
                     currentCategory = item.category;
                     const categoryTitle = document.createElement('div');
                     categoryTitle.className = 'category-title';
@@ -1495,45 +1531,20 @@
                     container.appendChild(categoryTitle);
                 }
                 
-                // Добавляем элемент сметы (кроме работ)
-                if (item.category !== 'МОНТАЖ') {
-                    const summaryItem = document.createElement('div');
-                    summaryItem.className = 'summary-item';
-                    summaryItem.innerHTML = `
-                        <div>
-                            <strong>${item.name}</strong>
-                            <div style="font-size: 0.85em; color: #999; margin-top: 4px;">
-                                ${item.count} ${item.unit} × ${formatPrice(item.price)}
-                            </div>
-                        </div>
-                        <span>${formatPrice(item.total)}</span>
-                    `;
-                    container.appendChild(summaryItem);
-                } else {
-                    hasWorkCategory = true;
-                }
-            });
-            
-            // Добавляем работы отдельной категорией
-            if (hasWorkCategory || workTotal > 0) {
-                const workTitle = document.createElement('div');
-                workTitle.className = 'category-title';
-                workTitle.textContent = 'МОНТАЖ';
-                container.appendChild(workTitle);
-                
+                // Добавляем элемент сметы
                 const summaryItem = document.createElement('div');
                 summaryItem.className = 'summary-item';
                 summaryItem.innerHTML = `
                     <div>
-                        <strong>Монтаж и установка оборудования</strong>
+                        <strong>${item.name}</strong>
                         <div style="font-size: 0.85em; color: #999; margin-top: 4px;">
-                            Комплекс работ по установке и настройке
+                            ${item.count} ${item.unit} × ${formatPrice(item.price)}
                         </div>
                     </div>
-                    <span>${formatPrice(workTotal)}</span>
+                    <span>${formatPrice(item.total)}</span>
                 `;
                 container.appendChild(summaryItem);
-            }
+            });
         }
 
         // Функция форматирования цены
