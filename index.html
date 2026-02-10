@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Конфигуратор Умного Дома | Лофт Стиль</title>
     <style>
+        /* Все стили остаются без изменений */
         * {
             margin: 0;
             padding: 0;
@@ -1505,15 +1506,15 @@
                             String(date.getMonth() + 1).padStart(2, '0') + '-' + 
                             String(date.getDate()).padStart(2, '0');
             
-            // Создаем CSV в кодировке Windows-1251 (стандартная для русского Excel)
-            let csvContent = '';
+            // Создаем CSV с точкой с запятой как разделителем (стандарт для русского Excel)
+            let csvContent = 'SEP=;\r\n';
             
             // Основной заголовок
             csvContent += 'СМЕТА ПРОЕКТА УМНОГО ДОМА\r\n';
             csvContent += 'Дата создания: ' + timestamp + '\r\n\r\n';
             
-            // Заголовки таблицы с разделителем табуляции (наиболее надежный способ)
-            csvContent += '№\tКатегория\tНаименование\tКол-во\tЕд.изм.\tЦена\tСумма\r\n';
+            // Заголовки таблицы
+            csvContent += '№;Категория;Наименование;Кол-во;Ед.изм.;Цена;Сумма\r\n';
             
             let lineNumber = 1;
             
@@ -1528,20 +1529,23 @@
             // Добавляем все позиции
             window.currentItems.forEach((item) => {
                 const categoryName = categories[item.category] || item.category;
-                csvContent += lineNumber + '\t' + 
-                             categoryName + '\t' + item.name + '\t' + 
-                             item.count + '\t' + item.unit + '\t' + 
-                             item.unitPrice + '\t' + item.price + '\r\n';
+                // Экранируем кавычки в названиях
+                const itemName = item.name.replace(/"/g, '""');
+                
+                csvContent += lineNumber + ';' + 
+                             categoryName + ';"' + itemName + '";' + 
+                             item.count + ';' + item.unit + ';' + 
+                             item.unitPrice + ';' + item.price + '\r\n';
                 lineNumber++;
             });
             
             csvContent += '\r\n';
             
             // Добавляем итоги
-            csvContent += 'ИТОГО ОБОРУДОВАНИЕ:\t\t\t\t\t' + window.currentTotals.equipmentTotal + '\r\n';
-            csvContent += 'ИТОГО МОДУЛИ:\t\t\t\t\t' + window.currentTotals.modulesTotal + '\r\n';
-            csvContent += 'ИТОГО МОНТАЖ:\t\t\t\t\t' + window.currentTotals.workTotal + '\r\n\r\n';
-            csvContent += 'ВСЕГО К ОПЛАТЕ:\t\t\t\t\t' + window.currentTotals.finalTotal + '\r\n\r\n';
+            csvContent += 'ИТОГО ОБОРУДОВАНИЕ:;;;;;' + window.currentTotals.equipmentTotal + '\r\n';
+            csvContent += 'ИТОГО МОДУЛИ:;;;;;' + window.currentTotals.modulesTotal + '\r\n';
+            csvContent += 'ИТОГО МОНТАЖ:;;;;;' + window.currentTotals.workTotal + '\r\n\r\n';
+            csvContent += 'ВСЕГО К ОПЛАТЕ:;;;;;' + window.currentTotals.finalTotal + '\r\n\r\n';
             
             // Примечания
             csvContent += 'Примечания:\r\n';
@@ -1551,37 +1555,13 @@
             csvContent += '4. Гарантия на оборудование: 24 месяца\r\n';
             csvContent += '5. Гарантия на монтажные работы: 12 месяцев\r\n';
             
-            // Преобразуем в Windows-1251 кодировку
-            function toWin1251(str) {
-                const win1251 = {
-                    'А': 0xC0, 'Б': 0xC1, 'В': 0xC2, 'Г': 0xC3, 'Д': 0xC4, 'Е': 0xC5, 'Ж': 0xC6, 'З': 0xC7,
-                    'И': 0xC8, 'Й': 0xC9, 'К': 0xCA, 'Л': 0xCB, 'М': 0xCC, 'Н': 0xCD, 'О': 0xCE, 'П': 0xCF,
-                    'Р': 0xD0, 'С': 0xD1, 'Т': 0xD2, 'У': 0xD3, 'Ф': 0xD4, 'Х': 0xD5, 'Ц': 0xD6, 'Ч': 0xD7,
-                    'Ш': 0xD8, 'Щ': 0xD9, 'Ъ': 0xDA, 'Ы': 0xDB, 'Ь': 0xDC, 'Э': 0xDD, 'Ю': 0xDE, 'Я': 0xDF,
-                    'а': 0xE0, 'б': 0xE1, 'в': 0xE2, 'г': 0xE3, 'д': 0xE4, 'е': 0xE5, 'ж': 0xE6, 'з': 0xE7,
-                    'и': 0xE8, 'й': 0xE9, 'к': 0xEA, 'л': 0xEB, 'м': 0xEC, 'н': 0xED, 'о': 0xEE, 'п': 0xEF,
-                    'р': 0xF0, 'с': 0xF1, 'т': 0xF2, 'у': 0xF3, 'ф': 0xF4, 'х': 0xF5, 'ц': 0xF6, 'ч': 0xF7,
-                    'ш': 0xF8, 'щ': 0xF9, 'ъ': 0xFA, 'ы': 0xFB, 'ь': 0xFC, 'э': 0xFD, 'ю': 0xFE, 'я': 0xFF
-                };
-                
-                let result = '';
-                for (let i = 0; i < str.length; i++) {
-                    const char = str[i];
-                    if (char >= 'А' && char <= 'я' && win1251[char]) {
-                        result += String.fromCharCode(win1251[char]);
-                    } else {
-                        result += char;
-                    }
-                }
-                return result;
-            }
+            // Добавляем BOM для правильного отображения кириллицы
+            const BOM = '\uFEFF';
+            const finalContent = BOM + csvContent;
             
-            // Конвертируем в Windows-1251
-            const win1251Content = toWin1251(csvContent);
-            
-            // Создаем Blob с правильной кодировкой
-            const blob = new Blob([win1251Content], { 
-                type: 'text/plain;charset=windows-1251'
+            // Создаем Blob с UTF-8
+            const blob = new Blob([finalContent], { 
+                type: 'text/csv;charset=utf-8'
             });
             
             // Создаем ссылку для скачивания
@@ -1589,7 +1569,7 @@
             const a = document.createElement('a');
             a.href = url;
             
-            // Сохраняем как CSV - Excel откроет корректно
+            // Сохраняем как CSV
             a.download = `смета-${dateStr}.csv`;
             
             document.body.appendChild(a);
@@ -1597,7 +1577,7 @@
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
             
-            // Простое уведомление вместо инструкции
+            // Простое уведомление
             showNotification(`Смета сохранена в Excel! Файл: смета-${dateStr}.csv`);
         }
 
