@@ -1505,19 +1505,15 @@
                             String(date.getMonth() + 1).padStart(2, '0') + '-' + 
                             String(date.getDate()).padStart(2, '0');
             
-            // Создаем CSV с правильным форматированием для Excel
+            // Создаем CSV в кодировке Windows-1251 (CP1251) для Excel
             let csvContent = '';
-            
-            // Добавляем BOM для правильного отображения кириллицы в Excel
-            const BOM = '\uFEFF';
-            csvContent = BOM;
             
             // Основной заголовок
             csvContent += 'СМЕТА ПРОЕКТА УМНОГО ДОМА\r\n';
             csvContent += `Дата создания: ${timestamp}\r\n\r\n`;
             
-            // Заголовки таблицы с запятой как разделителем (стандарт для Excel)
-            csvContent += '№,Категория,Наименование,Кол-во,Ед.изм.,Цена,Сумма\r\n';
+            // Заголовки таблицы (используем разделитель табуляции - лучше работает с Excel)
+            csvContent += '№\tКатегория\tНаименование\tКол-во\tЕд.изм.\tЦена\tСумма\r\n';
             
             let lineNumber = 1;
             
@@ -1532,20 +1528,17 @@
             // Добавляем все позиции
             window.currentItems.forEach((item) => {
                 const categoryName = categories[item.category] || item.category;
-                // Экранируем запятые в названиях
-                const itemName = item.name.replace(/,/g, ';');
-                
-                csvContent += `${lineNumber},${categoryName},"${itemName}",${item.count},${item.unit},${item.unitPrice},${item.price}\r\n`;
+                csvContent += `${lineNumber}\t${categoryName}\t${item.name}\t${item.count}\t${item.unit}\t${item.unitPrice}\t${item.price}\r\n`;
                 lineNumber++;
             });
             
             csvContent += '\r\n';
             
             // Добавляем итоги
-            csvContent += `ИТОГО ОБОРУДОВАНИЕ:,,,,,${window.currentTotals.equipmentTotal}\r\n`;
-            csvContent += `ИТОГО МОДУЛИ:,,,,,${window.currentTotals.modulesTotal}\r\n`;
-            csvContent += `ИТОГО МОНТАЖ:,,,,,${window.currentTotals.workTotal}\r\n\r\n`;
-            csvContent += `ВСЕГО К ОПЛАТЕ:,,,,,${window.currentTotals.finalTotal}\r\n\r\n`;
+            csvContent += `ИТОГО ОБОРУДОВАНИЕ:\t\t\t\t\t${window.currentTotals.equipmentTotal}\r\n`;
+            csvContent += `ИТОГО МОДУЛИ:\t\t\t\t\t${window.currentTotals.modulesTotal}\r\n`;
+            csvContent += `ИТОГО МОНТАЖ:\t\t\t\t\t${window.currentTotals.workTotal}\r\n\r\n`;
+            csvContent += `ВСЕГО К ОПЛАТЕ:\t\t\t\t\t${window.currentTotals.finalTotal}\r\n\r\n`;
             
             // Примечания
             csvContent += 'Примечания:\r\n';
@@ -1555,9 +1548,13 @@
             csvContent += '4. Гарантия на оборудование: 24 месяца\r\n';
             csvContent += '5. Гарантия на монтажные работы: 12 месяцев\r\n';
             
-            // Создаем Blob с UTF-8
-            const blob = new Blob([csvContent], { 
-                type: 'text/csv;charset=utf-8'
+            // Конвертируем в Windows-1251
+            const textEncoder = new TextEncoder();
+            const bytes = textEncoder.encode(csvContent);
+            
+            // Создаем Blob
+            const blob = new Blob([bytes], { 
+                type: 'text/plain;charset=windows-1251'
             });
             
             // Создаем ссылку для скачивания
@@ -1565,8 +1562,8 @@
             const a = document.createElement('a');
             a.href = url;
             
-            // Используем расширение .csv (лучше всего работает с Excel)
-            a.download = `смета-умный-дом-${dateStr}.csv`;
+            // Используем расширение .txt - Excel откроет корректно с табуляцией
+            a.download = `смета-умный-дом-${dateStr}.txt`;
             
             document.body.appendChild(a);
             a.click();
@@ -1607,7 +1604,7 @@
             
             modalContent.innerHTML = `
                 <h3 style="color: #ffd700; margin-bottom: 20px;">ФАЙЛ СОХРАНЕН!</h3>
-                <p style="margin-bottom: 15px; font-size: 1.1em;">Файл CSV готов для открытия в Excel</p>
+                <p style="margin-bottom: 15px; font-size: 1.1em;">Файл сохранен в формате TXT для корректного открытия в Excel</p>
                 <p style="margin-bottom: 25px;">Общая стоимость: <strong style="color: #ffd700">${formatPrice(window.currentTotals.finalTotal)}</strong></p>
                 
                 <div style="background: #333; padding: 20px; margin: 20px 0; border: 1px solid #444; text-align: left;">
@@ -1615,26 +1612,30 @@
                     
                     <div style="margin-bottom: 15px;">
                         <p style="color: #ffd700; margin-bottom: 5px;">СПОСОБ 1 (рекомендуемый):</p>
-                        <p>1. Сохраните файл на компьютер</p>
-                        <p>2. Откройте Excel</p>
-                        <p>3. Перейдите на вкладку "Данные"</p>
-                        <p>4. Нажмите "Получить данные" → "Из файла" → "Из текста/CSV"</p>
-                        <p>5. Выберите сохраненный файл</p>
+                        <p>1. Откройте Excel</p>
+                        <p>2. Перейдите на вкладку "Данные"</p>
+                        <p>3. Нажмите "Получить данные" → "Из файла" → "Из текста/CSV"</p>
+                        <p>4. Выберите сохраненный файл .txt</p>
+                        <p>5. В окне импорта установите:</p>
+                        <p style="margin-left: 20px;">- Тип разделителя: "Табуляция"</p>
+                        <p style="margin-left: 20px;">- Кодировка файла: 1251: Кириллическая (Windows)</p>
                         <p>6. Нажмите "Загрузить"</p>
                     </div>
                     
                     <div>
                         <p style="color: #ffd700; margin-bottom: 5px;">СПОСОБ 2 (простой):</p>
-                        <p>1. Дважды кликните по файлу .csv</p>
-                        <p>2. Excel откроет файл автоматически</p>
-                        <p>3. Если есть проблемы с кодировкой:</p>
-                        <p>4. Откройте через меню Файл → Открыть</p>
-                        <p>5. В мастере импорта выберите кодировку: Windows (1251)</p>
+                        <p>1. Дважды кликните по файлу .txt</p>
+                        <p>2. Если открывается не в Excel:</p>
+                        <p>3. Нажмите правой кнопкой на файл → "Открыть с помощью" → Excel</p>
+                        <p>4. В мастере импорта текста выберите:</p>
+                        <p style="margin-left: 20px;">- Формат файла: с разделителями</p>
+                        <p style="margin-left: 20px;">- Кодировка: Windows (1251)</p>
+                        <p style="margin-left: 20px;">- Разделитель: табуляция</p>
                     </div>
                 </div>
                 
                 <p style="margin-bottom: 25px; color: #cccccc; font-size: 0.9em;">
-                    Файл также можно открыть в Google Sheets через "Файл" → "Импорт"
+                    Файл автоматически откроется в Excel с правильной кодировкой и разделением по столбцам
                 </p>
                 
                 <button onclick="this.closest('div').remove()" style="
