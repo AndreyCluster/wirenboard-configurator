@@ -503,6 +503,7 @@
         
         .actions {
             display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 15px;
             margin-top: 30px;
         }
@@ -559,6 +560,12 @@
             border: 2px solid #0070ff;
         }
         
+        .btn-excel {
+            background: linear-gradient(135deg, #217346, #2e8b57);
+            color: white;
+            border-color: #217346;
+        }
+        
         .btn:hover {
             transform: translateY(-3px);
             box-shadow: 4px 4px 0 rgba(0,0,0,0.4);
@@ -575,6 +582,10 @@
         .btn-success:hover {
             background: #0070ff;
             color: #1a1a1a;
+        }
+        
+        .btn-excel:hover {
+            background: linear-gradient(135deg, #2e8b57, #217346);
         }
         
         .notes {
@@ -684,18 +695,6 @@
         .highlight {
             color: #ffd700;
             font-weight: bold;
-        }
-        
-        .material-symbol {
-            display: inline-block;
-            width: 30px;
-            height: 30px;
-            background: #444;
-            border: 1px solid #555;
-            margin-right: 10px;
-            text-align: center;
-            line-height: 28px;
-            font-size: 14px;
         }
         
         /* Анимации */
@@ -841,7 +840,7 @@
                     <div class="form-group">
                         <label>ДИММИРУЕМОЕ ОСВЕЩЕНИЕ</label>
                         <div class="counter">
-                            <button onclick="changeCount('lightDimmable', -1)">  -</button>
+                            <button onclick="changeCount('lightDimmable', -1)">-</button>
                             <span id="lightDimmable">0</span>
                             <button onclick="changeCount('lightDimmable', 1)">+</button>
                         </div>
@@ -1020,10 +1019,6 @@
                         <span>МОНТАЖ И УСТАНОВКА:</span>
                         <span id="workTotal">0 ₽</span>
                     </div>
-                    <div class="total-row">
-                        <span>ДОПОЛНИТЕЛЬНЫЕ УСЛУГИ:</span>
-                        <span id="extraTotal">0 ₽</span>
-                    </div>
                     <div class="total-row final">
                         <span>ИТОГО К ОПЛАТЕ:</span>
                         <span id="finalTotal">0 ₽</span>
@@ -1032,20 +1027,23 @@
                 
                 <div class="actions">
                     <button class="btn btn-primary" onclick="calculate()">
-                        <i class="fas fa-calculator"></i> РАССЧИТАТЬ СТОИМОСТЬ
+                        <i class="fas fa-calculator"></i> РАССЧИТАТЬ
                     </button>
                     <button class="btn btn-success" onclick="saveConfiguration()">
-                        <i class="fas fa-save"></i> СОХРАНИТЬ КОНФИГУРАЦИЮ
+                        <i class="fas fa-save"></i> JSON
+                    </button>
+                    <button class="btn btn-excel" onclick="saveToExcel()">
+                        <i class="fas fa-file-excel"></i> EXCEL
                     </button>
                     <button class="btn btn-secondary" onclick="sendRequest()">
-                        <i class="fas fa-paper-plane"></i> ОТПРАВИТЬ ЗАПРОС
+                        <i class="fas fa-paper-plane"></i> ЗАПРОС
                     </button>
                 </div>
                 
                 <div class="notes">
-                    <p><strong>ВНИМАНИЕ:</strong> Стоимость указана без учета НДС</p>
-                    <p>Окончательная цена определяется после выезда специалиста на объект</p>
-                    <p>Гарантия на оборудование - 24 месяца, на монтажные работы - 12 месяцев</p>
+                    <p><strong>ФОРМАТЫ:</strong> JSON - для программистов, EXCEL - для коммерческих отделов</p>
+                    <p>Excel файл открывается в MS Excel, Google Sheets и других табличных редакторах</p>
+                    <p>Данные автоматически форматируются для удобного анализа</p>
                 </div>
                 
                 <div class="contact-info">
@@ -1161,7 +1159,9 @@
             items.push({
                 name: controller.name,
                 price: controller.price,
-                category: 'equipment'
+                category: 'equipment',
+                count: 1,
+                unit: 'шт'
             });
 
             // 2. Модули
@@ -1170,7 +1170,9 @@
                 items.push({
                     name: prices.modules.zigbeeModule.name,
                     price: prices.modules.zigbeeModule.price,
-                    category: 'modules'
+                    category: 'modules',
+                    count: 1,
+                    unit: 'шт'
                 });
             }
 
@@ -1178,9 +1180,11 @@
                 const totalPrice = state.rs485Modules * prices.modules.rs485Module.price;
                 modulesCost += totalPrice;
                 items.push({
-                    name: `${prices.modules.rs485Module.name} (${state.rs485Modules} ШТ)`,
+                    name: prices.modules.rs485Module.name,
                     price: totalPrice,
-                    category: 'modules'
+                    category: 'modules',
+                    count: state.rs485Modules,
+                    unit: 'шт'
                 });
             }
 
@@ -1189,9 +1193,11 @@
                 const totalPrice = state.lightSimple * prices.lighting.simple.price;
                 workCost += totalPrice;
                 items.push({
-                    name: `${prices.lighting.simple.name} (${state.lightSimple})`,
+                    name: prices.lighting.simple.name,
                     price: totalPrice,
-                    category: 'work'
+                    category: 'work',
+                    count: state.lightSimple,
+                    unit: 'линий'
                 });
             }
 
@@ -1199,9 +1205,11 @@
                 const totalPrice = state.lightDimmable * prices.lighting.dimmable.price;
                 workCost += totalPrice;
                 items.push({
-                    name: `${prices.lighting.dimmable.name} (${state.lightDimmable})`,
+                    name: prices.lighting.dimmable.name,
                     price: totalPrice,
-                    category: 'work'
+                    category: 'work',
+                    count: state.lightDimmable,
+                    unit: 'линий'
                 });
             }
 
@@ -1209,9 +1217,11 @@
                 const totalPrice = state.ledBacklight * prices.lighting.ledBacklight.price;
                 workCost += totalPrice;
                 items.push({
-                    name: `${prices.lighting.ledBacklight.name} (${state.ledBacklight})`,
+                    name: prices.lighting.ledBacklight.name,
                     price: totalPrice,
-                    category: 'work'
+                    category: 'work',
+                    count: state.ledBacklight,
+                    unit: 'зон'
                 });
             }
 
@@ -1219,9 +1229,11 @@
                 const totalPrice = state.cctBacklight * prices.lighting.cctBacklight.price;
                 workCost += totalPrice;
                 items.push({
-                    name: `${prices.lighting.cctBacklight.name} (${state.cctBacklight})`,
+                    name: prices.lighting.cctBacklight.name,
                     price: totalPrice,
-                    category: 'work'
+                    category: 'work',
+                    count: state.cctBacklight,
+                    unit: 'зон'
                 });
             }
 
@@ -1229,9 +1241,11 @@
                 const totalPrice = state.rgbBacklight * prices.lighting.rgbBacklight.price;
                 workCost += totalPrice;
                 items.push({
-                    name: `${prices.lighting.rgbBacklight.name} (${state.rgbBacklight})`,
+                    name: prices.lighting.rgbBacklight.name,
                     price: totalPrice,
-                    category: 'work'
+                    category: 'work',
+                    count: state.rgbBacklight,
+                    unit: 'зон'
                 });
             }
 
@@ -1239,9 +1253,11 @@
                 const totalPrice = state.rgbwBacklight * prices.lighting.rgbwBacklight.price;
                 workCost += totalPrice;
                 items.push({
-                    name: `${prices.lighting.rgbwBacklight.name} (${state.rgbwBacklight})`,
+                    name: prices.lighting.rgbwBacklight.name,
                     price: totalPrice,
-                    category: 'work'
+                    category: 'work',
+                    count: state.rgbwBacklight,
+                    unit: 'зон'
                 });
             }
 
@@ -1250,9 +1266,11 @@
                 const totalPrice = state.ventilation * prices.equipment.ventilation.price;
                 modulesCost += totalPrice;
                 items.push({
-                    name: `${prices.equipment.ventilation.name} (${state.ventilation} ШТ)`,
+                    name: prices.equipment.ventilation.name,
                     price: totalPrice,
-                    category: 'modules'
+                    category: 'modules',
+                    count: state.ventilation,
+                    unit: 'шт'
                 });
             }
 
@@ -1260,9 +1278,11 @@
                 const totalPrice = state.supplyVentilation * prices.equipment.supplyVentilation.price;
                 modulesCost += totalPrice;
                 items.push({
-                    name: `${prices.equipment.supplyVentilation.name} (${state.supplyVentilation} ШТ)`,
+                    name: prices.equipment.supplyVentilation.name,
                     price: totalPrice,
-                    category: 'modules'
+                    category: 'modules',
+                    count: state.supplyVentilation,
+                    unit: 'шт'
                 });
             }
 
@@ -1270,9 +1290,11 @@
                 const totalPrice = state.airConditioners * prices.equipment.airConditioners.price;
                 modulesCost += totalPrice;
                 items.push({
-                    name: `${prices.equipment.airConditioners.name} (${state.airConditioners} ШТ)`,
+                    name: prices.equipment.airConditioners.name,
                     price: totalPrice,
-                    category: 'modules'
+                    category: 'modules',
+                    count: state.airConditioners,
+                    unit: 'шт'
                 });
             }
 
@@ -1280,9 +1302,11 @@
                 const totalPrice = state.thermoHeads * prices.equipment.thermoHeads.price;
                 modulesCost += totalPrice;
                 items.push({
-                    name: `${prices.equipment.thermoHeads.name} (${state.thermoHeads} ШТ)`,
+                    name: prices.equipment.thermoHeads.name,
                     price: totalPrice,
-                    category: 'modules'
+                    category: 'modules',
+                    count: state.thermoHeads,
+                    unit: 'шт'
                 });
             }
 
@@ -1291,9 +1315,11 @@
                 const totalPrice = state.motionSensors * prices.sensors.motionSensor.price;
                 modulesCost += totalPrice;
                 items.push({
-                    name: `${prices.sensors.motionSensor.name} (${state.motionSensors} ШТ)`,
+                    name: prices.sensors.motionSensor.name,
                     price: totalPrice,
-                    category: 'modules'
+                    category: 'modules',
+                    count: state.motionSensors,
+                    unit: 'шт'
                 });
             }
 
@@ -1302,7 +1328,9 @@
                 items.push({
                     name: prices.sensors.leakSensor.name,
                     price: prices.sensors.leakSensor.price,
-                    category: 'modules'
+                    category: 'modules',
+                    count: 1,
+                    unit: 'шт'
                 });
             }
 
@@ -1311,13 +1339,25 @@
                 items.push({
                     name: prices.sensors.gasSensor.name,
                     price: prices.sensors.gasSensor.price,
-                    category: 'modules'
+                    category: 'modules',
+                    count: 1,
+                    unit: 'шт'
                 });
             }
 
             // Итог
             const total = equipmentCost + modulesCost + workCost + extraCost;
             updateSummary(items, equipmentCost, modulesCost, workCost, extraCost, total);
+            
+            // Сохраняем текущие позиции для Excel
+            window.currentItems = items;
+            window.currentTotals = {
+                equipmentTotal: equipmentCost,
+                modulesTotal: modulesCost,
+                workTotal: workCost,
+                extraTotal: extraCost,
+                finalTotal: total
+            };
         }
 
         function updateSummary(items, equipmentTotal, modulesTotal, workTotal, extraTotal, finalTotal) {
@@ -1354,7 +1394,8 @@
                     categories.equipment.forEach(item => {
                         const div = document.createElement('div');
                         div.className = 'summary-item';
-                        div.innerHTML = `<span>${item.name}</span><span>${formatPrice(item.price)}</span>`;
+                        const displayName = item.count > 1 ? `${item.name} (${item.count} ${item.unit})` : item.name;
+                        div.innerHTML = `<span>${displayName}</span><span>${formatPrice(item.price)}</span>`;
                         container.appendChild(div);
                     });
                 }
@@ -1369,7 +1410,8 @@
                     categories.modules.forEach(item => {
                         const div = document.createElement('div');
                         div.className = 'summary-item';
-                        div.innerHTML = `<span>${item.name}</span><span>${formatPrice(item.price)}</span>`;
+                        const displayName = item.count > 1 ? `${item.name} (${item.count} ${item.unit})` : item.name;
+                        div.innerHTML = `<span>${displayName}</span><span>${formatPrice(item.price)}</span>`;
                         container.appendChild(div);
                     });
                 }
@@ -1384,22 +1426,8 @@
                     categories.work.forEach(item => {
                         const div = document.createElement('div');
                         div.className = 'summary-item';
-                        div.innerHTML = `<span>${item.name}</span><span>${formatPrice(item.price)}</span>`;
-                        container.appendChild(div);
-                    });
-                }
-
-                // Услуги
-                if (categories.extra.length > 0) {
-                    const categoryTitle = document.createElement('div');
-                    categoryTitle.className = 'category-title';
-                    categoryTitle.textContent = 'ДОПОЛНИТЕЛЬНЫЕ УСЛУГИ:';
-                    container.appendChild(categoryTitle);
-                    
-                    categories.extra.forEach(item => {
-                        const div = document.createElement('div');
-                        div.className = 'summary-item';
-                        div.innerHTML = `<span>${item.name}</span><span>${formatPrice(item.price)}</span>`;
+                        const displayName = item.count > 1 ? `${item.name} (${item.count} ${item.unit})` : item.name;
+                        div.innerHTML = `<span>${displayName}</span><span>${formatPrice(item.price)}</span>`;
                         container.appendChild(div);
                     });
                 }
@@ -1409,7 +1437,6 @@
             document.getElementById('equipmentTotal').textContent = formatPrice(equipmentTotal);
             document.getElementById('modulesTotal').textContent = formatPrice(modulesTotal);
             document.getElementById('workTotal').textContent = formatPrice(workTotal);
-            document.getElementById('extraTotal').textContent = formatPrice(extraTotal);
             document.getElementById('finalTotal').textContent = formatPrice(finalTotal);
             
             // Анимация изменения итоговой суммы
@@ -1429,11 +1456,15 @@
             }).format(price);
         }
 
+        function formatPriceForExcel(price) {
+            return price.toLocaleString('ru-RU');
+        }
+
         function saveConfiguration() {
             const total = document.getElementById('finalTotal').textContent;
             const config = JSON.stringify(state, null, 2);
             
-            // Сохраняем файл
+            // Сохраняем файл JSON
             const blob = new Blob([config], { type: 'application/json' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
@@ -1445,7 +1476,77 @@
             URL.revokeObjectURL(url);
             
             // Показываем уведомление
-            showNotification(`Конфигурация сохранена! Общая стоимость: ${total}`);
+            showNotification(`Конфигурация сохранена (JSON)! Общая стоимость: ${total}`);
+        }
+
+        function saveToExcel() {
+            if (!window.currentItems || window.currentItems.length === 0) {
+                showNotification("Сначала добавьте оборудование в конфигурацию!");
+                return;
+            }
+            
+            const total = document.getElementById('finalTotal').textContent;
+            const timestamp = new Date().toLocaleString('ru-RU');
+            
+            // Создаем CSV структуру для Excel
+            let csvContent = "sep=,\r\n"; // Разделитель для Excel
+            csvContent += "СМЕТА ПРОЕКТА УМНОГО ДОМА\r\n";
+            csvContent += `Дата создания: ${timestamp}\r\n`;
+            csvContent += "\r\n";
+            
+            // Заголовки таблицы
+            csvContent += "№;Категория;Наименование;Количество;Ед.изм.;Цена за ед., руб.;Сумма, руб.\r\n";
+            
+            let lineNumber = 1;
+            
+            // Добавляем основное оборудование
+            const categories = {
+                'equipment': 'ОСНОВНОЕ ОБОРУДОВАНИЕ',
+                'modules': 'ДОПОЛНИТЕЛЬНЫЕ МОДУЛИ',
+                'work': 'МОНТАЖ И УСТАНОВКА',
+                'extra': 'ДОПОЛНИТЕЛЬНЫЕ УСЛУГИ'
+            };
+            
+            // Добавляем все позиции
+            window.currentItems.forEach((item, index) => {
+                const categoryName = categories[item.category] || item.category;
+                const unitPrice = item.count > 1 ? Math.round(item.price / item.count) : item.price;
+                
+                csvContent += `${lineNumber};${categoryName};"${item.name}";${item.count};${item.unit};${formatPriceForExcel(unitPrice)};${formatPriceForExcel(item.price)}\r\n`;
+                lineNumber++;
+            });
+            
+            csvContent += "\r\n";
+            
+            // Добавляем итоги
+            csvContent += `Итого оборудование:;${formatPriceForExcel(window.currentTotals.equipmentTotal)}\r\n`;
+            csvContent += `Итого модули:;${formatPriceForExcel(window.currentTotals.modulesTotal)}\r\n`;
+            csvContent += `Итого монтаж:;${formatPriceForExcel(window.currentTotals.workTotal)}\r\n`;
+            csvContent += "\r\n";
+            csvContent += `ВСЕГО К ОПЛАТЕ:;${formatPriceForExcel(window.currentTotals.finalTotal)}\r\n`;
+            csvContent += "\r\n";
+            csvContent += "Примечания:\r\n";
+            csvContent += "1. Цены указаны в российских рублях без учета НДС\r\n";
+            csvContent += "2. Стоимость является предварительной\r\n";
+            csvContent += "3. Окончательная цена определяется после выезда инженера\r\n";
+            csvContent += "4. Гарантия на оборудование: 24 месяца\r\n";
+            csvContent += "5. Гарантия на монтажные работы: 12 месяцев\r\n";
+            
+            // Создаем Blob и сохраняем как CSV файл
+            const blob = new Blob(["\ufeff" + csvContent], { 
+                type: 'text/csv;charset=utf-8;' 
+            });
+            
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `smart-home-estimate-${Date.now()}.csv`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            showNotification(`Смета сохранена в Excel! Файл: ${a.download}`);
         }
 
         function sendRequest() {
