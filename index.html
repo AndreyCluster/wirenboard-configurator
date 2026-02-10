@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Конфигуратор Умного Дома | Лофт Стиль</title>
     <style>
-        /* Все стили остаются без изменений */
         * {
             margin: 0;
             padding: 0;
@@ -872,7 +871,7 @@
                     <div class="form-group">
                         <label>RGB ПОДСВЕТКА</label>
                         <div class="counter">
-                            <button onclick="changeCount('rgbBacklight', -1)">-</button>
+                            <button onclick="changeCount('rgbBacklight', -1)">  </button>
                             <span id="rgbBacklight">0</span>
                             <button onclick="changeCount('rgbBacklight', 1)">+</button>
                         </div>
@@ -1506,15 +1505,43 @@
                             String(date.getMonth() + 1).padStart(2, '0') + '-' + 
                             String(date.getDate()).padStart(2, '0');
             
-            // Создаем CSV с точкой с запятой как разделителем (стандарт для русского Excel)
-            let csvContent = 'SEP=;\r\n';
-            
-            // Основной заголовок
-            csvContent += 'СМЕТА ПРОЕКТА УМНОГО ДОМА\r\n';
-            csvContent += 'Дата создания: ' + timestamp + '\r\n\r\n';
-            
-            // Заголовки таблицы
-            csvContent += '№;Категория;Наименование;Кол-во;Ед.изм.;Цена;Сумма\r\n';
+            // Создаем HTML таблицу - самый надежный способ для Excel
+            let htmlContent = `
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <meta charset="UTF-8">
+                    <title>Смета проекта Умного Дома</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; margin: 20px; }
+                        h1 { color: #333; }
+                        h2 { color: #666; margin-top: 30px; }
+                        table { border-collapse: collapse; width: 100%; margin: 20px 0; }
+                        th { background-color: #f2f2f2; font-weight: bold; padding: 10px; border: 1px solid #ddd; }
+                        td { padding: 8px; border: 1px solid #ddd; }
+                        .total { font-weight: bold; background-color: #e6f3ff; }
+                        .final-total { font-size: 18px; color: #d35400; }
+                        .notes { margin-top: 30px; font-size: 12px; color: #666; }
+                    </style>
+                </head>
+                <body>
+                    <h1>СМЕТА ПРОЕКТА УМНОГО ДОМА</h1>
+                    <p><strong>Дата создания:</strong> ${timestamp}</p>
+                    
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>№</th>
+                                <th>Категория</th>
+                                <th>Наименование</th>
+                                <th>Кол-во</th>
+                                <th>Ед.изм.</th>
+                                <th>Цена</th>
+                                <th>Сумма</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
             
             let lineNumber = 1;
             
@@ -1529,39 +1556,60 @@
             // Добавляем все позиции
             window.currentItems.forEach((item) => {
                 const categoryName = categories[item.category] || item.category;
-                // Экранируем кавычки в названиях
-                const itemName = item.name.replace(/"/g, '""');
-                
-                csvContent += lineNumber + ';' + 
-                             categoryName + ';"' + itemName + '";' + 
-                             item.count + ';' + item.unit + ';' + 
-                             item.unitPrice + ';' + item.price + '\r\n';
+                htmlContent += `
+                    <tr>
+                        <td>${lineNumber}</td>
+                        <td>${categoryName}</td>
+                        <td>${item.name}</td>
+                        <td>${item.count}</td>
+                        <td>${item.unit}</td>
+                        <td>${item.unitPrice} ₽</td>
+                        <td>${item.price} ₽</td>
+                    </tr>
+                `;
                 lineNumber++;
             });
             
-            csvContent += '\r\n';
+            // Итоги
+            htmlContent += `
+                        </tbody>
+                    </table>
+                    
+                    <h2>ИТОГИ</h2>
+                    <table>
+                        <tr class="total">
+                            <td colspan="6">ИТОГО ОБОРУДОВАНИЕ:</td>
+                            <td>${window.currentTotals.equipmentTotal} ₽</td>
+                        </tr>
+                        <tr class="total">
+                            <td colspan="6">ИТОГО МОДУЛИ:</td>
+                            <td>${window.currentTotals.modulesTotal} ₽</td>
+                        </tr>
+                        <tr class="total">
+                            <td colspan="6">ИТОГО МОНТАЖ:</td>
+                            <td>${window.currentTotals.workTotal} ₽</td>
+                        </tr>
+                        <tr class="total final-total">
+                            <td colspan="6">ВСЕГО К ОПЛАТЕ:</td>
+                            <td>${window.currentTotals.finalTotal} ₽</td>
+                        </tr>
+                    </table>
+                    
+                    <div class="notes">
+                        <h3>Примечания:</h3>
+                        <p>1. Цены указаны в российских рублях без учета НДС</p>
+                        <p>2. Стоимость является предварительной</p>
+                        <p>3. Окончательная цена определяется после выезда инженера</p>
+                        <p>4. Гарантия на оборудование: 24 месяца</p>
+                        <p>5. Гарантия на монтажные работы: 12 месяцев</p>
+                    </div>
+                </body>
+                </html>
+            `;
             
-            // Добавляем итоги
-            csvContent += 'ИТОГО ОБОРУДОВАНИЕ:;;;;;' + window.currentTotals.equipmentTotal + '\r\n';
-            csvContent += 'ИТОГО МОДУЛИ:;;;;;' + window.currentTotals.modulesTotal + '\r\n';
-            csvContent += 'ИТОГО МОНТАЖ:;;;;;' + window.currentTotals.workTotal + '\r\n\r\n';
-            csvContent += 'ВСЕГО К ОПЛАТЕ:;;;;;' + window.currentTotals.finalTotal + '\r\n\r\n';
-            
-            // Примечания
-            csvContent += 'Примечания:\r\n';
-            csvContent += '1. Цены указаны в российских рублях без учета НДС\r\n';
-            csvContent += '2. Стоимость является предварительной\r\n';
-            csvContent += '3. Окончательная цена определяется после выезда инженера\r\n';
-            csvContent += '4. Гарантия на оборудование: 24 месяца\r\n';
-            csvContent += '5. Гарантия на монтажные работы: 12 месяцев\r\n';
-            
-            // Добавляем BOM для правильного отображения кириллицы
-            const BOM = '\uFEFF';
-            const finalContent = BOM + csvContent;
-            
-            // Создаем Blob с UTF-8
-            const blob = new Blob([finalContent], { 
-                type: 'text/csv;charset=utf-8'
+            // Создаем Blob с HTML
+            const blob = new Blob([htmlContent], { 
+                type: 'text/html;charset=utf-8'
             });
             
             // Создаем ссылку для скачивания
@@ -1569,16 +1617,16 @@
             const a = document.createElement('a');
             a.href = url;
             
-            // Сохраняем как CSV
-            a.download = `смета-${dateStr}.csv`;
+            // Сохраняем как HTML - Excel откроет корректно
+            a.download = `смета-${dateStr}.html`;
             
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
             
-            // Простое уведомление
-            showNotification(`Смета сохранена в Excel! Файл: смета-${dateStr}.csv`);
+            // Показываем уведомление
+            showNotification(`Смета сохранена! Файл: смета-${dateStr}.html`);
         }
 
         function sendRequest() {
