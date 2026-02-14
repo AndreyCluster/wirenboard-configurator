@@ -1093,29 +1093,29 @@
                 rs485Module: 2800
             },
             lighting: {
-                lightSimple: 1500, // WB-MRM2
-                lightDimmable: 3200, // WB-MDM3
-                ledBacklight: 1800, // Монохромная LED
-                cctBacklight: 2500, // CCT подсветка
-                rgbBacklight: 3500, // RGB подсветка
-                rgbwBacklight: 4200 // RGBW подсветка
+                lightSimple: 1500,
+                lightDimmable: 3200,
+                ledBacklight: 1800,
+                cctBacklight: 2500,
+                rgbBacklight: 3500,
+                rgbwBacklight: 4200
             },
             ventilation: {
-                ventilation: 2200, // Вытяжки
-                supplyVentilation: 8500, // Приточная вентиляция
-                airConditioners: 3200, // Кондиционеры
-                thermoHeads: 4500 // Термоголовки
+                ventilation: 2200,
+                supplyVentilation: 8500,
+                airConditioners: 3200,
+                thermoHeads: 4500
             },
             sensors: {
-                motionSensor: 1900, // Датчики движения
-                leakSensor: 2500, // Датчик протечки
-                gasSensor: 3800 // Датчик газа
+                motionSensor: 1900,
+                leakSensor: 2500,
+                gasSensor: 3800
             },
             work: {
-                perLine: 2000, // Монтаж одной линии
-                controllerInstall: 5000, // Установка контроллера
-                moduleInstall: 1500, // Установка модуля
-                sensorInstall: 1000 // Установка датчика
+                perLine: 2000,
+                controllerInstall: 5000,
+                moduleInstall: 1500,
+                sensorInstall: 1000
             }
         };
 
@@ -1146,7 +1146,8 @@
             
             // Обработчики для кнопок счетчиков
             document.querySelectorAll('.counter button').forEach(button => {
-                button.addEventListener('click', function() {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
                     const action = this.dataset.action;
                     const target = this.dataset.target;
                     changeCount(target, action === 'increase' ? 1 : -1);
@@ -1199,15 +1200,21 @@
             let currentValue = 0;
             
             // Определяем категорию и получаем текущее значение
-            if (type.includes('light') || type.includes('led') || type.includes('cct') || type.includes('rgb')) {
+            if (type === 'lightSimple' || type === 'lightDimmable' || type === 'ledBacklight' || 
+                type === 'cctBacklight' || type === 'rgbBacklight' || type === 'rgbwBacklight') {
                 currentValue = config.lighting[type] || 0;
-            } else if (type.includes('ventilation') || type.includes('airConditioner') || type.includes('thermoHead')) {
+            } 
+            else if (type === 'ventilation' || type === 'supplyVentilation' || 
+                     type === 'airConditioners' || type === 'thermoHeads') {
                 currentValue = config.ventilation[type] || 0;
-            } else if (type.includes('motion')) {
+            } 
+            else if (type === 'motionSensors') {
                 currentValue = config.sensors[type] || 0;
-            } else if (type.includes('rs485')) {
+            } 
+            else if (type === 'rs485Modules') {
                 currentValue = config.modules[type] || 0;
-            } else {
+            } 
+            else {
                 return;
             }
             
@@ -1215,18 +1222,27 @@
             const newValue = Math.max(0, currentValue + delta);
             
             // Сохраняем новое значение
-            if (type.includes('light') || type.includes('led') || type.includes('cct') || type.includes('rgb')) {
+            if (type === 'lightSimple' || type === 'lightDimmable' || type === 'ledBacklight' || 
+                type === 'cctBacklight' || type === 'rgbBacklight' || type === 'rgbwBacklight') {
                 config.lighting[type] = newValue;
-            } else if (type.includes('ventilation') || type.includes('airConditioner') || type.includes('thermoHead')) {
+            } 
+            else if (type === 'ventilation' || type === 'supplyVentilation' || 
+                     type === 'airConditioners' || type === 'thermoHeads') {
                 config.ventilation[type] = newValue;
-            } else if (type.includes('motion')) {
+            } 
+            else if (type === 'motionSensors') {
                 config.sensors[type] = newValue;
-            } else if (type.includes('rs485')) {
+            } 
+            else if (type === 'rs485Modules') {
                 config.modules[type] = newValue;
             }
             
             // Обновляем отображение
-            document.getElementById(type).textContent = newValue;
+            const element = document.getElementById(type);
+            if (element) {
+                element.textContent = newValue;
+            }
+            
             calculate();
         }
 
@@ -1358,7 +1374,7 @@
                 });
             }
             
-            // Приточная вентиляция
+            // ПРИТОЧНАЯ ВЕНТИЛЯЦИЯ - исправлено
             if (config.ventilation.supplyVentilation > 0) {
                 const total = config.ventilation.supplyVentilation * prices.ventilation.supplyVentilation;
                 equipmentTotal += total;
@@ -1477,18 +1493,6 @@
                 });
             }
             
-            // Добавляем монтажные работы
-            if (workTotal > 0) {
-                summaryItems.push({
-                    category: 'МОНТАЖ',
-                    name: 'Монтаж и установка оборудования',
-                    count: 1,
-                    unit: 'комплекс',
-                    price: workTotal,
-                    total: workTotal
-                });
-            }
-            
             // Добавляем установку контроллера
             workTotal += prices.work.controllerInstall;
             
@@ -1521,7 +1525,7 @@
             
             let currentCategory = '';
             
-            items.forEach((item, index) => {
+            items.forEach((item) => {
                 // Добавляем заголовок категории если она изменилась
                 if (item.category !== currentCategory) {
                     currentCategory = item.category;
@@ -1682,6 +1686,7 @@
                 ]);
             }
             
+            // ПРИТОЧНАЯ ВЕНТИЛЯЦИЯ В EXCEL
             if (config.ventilation.supplyVentilation > 0) {
                 excelData.push([
                     itemNumber++,
@@ -1856,18 +1861,18 @@
                 });
                 
                 // Обновляем счетчики
-                document.getElementById('lightSimple').textContent = '0';
-                document.getElementById('lightDimmable').textContent = '0';
-                document.getElementById('ledBacklight').textContent = '0';
-                document.getElementById('cctBacklight').textContent = '0';
-                document.getElementById('rgbBacklight').textContent = '0';
-                document.getElementById('rgbwBacklight').textContent = '0';
-                document.getElementById('ventilation').textContent = '0';
-                document.getElementById('supplyVentilation').textContent = '0';
-                document.getElementById('airConditioners').textContent = '0';
-                document.getElementById('thermoHeads').textContent = '0';
-                document.getElementById('motionSensors').textContent = '0';
-                document.getElementById('rs485Modules').textContent = '0';
+                const counterIds = [
+                    'lightSimple', 'lightDimmable', 'ledBacklight', 'cctBacklight', 
+                    'rgbBacklight', 'rgbwBacklight', 'ventilation', 'supplyVentilation',
+                    'airConditioners', 'thermoHeads', 'motionSensors', 'rs485Modules'
+                ];
+                
+                counterIds.forEach(id => {
+                    const element = document.getElementById(id);
+                    if (element) {
+                        element.textContent = '0';
+                    }
+                });
                 
                 // Пересчитываем
                 calculate();
